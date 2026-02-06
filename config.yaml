@@ -18,7 +18,7 @@ carpentry: 'incubator'
 carpentry_description: 'AI Carpentry'
 
 # Overall title for pages.
-title: 'Learning to Code with GenAI'
+title: 'Learning to Code with Generative AI'
 
 # Date the lesson was created (YYYY-MM-DD, this is empty by default)
 created: 2026-02-05
