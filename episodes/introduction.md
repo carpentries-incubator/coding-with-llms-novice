@@ -41,6 +41,8 @@ We want to write a python script that loads file data.csv into a variable for fu
 
 Your output may differ from the output for other people.
 
+:::
+
 ::: solution 
 
 ## Example Output
