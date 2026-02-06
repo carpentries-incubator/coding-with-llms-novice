@@ -6,10 +6,7 @@ exercises: 2 # exercise time in minutes
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-* How to interact with an AI model to get code for your data analysis?
-* How to read AI generated code?
-* How to interact with an AI model to get it explain the workings of a chunk of code to you?
-
+- FIXME
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
@@ -35,7 +32,8 @@ FIXME
 Enter into your LLM:
 
 ```
-We want to write a python script that loads file data.csv into a variable for further analysis.
+We want to write a python script that loads file
+data.csv into a variable for further analysis.
 ```
 ::: hint
 
