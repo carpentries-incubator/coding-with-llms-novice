@@ -10,5 +10,6 @@ site: sandpaper::sandpaper_site
 * Explain the AI generated code
   * Identify elements of generated code that you do not understand
   * Co-produce explanations of code with a generative AI model
-* (Alongside gain some first knowledge about fundamentals of coding)
+* Take responsibility for the code you co-produce with a generative AI model
+* (Alongside gain some first knowledge about fundamentals of coding/good [research] software development)
 
