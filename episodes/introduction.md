@@ -60,7 +60,7 @@ print(data.head())
 
 - which packages does it use?
 - which data type is used?
-
+:::
 
 ## Challenge 3: Refine the prompt to ensure package pandas is used
 
