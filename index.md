@@ -2,14 +2,23 @@
 site: sandpaper::sandpaper_site
 ---
 
+This lesson introduces participants to using generative AI to help them learn to write Research Software in a computer programming language.
 
-* Co-produce code with an generative AI model for your data analysis
-  * Co-produce assets like documentation an with a generative AI model
-  * Validate (Verify!?) the correctness of the code, including by AI generated tests
-  * Debugging skills 
-* Explain the AI generated code
-  * Identify elements of generated code that you do not understand
-  * Co-produce explanations of code with a generative AI model
-* Take responsibility for the code you co-produce with a generative AI model
-* (Alongside gain some first knowledge about fundamentals of coding/good [research] software development)
+After completing this lesson, learners will be able to use Large Language Models to:
 
+* Identify and sequence learning goals
+* Construct prompts following good practice 
+* Analyse how simple programs work
+* Find resources to learn the elements of programming 
+* Generate exercises to master new skills 
+* Write and test programs
+* Develop a strategy to continue learning
+
+
+:::::::::::::::::::::::::::::::: prereq
+
+### Prerequisites
+This lesson is aimed at people with little or no prior experience of programming / research software.
+It assumes some foundational knowledge of probability and computers.
+
+:::::::::::::::::::::::::::::::::::::::
