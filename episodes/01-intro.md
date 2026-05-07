@@ -8,7 +8,7 @@ exercises: 1 # exercise time in minutes
 
 - **Understand** learning through challenge
 - **Identify** a learning goal
-- **Prompt** an AI chatbot
+- **Choose** an AI chatbot
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -26,38 +26,24 @@ Generative models and agents, including LLMs, can be used to automate a wide var
 at work and in our lives. But automating a task while we are still learning how to do it 
 can limit our learning and our ability to build up more complex and creative skill sets.
 
-However we can use AI tools to positively support our learning journey instead. In this class we will explore and practice some ways that we can use Large Language Models to inform, challenge and support us as we learn how to write software code to analyse research data.
+We can use AI tools to positively support our learning journey instead. In this class we will explore and practice some ways that we can use Large Language Models to inform, challenge and support us as we learn how to write software code to analyse research data.
 
-### A Learning-First Approach
-
-Think back to your early education. You learned to read, write, and do basic arithmetic. When you were learning the foundational skills of working with numbers, you were probably not allowed to use a calculator, even though tools to automate arithmetic are widely and easily available. Instead, you struggled with, and mastered, addition, subtraction, multiplication, division, place value, orders of operations and so forth. And because you mastered these skills, you were able to tackle more complex skills like algebra and geometry, constructing logical arguments, and understanding research data. You can now use calculators and spreadsheets with confidence, because you have built up complex skills on those essential foundations.
-
-In the same way, if we want develop comfort and confidence in building research software, it helps to master the fundamentals of coding, even if we choose to automate some of it later.
-
-#### Ways To Keep The Learning Going
-
-There are a few ways to keep ourselves learning with LLMs, such as
-
-- Writing clear, detailed prompts
-- Asking for tuition in a specific way
-- Analysing existing code
-- Asking for explanations
-- Using chat to identify gaps in our knowledge
-
-### Setting Out The Tools
+### Choosing An AI Partner
 
 There are many popular AI models available online, including:
 
-- ChatGPT
-- Claude
-- Copilot
-- Gemini
+- [ChatGPT](https://chatgpt.com)
+- [Claude](https://claude.ai/)
+- [Copilot](https://copilot.microsoft.com)
+- [Gemini](https://gemini.google.com/app)
 
-In addition, institutions might run their own, local copies of models like:
+In addition, institutions might run their own, local copies of models like such as DeepSeek or Mistral:
 
-- DeepSeek
-- Mistral
-- **FIXME LIST MORE**
+### Choosing A Programming Language
+
+Researchers use many different programming languages to solve problems in data analysis and modeling. This course provides examples in Python and R. Both of these languages are widely used in research computing, since they are open source, freely available and have large user communities who contribute useful code.
+
+You could use the approach in this course to learn other languages too, but remember that the more widely used a language is, the better it is represented in AI training data, and the better an LLM will support it.
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 

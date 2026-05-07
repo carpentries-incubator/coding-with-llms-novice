@@ -21,3 +21,13 @@ exercises:  # exercise time in minutes
 - How can I build more complex skillsets?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+#### Ways To Keep The Learning Going
+
+There are a few ways to keep ourselves learning with LLMs, such as
+
+- Writing clear, detailed prompts
+- Asking for tuition in a specific way
+- Analysing existing code
+- Asking for explanations
+- Using chat to identify gaps in our knowledge
