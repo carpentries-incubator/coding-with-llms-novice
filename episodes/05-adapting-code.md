@@ -16,3 +16,7 @@ exercises: 2 # exercise time in minutes
 - FIXME
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Using What We Have Learned
+
+* Applying our new skills to put together a working script

@@ -16,3 +16,9 @@ exercises:  # exercise time in minutes
 - FIXME
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+## What More Can We Learn?
+
+* Identify gaps in our knowledge
+* Seek information about specific subtopics
+* Ask for advice about prompting strategies

@@ -16,3 +16,7 @@ exercises:  # exercise time in minutes
 - FIXME
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Understanding Existing Code
+
+[Upload and ask for explanations of how existing code functions]

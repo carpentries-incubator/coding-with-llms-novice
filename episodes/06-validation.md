@@ -16,3 +16,9 @@ exercises:  # exercise time in minutes
 - FIXME
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+## But Is It True?
+
+* Validating AI Output
+* Checking references
+* Testing our Code
