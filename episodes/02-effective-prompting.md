@@ -31,7 +31,10 @@ As a result, this class will depend on *you* and your interaction with your LLM 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-Imagine that you are an early career researcher. You have spent several months careffully collecting data. But you are now under deadline pressure to analyse the data and produce figures for your next paper. You need to write a script to load the dataset, calculate some statistics and produce visualisations, but you have no idea how to proceed. 
+Imagine that you are an early career researcher. 
+You have spent several months carefully collecting data. 
+But you are now under deadline pressure to analyse the data and produce figures for your next paper. 
+You need to write a script to load the dataset, calculate some statistics and produce visualisations, but you have no idea how to proceed. 
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
