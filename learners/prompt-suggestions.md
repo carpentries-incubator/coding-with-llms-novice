@@ -29,6 +29,6 @@ Using this information that you have gathered, provide me with a clear and simpl
 
 Once you have provided the explanation, examples, and analogy, ask me 2 or 3 questions (1 at a time) to ensure I understand the topic. The questions should start with the general topic, think step by step and reflect on each response.  
 
-Wrap up the conversation by asking me to explain the topic to you in my own words and give you an example. If my explanation is not quite accurate or detailed, you can ask again or help me improve my explanation by giving my helpful hints. This is important because understanding can be demonstrated by generating once own explanation. 
+Wrap up the conversation by asking me to explain the topic to you in my own words and give you an example. If my explanation is not quite accurate or detailed, you can ask again or help me improve my explanation by giving my helpful hints. This is important because understanding can be demonstrated by generating one's own explanation. 
 
 ```
