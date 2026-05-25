@@ -1,0 +1,24 @@
+---
+title: "Learning About Programming Concepts"
+teaching:  # teaching time in minutes
+exercises:  # exercise time in minutes
+---
+
+::::::::::::::::::::::::::::::::::::::: objectives
+
+- FIXME
+-
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::: questions
+
+- FIXME
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+## What More Can We Learn?
+
+* Identify gaps in our knowledge
+* Seek information about specific subtopics
+* Ask for advice about prompting strategies
