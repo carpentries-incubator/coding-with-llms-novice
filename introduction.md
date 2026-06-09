@@ -56,11 +56,18 @@ print(data.head())
 ```
 :::
 
+::::::::::::::::
+
+:::::: challenge 
+
 ## Challenge 2: what is the code you got doing?
 
 - which packages does it use?
 - which data type is used?
 
+::::::::::::::::
+
+:::::: challenge
 
 ## Challenge 3: Refine the prompt to ensure package pandas is used
 
@@ -68,8 +75,7 @@ print(data.head())
 
 :::
 
-
-::::::
+::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
