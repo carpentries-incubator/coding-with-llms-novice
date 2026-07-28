@@ -9,6 +9,7 @@ exercises: 1 # exercise time in minutes
 - **Understand** learning through challenge
 - **Identify** a learning goal
 - **Choose** an AI chatbot
+- **Use** R to explore data
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -61,6 +62,35 @@ Discuss with each other and with your instructor:
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Choose an appropriate LLM to use today and open a session.
+
+### Getting Started with R
+
+Following https://southampton-rsg-training.github.io/data-analysis-and-visualisation-r/1-starting-with-data.html
+
+#### What is R?  What is RStudio?
+
+- Define R (language) and RStudio (IDE)
+
+#### Knowing your way around RStudio
+
+- Screenshot of four panes
+
+#### R Basics
+
+- Run `3 + 5 ` in R Console
+- Create variable with data e.g. `weight_kg <- 55`
+- View contents e.g. `weight_kg`
+
+#### Load Data
+
+- Introduce gapminder: country, year, pop, continent, lifeExp, gdpPercap
+- Download https://swcarpentry.github.io/r-novice-gapminder/data/gapminder_data.csv
+
+```r
+gapminder <- read.csv( "gapminder_data.csv" )
+head( gapminder )
+summary( gapminder )
+```
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 

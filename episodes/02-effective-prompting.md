@@ -6,8 +6,9 @@ exercises: 2 # exercise time in minutes
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
-- 
--
+- **Practice** interacting with an AI chatbot
+- **Use** ggplot2 to plot data
+- **Remember** to ask followup questions
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -70,3 +71,56 @@ I need to write a script in python to load data, generate statistics and produce
 ```
 
 **TODO: Consider *very* different response structures from different LLMs.**
+
+## Activity 1: Practice interacting with an AI chatbot
+
+Use a chatbot like https://google.com/ai to understand the value of context
+
+- How many years are available?
+    - "It looks like your question is missing some context"
+- How many years are available in gapminder?
+    - Official Gapminder Platform (300 years) vs Gapminder R / Python Programming Package (55 years)
+- How many years are available in https://swcarpentry.github.io/r-novice-gapminder/data/gapminder_data.csv?
+    - "There are 12 specific years available in that Software Carpentry Gapminder dataset"
+
+## Activity 2: Create your first plot (manually)
+
+### Load data
+
+- Confirm gapminder is loaded via `head( gapminder )` or refer to Episode 1
+
+### Load ggplot2
+
+- Introduce
+- Install via `install.packages( "ggplot2" )`
+- Confirm via `library( "ggplot2" )`
+
+### Run code
+
+```r
+ggplot( gapminder, aes( year, gdpPercap ) ) +
+    geom_point()
+```
+
+## Activity 3: Ask the chatbot to explain the code
+
+> This is my first time using R.  Can you explain what this code is doing, line by line?
+> ggplot( gapminder, aes( year, gdpPercap ) ) +
+>     geom_point()
+
+What follow-up questions do you have?  Some possibilities:
+- How does it know to plot year on the x-axis?
+- Why does ggplot use +?
+- Explain the difference between aes in ggplot and in geom_point as simply as you can
+
+## Activity 4: Modify the plot with help
+
+> This is my first time using R. Modify this code in the simplest way possible so that [insert modification]. Explain what the changes do.
+
+Some possibilities:
+- Dots are colored by continent
+    - color=continent
+- Dots are spread out more and don't overlap
+    - geom_jitter()
+- The outlier dots are labeled
+    - geom_text( data = subset( gapminder, gdpPercap > 50000 ), aes( label = country ), color = "black" )
