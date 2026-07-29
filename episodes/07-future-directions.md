@@ -31,3 +31,11 @@ There are a few ways to keep ourselves learning with LLMs, such as
 - Analysing existing code
 - Asking for explanations
 - Using chat to identify gaps in our knowledge
+
+what to learn next: maybe as suggested prompts rather than (or as well as) links to specific recommended reading
+
+* reproducibility: version control, environment management, reports with Quarto
+* more software development skills and principles
+* logic? i.e. selection criteria > == != etc and &, |
+* agents and AI-forward IDEs, mention security
+
