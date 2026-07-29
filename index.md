@@ -2,10 +2,7 @@
 site: sandpaper::sandpaper_site
 ---
 
-This lesson introduces AI chatbots as an assistant for learning to code in R. 
-Using plotting as a motivating example, it touches on functions and loops but does not aim to be a comprehensive introduction to programming. 
-Rather, the goal is to get participants started running code, asking an AI chatbot for help, and critically evaluating the responses. 
-After completing this lesson, participants should be comfortable using AI chatbots to work through additional Carpentries lessons.
+This lesson introduces participants to using generative AI to help them learn to write Research Software in a computer programming language.
 
 After completing this lesson, learners will be able to:
 
