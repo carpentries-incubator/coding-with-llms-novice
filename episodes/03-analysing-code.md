@@ -6,8 +6,12 @@ exercises:  # exercise time in minutes
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
-- FIXME
--
+_After following this episode, learners will be able to..._
+
+- Run a block of code.
+- Trace the flow of a block of code.
+- Make small modifications to a block of code and observe how its behaviour changes.
+- Prompt a chatbot for an explanation of a line or block of code.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -37,6 +41,7 @@ EXERCISE: draw a flow chart describing the code.
 
 * when you get stuck, cannot figure out what a particular block of code is doing, ask somebody.
 * paste the code into your chatbot, ask it to explain the code. Include information about your level of expertise.
+    * always try to understand it yourself first, or at least make a guess: you will learn more if you can compare the chatbot's response with the answer you expected.
 * if the response includes words you do not understand, ask for a definition (Glosario can be a good source of these too). More on this in the next episode.
 * check your understanding and the veracity of the explanation that was generated.
 * based on your interpretation of the response, adjust the code, predict what will change in the output/behaviour, then run it and check whether you were right.
@@ -52,4 +57,4 @@ EXERCISE or activity here for learners to try identifying a small change to a ch
 * the explanation you receive may be too high-level, e.g. explaining _what_ the script does but not helping you understand _how_
 * or it may be so long that it becomes overwhelming
 * managing cognitive load by keeping explanations short and taking regular opportunities to test your understanding will aid your learning
-* this will seem slow at first, bnut you will be able to move increasingly quickly as you continue to learn
+* this will seem slow at first, but you will be able to move more quickly as you continue to learn

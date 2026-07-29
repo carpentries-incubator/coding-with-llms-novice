@@ -6,8 +6,13 @@ exercises: 2 # exercise time in minutes
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
-- FIXME
--
+_After following this episode, learners will be able to..._
+
+- Generate a plan of steps to improve a script.
+- Execute steps in this plan.
+- Evaluate the impact of changes made.
+- Articulate the changes the chatbot should make to extend an existing script.
+- Reflect on what they are learning and what the chatbot is and is not helping with.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -22,7 +27,7 @@ exercises: 2 # exercise time in minutes
 * it is time to move on from analysing code that has already been written, and begin generating new code
 * the knowledge you have gained so far will help:
     * conceptual understanding, "computational thinking", and familiarity with technical terminology will help you write a prompt that is more likely to generate the code you want
-    * you may be more capable now of anticipating what code you are expecting to get back
+    * you may be more capable now of anticipating what code you will get back
     * ability to trace the flow of the generated code and test+query parts you do not understand will help you evaluate the usefulness of the output (more on this in the next episode)
 * back to our messy script: upload whole script to chatbot and prompt for:
     * a plan: what can be cleaned up and how?

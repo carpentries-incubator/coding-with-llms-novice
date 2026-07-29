@@ -6,8 +6,10 @@ exercises:  # exercise time in minutes
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
-- FIXME
--
+_After following this episode, learners will be able to..._
+
+- Appreciate how the use of relevant technical terminology in a prompt can influence the style and accuracy of the response generated.
+- Identify some strategies to help them build a useful mental model of coding.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
