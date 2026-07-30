@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://carpentries-incubator.github.io/coding-with-llms-novice/01-intro.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/coding-with-llms-novice/02-effective-prompting.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/coding-with-llms-novice/03-analysing-code.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/coding-with-llms-novice/04-learning-concepts.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/coding-with-llms-novice/05-modifying-code.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/coding-with-llms-novice/06-validation.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/coding-with-llms-novice/07-future-directions.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries-incubator.github.io/coding-with-llms-novice/404.html</loc>
   </url>
   <url>
@@ -20,6 +41,27 @@
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/coding-with-llms-novice/index.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/coding-with-llms-novice/instructor/01-intro.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/coding-with-llms-novice/instructor/02-effective-prompting.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/coding-with-llms-novice/instructor/03-analysing-code.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/coding-with-llms-novice/instructor/04-learning-concepts.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/coding-with-llms-novice/instructor/05-modifying-code.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/coding-with-llms-novice/instructor/06-validation.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/coding-with-llms-novice/instructor/07-future-directions.html</loc>
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/coding-with-llms-novice/instructor/404.html</loc>
