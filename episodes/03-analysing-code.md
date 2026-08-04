@@ -17,7 +17,8 @@ _After following this episode, learners will be able to..._
 
 :::::::::::::::::::::::::::::::::::::::: questions
 
-- FIXME
+- What are some good strategies to learn from code that I did not write myself?
+- How can I use a chatbot to help build my own understanding of how code works?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -28,7 +29,7 @@ The code below generates a set of line plots showing how average life expectancy
 library(ggplot2)
 
 plot_life_expectancy <- function(df, country, outdir="results") {
-  lifeExp_plot <- ggplot(data = americas[americas$country == country,], mapping = aes(x = year, y = lifeExp)) +
+  lifeExp_plot <- ggplot(data = df[df$country == country,], mapping = aes(x = year, y = lifeExp)) +
     geom_line()
   ggsave(filename = paste0(outdir, "/", country, "_lifeExp.png"), plot = lifeExp_plot, width = 12, height = 10, dpi = 300, units = "cm")
 }
@@ -37,7 +38,7 @@ gapminder <- read.csv('gapminder_data.csv')
 americas <- gapminder[gapminder$continent == "Americas",]
 
 for (country in unique(americas$country)) {
-  plot_life_expectancy(gapminder, country)
+  plot_life_expectancy(americas, country)
 }
 ```
 
@@ -291,24 +292,184 @@ for (country in unique(americas$country)) {
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-EXERCISE: draw a flow chart describing the code.
+All of this experimentation is likely to have helped you develop your understanding of how information flows through the program.
+This ability to trace the flow of code, understanding how variables are handled and how their values change as the program runs, is a vital skill.
+Even if the code itself is generated with AI -- or written by somebody else! -- building your own mental model of what it does and how will help you ensure that the results it produces are correct.
 
-* when you get stuck, cannot figure out what a particular block of code is doing, ask somebody.
-* paste the code into your chatbot, ask it to explain the code. Include information about your level of expertise.
-    * always try to understand it yourself first, or at least make a guess: you will learn more if you can compare the chatbot's response with the answer you expected.
-* if the response includes words you do not understand, ask for a definition (Glosario can be a good source of these too). More on this in the next episode.
-* check your understanding and the veracity of the explanation that was generated.
-* based on your interpretation of the response, adjust the code, predict what will change in the output/behaviour, then run it and check whether you were right.
+:::::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
-EXERCISE or activity here for learners to try identifying a small change to a chunk of code, based on the explanation provided.
+### Go With The Flow
+Using pencil and paper, <https://tldraw.com>, or another tool, draw a flow chart describing the execution of the program in the code block at the top of this episode.
 
-* if you get an unexpected result, refer back to the explanation you received and the output you observed, and try to identify your misconception. if you cannot find it, explain to the chatbot what you changed, what you expected to see, what you actually got, and ask for clarification. "what am I missing?" rather than "fix it for me".
-* bear in mind: sometimes the chatbot will make mistakes! if you don't seem to be making any progress after trying this for a while, try to find a human to ask, or fire up a new chatbot session to get a "second opinion".
-* all of the above is a good strategy if you are getting help from a human too!
+::::::::::::::::::::::::::::::: solution
 
-* what about providing the entire code base all at once? wouldn't that be quicker than analysing it line-by-line, section-by-section?
-* it will be harder for you to build you own understanding of the code -- it is easier to trace execution through a handful of lines than through hundreds
-* the explanation you receive may be too high-level, e.g. explaining _what_ the script does but not helping you understand _how_
-* or it may be so long that it becomes overwhelming
-* managing cognitive load by keeping explanations short and taking regular opportunities to test your understanding will aid your learning
-* this will seem slow at first, but you will be able to move more quickly as you continue to learn
+
+::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Getting Unstuck
+
+Manually reverse-engineering code will not always help you, though, and you can expect to get stuck from time to time.
+For example, what happens if we run the `library(ggplot2)` part of the example code in isolation?
+
+```R
+library(ggplot2)
+```
+
+After a short pause (a sign that _something_ is happening), the prompt returns but we get no additional output.
+This is difficult to interpret!
+We might try adding a call to `print` afterwards, but that doesn't seem to help:
+
+```R
+library(ggplot2)
+print(ggplot2)
+```
+
+```error
+Error: object 'ggplot2' not found
+```
+
+We could also adjust the code and re-run it, to see what happens:
+
+```R
+library(fgplot2)
+```
+
+```error
+Error in library(fgplot2) : there is no package called ‘fgplot2’
+```
+
+This gives us some more information, but how helpful it is will depend on our prior knowledge of the concepts and technical terminology of the R language.
+If we do not already know what a package is, the error message is of limited use.
+
+R provides a built-in `help` function.
+We can use it to view the documentation of a given function.
+
+```R
+help(library)
+```
+
+These documentation pages are a rich source of information but are usually more accessible to those already knowledgable about the language/with more experience of coding.
+If `help` does not give you what you need, you could try:
+
+1. Searching the internet for an answer to your question. 
+   The chances are good that (many) other people have got stuck with the same thing, asked for help, and received an answer that will be useful to you as well.
+   Q&A forum websites like StackOverflow are particularly good sources for this kind of information.
+2. Ask another person, or your chatbot.
+
+### Asking for Help 
+Here is some advice to follow when asking for help, whether from a person or a chatbot:
+
+1. If you are encountering an error, copy and paste the error message into your message asking for help.
+2. Also include a copy of the code where you are having trouble and, if applicable, an example of the data you are feeding into it.
+3. Be specific about the task you are working on, the problem you are having (the error message may be enough), and/or what it is about the code that you do not understand.
+4. Unless the person or chatbot is already aware of your level of programming expertise, it can be useful to summarise that as well.
+
+Most importantly, as it will help you build your own ability, take time to consider the response you receive.
+Can you understand the explanation that is being provided to you?
+If not, ask follow-up question(s) to fill in the gaps.
+Can you find a way to adjust your code to check that your understanding is correct?
+
+## AI-generated Explanations
+Our chatbot can also produce explanations of what code is doing.
+
+::::::::::::::::::::::::::::::::::::::::::::::::: instructor
+
+### How To Run This Challenge 
+We recommend doing the first part of the challenge below together with the group.
+Have the learners follow along with you as you write and submit the prompt, then spend a few minutes discussing the output you received.
+Ask learners whether anyone received a substantially different response, and encourage them to share it in the collaborative notes if so.
+
+Ask learners if the response(s) include any jargon that they are not familiar with, and help them understand the response if so.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::::::::::: challenge
+
+### Explain This Code
+Submit the prompt below to your chatbot:
+
+> I am a novice programmer learning to code with R.
+> Explain what this code does:
+> 
+> ```R
+> library(ggplot2)
+> 
+> plot_life_expectancy <- function(df, country, outdir="results") {
+>   lifeExp_plot <- ggplot(data = df[df$country == country,], mapping = aes(x = year, y = lifeExp)) +
+>     geom_line()
+>   ggsave(filename = paste0(outdir, "/", country, "_lifeExp.png"), plot = lifeExp_plot, width = 12, height = 10, dpi = 300, units = "cm")
+> }
+> 
+> gapminder <- read.csv('gapminder_data.csv')
+> americas <- gapminder[gapminder$continent == "Americas",]
+> 
+> for (country in unique(americas$country)) {
+>   plot_life_expectancy(americas, country)
+> }
+> ```
+
+Consider the response you received:
+
+* Does the explanation provided match your own understanding of the code?
+  If there are inconsistencies between your mental model of the code and the explanation in the response, can you identify a way of testing whether your understanding or the explanation is correct?
+* Is the level of detail included in the response helpful? 
+  Are there any terms or concepts used in the explanation that you do not understand?
+* Can you adjust the prompt to generate a more helpful response from the chatbot?
+  If so, paste your customised prompt into the shared notes document for the workshop.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Generating an explanation from a chatbot is probably faster than exploring and reverse-engineering code to develop your understanding independently.
+It may also provide helpful contextual information that you would not learn through experimentation alone.
+But be careful about relying on this method to learn.
+
+Hands-on experience with code will help you develop a stronger mental model of how it works.
+This practical application of new knowledge may help it transfer to your long-term memory, which is required for learning.
+Many people have experienced the sensation of understanding a written explanation in the moment, only to find that they have forgotten it when required to recall the information later.
+
+Furthermore, explanations generated by a chatbot may include factual inaccuracies and/or irrelevant information.
+But they are likely to appear confident!
+(The same is true of answers you may find on the internet.)
+You are responsible for the code generated on your behalf, and a chatbot cannot be held accountable for any damage caused by the code it produces.
+<!-- link from above to the Implications lesson? -->
+Since that code can be powerful -- editing the files on your computer, interacting with other people's servers online, analysing masses of research data, etc -- some scepticism is healthy.
+
+By learning the basics of coding and giving yourself a framework with which you can continue to develop your own expertise, we hope to equip you with what [Cory Doctorow refers to as _discernment_](https://pluralistic.net/2026/07/28/hitl-ers/): the ability to distinguish useful AI outputs from unhelpful/misleading responses.
+
+To ensure that you continue to learn as you work through this lesson and afterwards, some good habits to get into are:
+
+1. Before you ask a question or request some code, _think_ about what you expect the answer to be or the response to look like.
+2. Compare the response generated to that expectation.
+   If the result you get is unexpected, spend some time thinking about what is different and why that could be.
+3. Try to find ways to adjust the code that will test your understanding: _"if x, then y should happen if I make z change to this part of the code."_ 
+
+If you find that you seem to have misunderstood something, prompt the chatbot with a description of what you have changed/what you are trying to do, what you expected to happen, what actually happened, and ask for clarification.
+Ask "what am I missing?" rather than "fix it for me" to develop your own expertise.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::: challenge
+
+### Test Your Understanding
+Review the response generated from your prompt in the previous exercise ([_Explain This Code_](#explain-this-code)) and identify one part of the explanation that you understand.
+Devise a way to adjust the code so that you can test whether your understanding is correct, then make that change to the code and check whether you were right.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+## How Much Is Too Much?
+While you are beginning to develop your own programming expertise, we recommend that you avoid passing large chunks of code and whole programs to the chatbot and asking for an explanation.
+You may expect that this will save you time but it will be harder for you to develop your own understanding of the code.
+It is easier to trace execution through a handful of lines than through hundreds.
+
+And it is easier to process and consider the explanation of a handful of lines that one of hundreds.
+If you provide a large volume of code to the chatbot, a detailed explanation will be very long while a less thorough summary of the code may explain things at a level too high to really build your understanding of how the code works.
+
+Managing your cognitive load by keeping explanations short and taking regular opportunities to test your understanding will aid your learning.
+This will seem slow at first but, as you continue to learn, you will be able to move more quickly and spend less time studying the code in detail.
+
+:::::::::::::::::::::::::::::::::::::::: keypoints
+
+- "Reverse-engineering" existing code and inserting `print` statements can help you develop your understanding of how code works.
+- Develop your own expertise by comparing a chatbot's explanations to your own understanding and finding practical ways to test the explanations. 
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
