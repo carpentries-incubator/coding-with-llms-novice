@@ -209,7 +209,7 @@ We are going to use the R function `download.file()` to download the CSV
 file that contains the gapminder data. Lets investigate the
 `download.file()` function.
 
-In the R console type `?download.file` and then look at the help view
+In the R console type `help( download.file )` and then look at the help view
 that will open on the bottom right. We can see a description and a list
 of arguments. We need the first two, `url` and `destfile`.
 
@@ -220,13 +220,13 @@ of arguments. We need the first two, `url` and `destfile`.
   "gapminder\_data.csv".
 
 ```r
-download.file(url = "https://ndownloader.figshare.com/files/2292169",
-              destfile = "data_raw/portal_data_joined.csv")
+download.file(url = "https://swcarpentry.github.io/r-novice-gapminder/data/gapminder_data.csv",
+              destfile = "gapminder_data.csv")
 ```
 
-You are now ready to load the data we use `read.csv()` to load the
+You are now ready to load the data!  We use `read.csv()` to load the
 content of the CSV file as an object of class `data.frame`, we can again
-use `?` and find the arguments of `?read.csv`. This time we just need
+use `help( read.csv )` to learn about the arguments. This time we just need
 the first argument `file` which we give the location of the file
 i.e. `destfile` from before.
 
@@ -246,6 +246,13 @@ head( gapminder )
 ```
 
 ```output
+      country year      pop continent lifeExp gdpPercap
+1 Afghanistan 1952  8425333      Asia  28.801  779.4453
+2 Afghanistan 1957  9240934      Asia  30.332  820.8530
+3 Afghanistan 1962 10267083      Asia  31.997  853.1007
+4 Afghanistan 1967 11537966      Asia  34.020  836.1971
+5 Afghanistan 1972 13079460      Asia  36.088  739.9811
+6 Afghanistan 1977 14880372      Asia  38.438  786.1134
 ```
 
 Quickly explore the dataset using the `summary()` function:
@@ -254,6 +261,22 @@ Quickly explore the dataset using the `summary()` function:
 summary( gapminder )
 ```
 
+```output
+   country               year           pop             continent        
+ Length:1704        Min.   :1952   Min.   :6.001e+04   Length:1704       
+ Class :character   1st Qu.:1966   1st Qu.:2.794e+06   Class :character  
+ Mode  :character   Median :1980   Median :7.024e+06   Mode  :character  
+                    Mean   :1980   Mean   :2.960e+07                     
+                    3rd Qu.:1993   3rd Qu.:1.959e+07                     
+                    Max.   :2007   Max.   :1.319e+09                     
+    lifeExp        gdpPercap       
+ Min.   :23.60   Min.   :   241.2  
+ 1st Qu.:48.20   1st Qu.:  1202.1  
+ Median :60.71   Median :  3531.8  
+ Mean   :59.47   Mean   :  7215.3  
+ 3rd Qu.:70.85   3rd Qu.:  9325.5  
+ Max.   :82.60   Max.   :113523.1  
+```
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
