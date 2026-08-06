@@ -72,16 +72,129 @@ I need to write a script in python to load data, generate statistics and produce
 
 **TODO: Consider *very* different response structures from different LLMs.**
 
-## Activity 1: Practice interacting with an AI chatbot
+## The Value of Context
 
-Use a chatbot like https://google.com/ai to understand the value of context
+When asking questions to an AI chatbot, providing adequate context is essential
+for getting useful answers. Without context, even a simple question can be
+ambiguous or impossible to answer correctly. Let's explore this with a hands-on
+exercise.
 
-- How many years are available?
-    - "It looks like your question is missing some context"
-- How many years are available in gapminder?
-    - Official Gapminder Platform (300 years) vs Gapminder R / Python Programming Package (55 years)
-- How many years are available in https://swcarpentry.github.io/r-novice-gapminder/data/gapminder_data.csv?
-    - "There are 12 specific years available in that Software Carpentry Gapminder dataset"
+In the previous episode, we loaded the gapminder dataset and explored it using
+`head()`. Notice how the years are sub-sampled to every five years.
+
+```output
+      country year      pop continent lifeExp gdpPercap
+1 Afghanistan 1952  8425333      Asia  28.801  779.4453
+2 Afghanistan 1957  9240934      Asia  30.332  820.8530
+3 Afghanistan 1962 10267083      Asia  31.997  853.1007
+```
+
+Now let's see how an AI chatbot responds when we ask questions about this data,
+with and without proper context.
+
+### A Question Without Context
+
+Open your AI chatbot of choice such as https://google.com/ai in a new browser
+window. Type and submit this prompt exactly as written:
+
+```
+How many years are available?
+```
+
+Look at the response. What did the chatbot say? Does it answer our question
+about the gapminder dataset?
+
+Without context, most chatbots will ask for clarification or give a generic
+response. For example, you might see something like: *"It looks like your
+question is missing some context. Could you tell me what you're referring to?"*
+
+### Adding Some Context
+
+Now try adding some context. Submit this prompt:
+
+```
+How many years are available in gapminder?
+```
+
+How does this response differ from the first? Is the answer consistent with what
+you know about the dataset?
+
+When you mention "gapminder", the chatbot has some context, but it may still be
+ambiguous. Gapminder is both a foundation that publishes data (with datasets
+spanning over 300 years of history) *and* the name of popular R and Python
+packages. The chatbot might tell you about either one, or ask which you mean.
+
+### Being Specific
+
+Finally, be even more specific. Submit this prompt:
+
+```
+How about in
+https://swcarpentry.github.io/r-novice-gapminder/data/gapminder_data.csv?
+```
+
+Does the AI chatbot have enough context now?  Look closely at this last prompt
+and see what context **is** and **is not** in the prompt.
+
+While the specific dataset is in the prompt, the specific question that you are
+asking is **not** in the prompt but in a previous prompt.  This demonstrates
+that earlier parts of your conversation can contribute context.
+
+::::::::::::::::::::::::::::::::::::::: challenge
+
+### Challenge: Criticall evaluate AI responses
+
+By providing the specific URL to the Software Carpentry gapminder CSV file, the
+chatbot can give you a precise answer. The dataset contains **12 specific
+years**: 1952, 1957, 1962, 1967, 1972, 1977, 1982, 1987, 1992, 1997, 2002, and
+2007 (data recorded at 5-year intervals). 
+
+How can you validate the response?
+
+::::::::::::::: solution
+
+Recall from the previous episode that we can explore our data in R using the
+`summary()` function.  Here we use `$` to subset the `year` column:
+
+```r
+summary(gapminder$year)
+```
+
+```output
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   1952    1966    1980    1980    1993    2007 
+```
+
+Another useful function is `unique()` to see all unique years:
+
+```r
+unique(gapminder$year)
+```
+
+```output
+ [1] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 2002 2007
+```
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+### Key Takeaway
+
+This exercise demonstrates a fundamental principle of effective AI prompting:
+**the more specific context you provide, the more useful the response will be**.
+
+When working with AI chatbots to help you learn or write code, remember to
+include:
+
+- What programming language you are using
+- What dataset or data structure you are working with
+- What you are trying to accomplish
+- Any relevant details about your specific situation
+
+A vague question like "How do I make a plot?" will get a very different (and
+often less helpful) response than "How do I make a scatter plot of year vs GDP
+per capita using ggplot2 in R with the gapminder dataset?"
 
 ## Activity 2: Create your first plot (manually)
 
