@@ -67,9 +67,8 @@ Choose an appropriate LLM to use today and open a session.
 
 ### Why learn R?
 
-We'll use R in this lesson to practice running code and asking an AI chatbot for
-help.  While we don't aim to provide a comprehensive introduction to R, there
-are several reasons why R is a good choice:
+We'll use R in this lesson to practice running code and asking an AI chatbot for help.
+While we don't aim to provide a comprehensive introduction to R, there are several reasons why R is a good choice:
 
 - R does not involve lots of pointing and clicking, and that's a good thing
 - R code is great for reproducibility
@@ -78,8 +77,7 @@ are several reasons why R is a good choice:
 - R produces high-quality graphics
 - R has a large and welcoming community
 
-For more information, check out these other great lessons from which material
-has been borrowed:
+For more information, check out these other great lessons from which material has been borrowed:
 
 - https://southampton-rsg-training.github.io/data-analysis-and-visualisation-r
 - https://datacarpentry.github.io/R-ecology-lesson
@@ -87,23 +85,16 @@ has been borrowed:
 
 ### What is R?  What is RStudio?
 
-The term "`R`" is used to refer to both the programming language and the
-software that interprets the scripts written using it.
+The term "`R`" is used to refer to both the programming language and the software that interprets the scripts written using it.
 
-[RStudio](https://posit.co/products/open-source/rstudio) is a very popular way
-to not only write R scripts but also to interact with the R software. To
-function correctly, RStudio needs R and therefore both need to be installed on
-your computer.
+[RStudio](https://posit.co/products/open-source/rstudio) is a very popular way to not only write R scripts but also to interact with the R software.
+To function correctly, RStudio needs R and therefore both need to be installed on your computer.
 
 ### Knowing your way around RStudio
 
-Let's start by learning about
-[RStudio](https://posit.co/products/open-source/rstudio), which is an
-open-source Integrated Development Environment (IDE) for working with R.
+Let's start by learning about [RStudio](https://posit.co/products/open-source/rstudio), which is an open-source Integrated Development Environment (IDE) for working with R.
 
-We will use RStudio IDE to write code, navigate the files on our
-computer, inspect the variables we are going to create, and visualize
-the plots we will generate.
+We will use RStudio IDE to write code, navigate the files on our computer, inspect the variables we are going to create, and visualize the plots we will generate.
 
 ![RStudio Interface.  Clockwise from top left: Source, Environment, Output, Console.](
     fig/rstudio-annotated.png
@@ -111,14 +102,8 @@ the plots we will generate.
     alt="RStudio interface showing four panes."
 }
 
-RStudio is divided into 4 "Panes": the **Source** for your scripts and
-documents (top-left, in the default layout), your
-**Environment/History** (top-right) which shows all the objects in your
-working space (Environment) and your command history (History), your
-**Files/Plots/Packages/Help/Viewer** (bottom-right), and the R
-**Console** (bottom-left). The placement of these panes and their
-content can be customized (see menu, Tools -> Global Options -> Pane
-Layout).
+RStudio is divided into 4 "Panes": the **Source** for your scripts and documents (top-left, in the default layout), your **Environment/History** (top-right) which shows all the objects in your working space (Environment) and your command history (History), your **Files/Plots/Packages/Help/Viewer** (bottom-right), and the R **Console** (bottom-left).
+The placement of these panes and their content can be customized (see menu, Tools -> Global Options -> Pane Layout).
 
 ## R Basics
 
@@ -144,44 +129,34 @@ You can get output from R simply by typing math in the console:
 
 ### Assigning values to objects
 
-However, to do useful and interesting things, we need to assign *values*
-to *objects*.
+However, to do useful and interesting things, we need to assign *values* to *objects*.
 
-A *value* is a piece of information that we want to store and retrieve
-at some later time, i.e. a number, a sequence of numbers, or even
-collections of data, for now we will start with numbers and later move
-onto collections of numbers which in R are called *vectors*.
+A *value* is a piece of information that we want to store and retrieve at some later time, i.e. a number, a sequence of numbers, or even collections of data, for now we will start with numbers and later move onto collections of numbers which in R are called *vectors*.
 
-An *object* (or *variable*) is programming speak for a thing with known
-properties.  You can think of an object as a box with a label, holding the value
-inside.
+An *object* (or *variable*) is programming speak for a thing with known properties.
+You can think of an object as a box with a label, holding the value inside.
 
-To create an object, we need to give it a name followed by the
-assignment operator `<-`, and the value we want to give it:
+To create an object, we need to give it a name followed by the assignment operator `<-`, and the value we want to give it:
 
 ```r
 weight_kg <- 55
 ```
 
-`<-` is the assignment operator. It assigns values on the right to
-objects on the left. So, after executing `weight_kg <- 55`, the value of
-`weight_kg` is `55`. The arrow can be read as 55 **goes into**
-`weight_kg`.
+`<-` is the assignment operator.
+It assigns values on the right to objects on the left.
+So, after executing `weight_kg <- 55`, the value of `weight_kg` is `55`.
+The arrow can be read as 55 **goes into** `weight_kg`.
 
 ### What is my object?
 
-Once an *object* is created there are two ways we can get information about that
-object:
+Once an *object* is created there are two ways we can get information about that object:
 
-1. Environment tab -- In the Environment tab in the top right of RStudio,
-'weight\_kg' has the type numeric length 1 and value 55. Make sure to keep an
-eye on the other values that appear here when using RStudio to understand what
-objects you have. This tab is great for small variables, when inspecting larger
-or more complicated objects it is better to use more advanced methods we will
-cover later on.
-2. Print command -- When assigning a value to an object, R does
-not print anything.  You can force R to print the value by using parentheses or
-by typing the object name:
+1. Environment tab -- In the Environment tab in the top right of RStudio, 'weight\_kg' has the type numeric length 1 and value 55.
+Make sure to keep an eye on the other values that appear here when using RStudio to understand what objects you have.
+This tab is great for small variables, when inspecting larger or more complicated objects it is better to use more advanced methods we will cover later on.
+
+2. Print command -- When assigning a value to an object, R does not print anything.
+You can force R to print the value by using parentheses or by typing the object name:
 
 ```r
 weight_kg <- 55    # doesn't print anything
@@ -191,10 +166,8 @@ weight_kg          # and so does typing the name of the object
 
 ## Load Data
 
-[Gapminder](https://gapminder.org) provides data to help people better
-understand global macrotrends.  We'll use a subset from the
-[gapminder](https://jennybc.github.io/gapminder) package that contains six
-variables:
+[Gapminder](https://gapminder.org) provides data to help people better understand global macrotrends.
+We'll use a subset from the [gapminder](https://jennybc.github.io/gapminder) package that contains six variables:
 
 | Column      | Description              |
 |:------------|:-------------------------|
@@ -205,13 +178,12 @@ variables:
 | lifeExp     | life expectancy at birth |
 | gdpPercap   | per-capita GDP           |
 
-We are going to use the R function `download.file()` to download the CSV
-file that contains the gapminder data. Lets investigate the
-`download.file()` function.
+We are going to use the R function `download.file()` to download the CSV file that contains the gapminder data.
+Lets investigate the `download.file()` function.
 
-In the R console type `help( download.file )` and then look at the help view
-that will open on the bottom right. We can see a description and a list
-of arguments. We need the first two, `url` and `destfile`.
+In the R console type `help( download.file )` and then look at the help view that will open on the bottom right.
+We can see a description and a list of arguments.
+We need the first two, `url` and `destfile`.
 
 - url: A character string giving a source URL for the data we use
   "<https://swcarpentry.github.io/r-novice-gapminder/data/gapminder_data.csv>".
@@ -224,22 +196,18 @@ download.file(url = "https://swcarpentry.github.io/r-novice-gapminder/data/gapmi
               destfile = "gapminder_data.csv")
 ```
 
-You are now ready to load the data!  We use `read.csv()` to load the
-content of the CSV file as an object of class `data.frame`, we can again
-use `help( read.csv )` to learn about the arguments. This time we just need
-the first argument `file` which we give the location of the file
-i.e. `destfile` from before.
+You are now ready to load the data!
+We use `read.csv()` to load the content of the CSV file as an object of class `data.frame`, we can again use `help( read.csv )` to learn about the arguments.
+This time we just need the first argument `file` which we give the location of the file i.e. `destfile` from before.
 
 ```r
 gapminder <- read.csv( "gapminder_data.csv" )
 ```
 
-This statement doesn't produce any output because, as you might recall,
-assignments don't display anything. If we want to check that our data
-has been loaded, we can check the environment pane in RStudio.
+This statement doesn't produce any output because, as you might recall, assignments don't display anything.
+If we want to check that our data has been loaded, we can check the environment pane in RStudio.
 
-To check the top (the first 6 lines) of this data frame we use the
-function `head()`:
+To check the top (the first 6 lines) of this data frame we use the function `head()`:
 
 ```r
 head( gapminder )
