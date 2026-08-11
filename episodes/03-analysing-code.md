@@ -436,6 +436,20 @@ You are responsible for the code generated on your behalf, and a chatbot cannot 
 <!-- link from above to the Implications lesson? -->
 Since that code can be powerful -- editing the files on your computer, interacting with other people's servers online, analysing masses of research data, etc -- some scepticism is healthy.
 
+::::::::::::::::::::::::::::::::: callout
+
+### Uncertainty
+You may find it possible to adjust the way that uncertainty is handled by some more recent versions of chatbots.
+For example, by adding something like the below to your prompt:
+
+> Mention when you are uncertain about something in your response, instead of confidently glossing over it.
+
+This can help you to avoid being led astray by something in a generated response.
+But we still encourage you to verify everything that you get back from a chatbot, especially if the consequences of it being wrong could be serious!
+Remember that you will build your own expertise by testing things out for yourself.
+
+:::::::::::::::::::::::::::::::::::::::::
+
 By learning the basics of coding and giving yourself a framework with which you can continue to develop your own expertise, we hope to equip you with what [Cory Doctorow refers to as _discernment_](https://pluralistic.net/2026/07/28/hitl-ers/): the ability to distinguish useful AI outputs from unhelpful/misleading responses.
 
 To ensure that you continue to learn as you work through this lesson and afterwards, some good habits to get into are:
