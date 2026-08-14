@@ -34,7 +34,7 @@ Since research computing tasks are often concerned with questions/data at the li
 
 Recall from Episode 3 that outputs from chatbots often have an authoritative tone, regardless of their relevance or factual accuracy. This tone can make us inclined to accept the output without critically evaluating it, but it's very important that we do.
 
-Regardless of whether you wrote the code from scratch or generated it with AI, you will held responsible for the results it produces. 
+Whether you wrote the code from scratch or generated it with AI, you will held responsible for the results it produces. 
 Therefore, it is up to you to determine whether or not the output generated is accurate and/or does what you need it to do.
 
 
