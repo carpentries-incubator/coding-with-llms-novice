@@ -105,7 +105,16 @@ Now, instead of solving the exercises it produces (save them for later if you li
 
 ::::::::::::::::::::::::::::::: solution
 
-An example prompt that worked well for the lesson developers: <!-- todo: add an example of a good prompt here -->
+An example prompt that worked well for the lesson developers:
+
+> You are an expert instructor providing training in programming. 
+> I am an early career researcher and novice programmer, who wants to learn enough coding in R to be able to analyse my research data. 
+> So far I have encountered some basic scripting: loading data, plotting from a dataframe with ggplot2, looping through unique values in a column, defining and calling a function.
+> Generate three exercises to help me expand and reinforce my understanding of function definitions. 
+> Do not use any concepts that I am not already familiar with, except where you want me to learn about it through the exercise itself. 
+> Each exercises should be slightly more difficult than the last, and the format of the exercises should vary i.e. not three multiple-choice questions in a row. 
+> Wait for me to provide my solution to an exercise and, if I get it wrong, give short hints or ask Socratic questions one at a time, to help me figure out where I went wrong.
+> Do not give me the answer unless I say "I give up". 
 
 ::::::::::::::::::::::::::::::::::::::::
 
