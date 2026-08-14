@@ -31,11 +31,13 @@ Nonetheless, this study underscores the potential danger of depending solely on 
 
 It has been found that [LLMs perform worse on unusual and niche tasks](https://arxiv.org/abs/2607.19104), especially those that are not well-represented in their training data. 
 Since research computing tasks are often concerned with questions/data at the limits of current human understanding, you should be prepared to encounter more problems than somebody generating code for more routine tasks in well-trodden territory.
-    
-Whereas a person might give you some indication when they are not confident that they are giving the right answer/good advice ("I'm not really sure but if I had to guess I would say..." or "You should really ask Jessica that question: she knows a lot more about this stuff than I do..."), the output of your chatbot will project the same confidence and positivity regardless of the relevance or factual accuracy of its response. Outputs from GPT systems often have an authoritative tone, which can make us inclined to accept the output without critically evaluating it.
+
+Recall from Episode 3 that outputs from chatbots often have an authoritative tone, regardless of their relevance or factual accuracy. This tone can make us inclined to accept the output without critically evaluating it, but it's very important that we do.
 
 Regardless of whether you wrote the code from scratch or generated it with AI, you will held responsible for the results it produces. 
 Therefore, it is up to you to determine whether or not the output generated is accurate and/or does what you need it to do.
+
+
 
 ## Types of Errors
 
