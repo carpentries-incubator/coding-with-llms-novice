@@ -49,4 +49,4 @@ EXERCISE to allow participants to experiment some more
 
 Follow-up discussion EXERCISE to find out what people learned, where they got stuck, any weird behaviour observed from the chatbot, etc?
 
-Toby: I found myself wondering about version control as I worked on this outline: as learners get more and more into this, they are increasingly going to benefit from viewing diffs of changes being made. the commit history also helps the model (then agent) keep track of what's been done and why, which facilitates experimentation and work spread across multiple sessions. Where and how can we gracefully introduce this stuff?
+Toby: I found myself wondering about version control as I worked on this outline: as learners get more and more into this, they are increasingly going to benefit from viewing diffs of changes being made. the commit history also helps the model (then agent) keep track of what's been done and why, which facilitates experimentation and work spread across multiple sessions. Where and how can we gracefully introduce this stuff? JS
