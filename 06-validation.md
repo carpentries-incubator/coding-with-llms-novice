@@ -23,8 +23,9 @@ _After following this episode, learners will be able to..._
 ## But Is It True?
 
 * Regardless of whether you wrote the code from scratch or generated it with AI, you will held responsible for the results it produces
-* LLM models make mistakes. Perhaps not often, and especially not when working with common libraries, functions, and tasks similar to those that many people have done in the past. 
-    * (Toby: not really mistakes, since "mistake" implies intent on the part of the mistake maker: "oops, I was wanted to do X but instead Y happened")
+    * (JS:)For patent and copyright in the US you must be able to prove significant human review. This also affects publication as many journals or data repositories require explicit disclosure of where, how, and why genAI produced code, data, or manuscripts are worth the time and attention of future scholars.
+* LLM models may mislead. Perhaps not often, and especially not when working with common libraries, functions, and tasks similar to those that many people have done in the past. 
+    * (Toby: not really mistakes, since "mistake" implies intent on the part of the mistake maker: "oops, I was wanted to do X but instead Y happened") (JS They are designed to sound competent and keep you engaged in the conversation at all costs, including accuracy---partially addressed next)
 * But, whereas a person might give you some indication when they are not confident that they are giving the right answer/good advice ("I'm not really sure but if I had to guess I would say..." or "You should really ask Jessica that question: she knows a lot more about this stuff than I do..."), the output of your chatbot will project the same confidence and positivity regardless of the relevance or factual accuracy of its response.
 * It is up to you to determine whether or not the output generated is accurate and/or does what you need it to do.
 * The code tracing/review skills you have picked up in this lesson will be helpful. But looking at the code is often not enough on its own:
@@ -33,7 +34,7 @@ _After following this episode, learners will be able to..._
     * Models perform worse on unusual and niche tasks, those that are not well-represented in their training data. (Toby: find the paper that Greg W shared recently re:model performance vs a benchmark of scientific challenges.) Since research computing tasks are often concerned with questions/data at the limits of current human understanding, you should be prepared to encounter more problems than somebody generating code for more routine tasks in well-trodden territory.
 
 ## What are some good validation strategies?
-* Test your code!
+* Test your code! How?
     * Minimally, run it on a small, test dataset. Check results carefully. Think first about what you expect to see, and compare the outcome with that expectation.
     * Allocate your rigour: consider how crucial each part of the code is, and treat those parts accordingly. For example, routine plotting functions and other standard "boilerplate" is more likely to be generated correctly -- and, in the case of the plotting code, errors might be detected quite easily. You might choose to spend less effort reviewing that code. But complex and/or crucial processing and calculations that are particular important for the results you will be reporting from your work merit a much closer look.
     * Consider adding some unit tests to your code: that is, code that tests the correctness of the other code. Programming languages typically have at least one framework to do this, and automated code generation has made it much easier and faster to do. Of course, you will also need to check the tests so that you can be confident that they are correct and/or testing the right things.
