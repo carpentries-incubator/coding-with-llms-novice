@@ -77,11 +77,8 @@ While we don't aim to provide a comprehensive introduction to R, there are sever
 - R produces high-quality graphics
 - R has a large and welcoming community
 
-For more information, check out these other great lessons from which material has been borrowed:
-
-- https://southampton-rsg-training.github.io/data-analysis-and-visualisation-r
-- https://datacarpentry.github.io/R-ecology-lesson
-- https://swcarpentry.github.io/r-novice-gapminder
+This list and significant amounts of the content below have been adapted from [Data Analysis and Visualisation in R](https://southampton-rsg-training.github.io/data-analysis-and-visualisation-r) by Southampton Research Software Group licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0).
+For more information, check out the original lesson as well as [Data Analysis and Visualization in R for Ecologists](https://datacarpentry.github.io/R-ecology-lesson) and [R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder).
 
 ### What is R?  What is RStudio?
 
@@ -109,7 +106,7 @@ The placement of these panes and their content can be customized (see menu, Tool
 
 ### Running commands
 
-You can get output from R simply by typing math in the console:
+You can get output from R by typing math in the console:
 
 ```r
 3 + 5
@@ -129,12 +126,15 @@ You can get output from R simply by typing math in the console:
 
 ### Assigning values to objects
 
-However, to do useful and interesting things, we need to assign *values* to *objects*.
+However, to do useful and interesting things, we need to assign *values* to *objects* and name them through *variables*.
 
 A *value* is a piece of information that we want to store and retrieve at some later time, i.e. a number, a sequence of numbers, or even collections of data, for now we will start with numbers and later move onto collections of numbers which in R are called *vectors*.
 
-An *object* (or *variable*) is programming speak for a thing with known properties.
+An *object* is programming speak for a thing with known properties.
 You can think of an object as a box with a label, holding the value inside.
+
+A *variable* is a name that refers to an object.
+You can use any name such as `x`, `current_temperature`, or `subject_id` but we recommend keeping object names explicit and not too long.
 
 To create an object, we need to give it a name followed by the assignment operator `<-`, and the value we want to give it:
 
@@ -248,8 +248,8 @@ summary( gapminder )
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
-- Generative AI tools like LLMs can either hinder or help our learning
-- We can use them to support our learning through explanations, prompting and challenges
-- Choice of specific tools might depend on local policies.
+- Choosing which and when to use Generative AI tools require thoughtful goal-setting
+- R and RStudio provide a reasonable entry point with a large and welcoming community
+- The Gapminder dataset contains global metrics for data analysis
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
