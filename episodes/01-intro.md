@@ -1,15 +1,15 @@
 ---
-title: "Introducing LLMs as a Learning Tool"
+title: "Introducing LLMs as a Tool to Learn R"
 teaching: 10 # teaching time in minutes
-exercises: 1 # exercise time in minutes
+exercises: 15 # exercise time in minutes
 ---
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
-- **Understand** learning through challenge
-- **Identify** a learning goal
+- **Identify** your learning goals
 - **Choose** an AI chatbot
-- **Use** R to explore data
+- **Understand** the basics of R
+- **Use** R to load data
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -17,7 +17,7 @@ exercises: 1 # exercise time in minutes
 
 - What do I want to learn?
 - What AI chatbots are available to me?
-- How do I get started?
+- How do I get started with R?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -40,12 +40,6 @@ There are many popular AI models available online, including:
 
 In addition, institutions might run their own, local copies of models like such as DeepSeek or Mistral:
 
-### Choosing A Programming Language
-
-Researchers use many different programming languages to solve problems in data analysis and modeling. This course provides examples in Python and R. Both of these languages are widely used in research computing, since they are open source, freely available and have large user communities who contribute useful code.
-
-You could use the approach in this course to learn other languages too, but remember that the more widely used a language is, the better it is represented in AI training data, and the better an LLM will support it.
-
 :::::::::::::::::::::::::::::::::::::::  challenge
 
 ## Challenge : What Tools Do We Have
@@ -61,7 +55,7 @@ Discuss with each other and with your instructor:
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-Choose an appropriate LLM to use today and open a session.
+Consult with your instructor on which LLMs are appropriate to use today and open a session.
 
 ## Getting Started with R
 
@@ -99,7 +93,7 @@ We will use RStudio IDE to write code, navigate the files on our computer, inspe
     alt="RStudio interface showing four panes."
 }
 
-RStudio is divided into 4 "Panes": the **Source** for your scripts and documents (top-left, in the default layout), your **Environment/History** (top-right) which shows all the objects in your working space (Environment) and your command history (History), your **Files/Plots/Packages/Help/Viewer** (bottom-right), and the R **Console** (bottom-left).
+RStudio is divided into 4 "Panes": the **Source** for your documents containing code (aka "scripts"; top-left, in the default layout), your **Environment/History** (top-right) which shows all the objects in your working space (Environment) and your command history (History), your **Files/Plots/Packages/Help/Viewer** (bottom-right), and the R **Console** (bottom-left).
 The placement of these panes and their content can be customized (see menu, Tools -> Global Options -> Pane Layout).
 
 ## R Basics
