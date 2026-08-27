@@ -18,6 +18,9 @@ exercises: 2 # exercise time in minutes
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+**Note:** some of the material in this episode was drafted with assistance from generative AI tools.
+All content was reviewed and approved for inclusion by at least one human.
+
 ## Starting A Conversation
 
 :::::::::::::::::::::::::::::::::::::::::  callout
