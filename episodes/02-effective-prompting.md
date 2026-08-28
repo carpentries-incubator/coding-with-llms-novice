@@ -197,24 +197,101 @@ A vague question like "How do I make a plot?" will get a very different (and
 often less helpful) response than "How do I make a scatter plot of year vs GDP
 per capita using ggplot2 in R with the gapminder dataset?"
 
-## Activity 2: Create your first plot (manually)
+## Laying a Foundation
 
-### Load data
+Before we ask an AI chatbot to help us create any code, let's first create a simple visualization manually.
+This will give us a foundation to build on in the activities that follow.
 
-- Confirm gapminder is loaded via `head( gapminder )` or refer to Episode 1
+You might wonder why we're creating a plot ourselves before asking AI for help.
+There are a few important reasons:
 
-### Load ggplot2
+1. **Building foundational knowledge**: Understanding the basics helps you evaluate AI-generated code more effectively.
+2. **Recognizing correct output**: If you know what a working plot looks like, you can tell when something has gone wrong.
+3. **Asking better questions**: Knowing the basic structure of ggplot2 code helps you ask more specific, effective questions to the AI.
 
-- Introduce
-- Install via `install.packages( "ggplot2" )`
-- Confirm via `library( "ggplot2" )`
+### Confirm Your Data is Loaded
 
-### Run code
+In the previous episode, we downloaded and loaded the gapminder dataset.
+Let's confirm it's still available in our R session by running:
+
+```r
+head( gapminder )
+```
+
+```output
+      country year      pop continent lifeExp gdpPercap
+1 Afghanistan 1952  8425333      Asia  28.801  779.4453
+2 Afghanistan 1957  9240934      Asia  30.332  820.8530
+3 Afghanistan 1962 10267083      Asia  31.997  853.1007
+4 Afghanistan 1967 11537966      Asia  34.020  836.1971
+5 Afghanistan 1972 13079460      Asia  36.088  739.9811
+6 Afghanistan 1977 14880372      Asia  38.438  786.1134
+```
+
+If you get an error saying `gapminder` is not found, go back to Episode 1 and follow the instructions to reload the data.
+
+### Install and Load ggplot2
+
+We are going to use the `ggplot2` package to create visualizations of our data.
+The "gg" in ggplot2 stands for "grammar of graphics" which provides a consistent vocabulary for building plots step by step.
+You can learn more at https://ggplot2.tidyverse.org.
+
+First, we need to install the package.
+Run this command in your console:
+
+```r
+install.packages( "ggplot2" )
+```
+
+Once installed, load the package into the current R session using the `library()` function:
+
+```r
+library( "ggplot2" )
+```
+
+### Create a Scatter Plot
+
+Now we're ready to create our first plot!
+We'll make a scatter plot showing how GDP per capita (`gdpPercap`) has changed over time (`year`).
+
+Type the following code into your script and run it:
 
 ```r
 ggplot( gapminder, aes( year, gdpPercap ) ) +
     geom_point()
 ```
+
+You should see a scatter plot appear in the Plots pane of RStudio, with year on the x-axis and GDP per capita on the y-axis.
+
+::::::::::::::::::::::::::::::::::::::: challenge
+
+### Challenge: Observe Your Plot
+
+Take a moment to look at the plot you just created. Consider these questions:
+
+1. What patterns do you notice in the data?
+2. Are there any outlier points that stand out?
+3. What do you think those high values of GDP per capita might represent?
+
+::::::::::::::: solution
+
+### Observations
+
+![Scatter plot of year versus GDP per capita from the gapminder dataset](
+    fig/02-fig1.png
+){
+    alt="Scatter plot showing year on the x-axis and GDP per capita on the y-axis showing a general upward trend over time with several outliers."
+}
+
+Looking at the plot, you might notice:
+
+1. There appears to be a general upward trend in GDP per capita over time.
+2. There are several outlier points in the earlier years.
+3. The high GDP values likely represent countries with resources or developed economies.
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Activity 3: Ask the chatbot to explain the code
 
