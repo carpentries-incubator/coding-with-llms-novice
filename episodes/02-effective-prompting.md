@@ -293,16 +293,79 @@ Looking at the plot, you might notice:
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Activity 3: Ask the chatbot to explain the code
+## Understanding the Pieces
 
-> This is my first time using R.  Can you explain what this code is doing, line by line?
-> ggplot( gapminder, aes( year, gdpPercap ) ) +
->     geom_point()
+Now that you've created a plot and observed its output, let's use an AI chatbot to help us understand exactly what each part of the code is doing.
+Using AI to explain code can personalize your learning and help build your ability to read and modify code independently.
 
-What follow-up questions do you have?  Some possibilities:
-- How does it know to plot year on the x-axis?
-- Why does ggplot use +?
-- Explain the difference between aes in ggplot and in geom_point as simply as you can
+### Ask the Chatbot to Explain the Code
+
+Open your AI chatbot and submit the following prompt:
+
+```
+This is my first time using R. Explain what this code does line by line:
+
+ggplot( gapminder, aes( year, gdpPercap ) ) +
+    geom_point()
+```
+
+Read through the explanation carefully.
+The chatbot should describe:
+
+- What `ggplot()` does and what its arguments mean
+- What `aes()` stands for and its role in mapping data to visual properties
+- Why we use `+` to connect the parts
+- What `geom_point()` does
+
+### Ask Follow-up Questions
+
+One great way to use AI chatbots for learning is to ask follow-up questions.
+After starting the conversation and setting the context, you can dig deeper into anything that wasn't clear.
+
+Choose one or more of these follow-up questions to ask your chatbot.
+Or, if something else from the explanation confused you, ask about that instead!
+
+- How does ggplot know to plot `year` on the x-axis and not the y-axis?
+- Why does ggplot use `+` instead of something like `%>%` or a comma?
+- What's the difference between putting `aes()` inside `ggplot()` versus inside `geom_point()`?
+
+::::::::::::::::::::::::::::::::::::::: discussion
+
+### Comparing Our Experiences
+
+Share your experience with the group:
+
+- **Compare responses:** Did everyone's chatbot cover the same key points?
+Did anything unexpected happen?
+
+- **Clarity check:** How much of the explanation made sense to you?
+Are there terms or concepts that are still confusing?
+
+- **Follow-up discoveries:** What did you learn from your follow-up questions?
+Did any answers surprise you or change how you understand the code?
+
+::::::::::::::: solution
+
+### Insights from Follow-up Questions
+
+Here are some insights you might learn from the follow-up questions:
+
+**Overall:** A detailed explanation should mention that `ggplot()` initializes the plot with data if provided, `aes()` maps variables to visual properties (x and y axes), `+` connects layers together, and `geom_point()` creates a scatter plot.
+
+**On axis assignment:** In `aes()`, the first unnamed argument is mapped to `x` and the second to `y`.
+You could also write `aes( x = year, y = gdpPercap )` to be more explicit.
+
+**On using `+`:** The `+` operator in ggplot2 is used to add layers to a plot.
+It's different from the pipe operator (`%>%` or `|>`) because it's specifically designed for building up plots piece by piece.
+Think of it as "adding" a layer on top of your base plot.
+
+**On `aes()` placement:** When `aes()` is in `ggplot()`, those mappings apply to all layers.
+When `aes()` is in a specific geom like `geom_point()`, those mappings only apply to that layer.
+This becomes important when you have multiple geoms in the same plot.
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Activity 4: Modify the plot with help
 
