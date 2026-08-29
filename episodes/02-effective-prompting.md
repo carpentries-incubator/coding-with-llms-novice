@@ -367,14 +367,155 @@ This becomes important when you have multiple geoms in the same plot.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Activity 4: Modify the plot with help
+## Building On Your Work
 
-> This is my first time using R. Modify this code in the simplest way possible so that [insert modification]. Explain what the changes do.
+Now that we have a plot and understand its basic structure, let's use an AI chatbot to modify it.
+We'll repeat this pattern often: start with code, ask for changes, review the code, test the code.
 
-Some possibilities:
-- Dots are colored by continent
-    - color=continent
-- Dots are spread out more and don't overlap
-    - geom_jitter()
-- The outlier dots are labeled
-    - geom_text( data = subset( gapminder, gdpPercap > 50000 ), aes( label = country ), color = "black" )
+### Engineering a Modification Prompt
+
+When asking AI to modify code, avoid vague prompts like "make my plot better" or "fix this code."
+These prompts rarely give useful results because the AI doesn't know what "better" means to you.
+
+A good modification prompt to start with includes four key elements:
+
+1. **Your experience level** — help the AI choose appropriate language and complexity
+2. **The original working code** — give the AI something concrete to modify
+3. **A specific change you want** — tell the AI exactly what to do
+4. **A request for explanation** — learn how code works, don't just copy
+
+Here's a template that combines these elements:
+
+```
+This is my first time using R. Modify this code in the simplest way
+possible so that [describe your specific change]. Explain what the
+changes do.
+
+[paste your code here]
+```
+
+By asking for "the simplest way possible," you encourage the AI to make minimal changes.
+This can help make it easier to understand exactly what changed and why.
+
+### Try It Out!: Color Points by Continent
+
+Let's use this template to make a specific modification to our gapminder plot.
+Color the points according to which continent each country belongs to.
+
+Open your AI chatbot and submit the following prompt:
+
+```
+This is my first time using R. Modify this code in the simplest way
+possible so that the points are colored by continent. Explain what
+the changes do.
+
+ggplot( gapminder, aes( year, gdpPercap ) ) +
+    geom_point()
+```
+
+Read the response carefully.
+The AI should explain that adding `color = continent` inside the `aes()` function maps the continent variable to the color of each point.
+Your modified code should look something like this:
+
+```r
+ggplot( gapminder, aes( year, gdpPercap, color = continent ) ) +
+    geom_point()
+```
+
+Here is one possible explanation that you might get from a chatbot (in this case ChatGPT):
+
+> **What changed?**
+>
+> - `color = continent` tells ggplot2 to use the continent column to determine the color of each point.
+> - Because continent is a categorical variable (such as "Asia", "Europe", etc.), ggplot2 automatically gives each continent a different color.
+> - Everything else stays the same: year is still on the x-axis, and gdpPercap is still on the y-axis.
+>
+> You'll also automatically get a legend showing which color corresponds to each continent.
+
+Copy the code from the AI response into your RStudio and run it.
+You should see a scatter plot where each continent appears in a different color, with a legend automatically added to the right side.
+
+![Scatter plot of year versus GDP per capita with points colored by continent](
+    fig/02-fig2.png
+){
+    alt="Scatter plot showing year on the x-axis and GDP per capita on the y-axis, with points colored by continent showing different colors for Africa, Americas, Asia, Europe, and Oceania."
+}
+
+::::::::::::::::::::::::::::::::::::: challenge
+
+## Make More Modifications
+
+Using the prompt template, ask the AI to make one of the following modifications to your plot.
+Pick whichever sounds most interesting to you:
+
+1. Spread out the dots so they don't overlap as much
+
+2. Label the outlier countries with high GDP
+
+3. Add a trend line showing the overall pattern
+
+4. Change the y-axis to a logarithmic scale
+
+After you get a response:
+
+- Read the explanation to understand what changed
+- Run the code in RStudio to verify it works
+- Compare your result with a neighbor to see if you get similar code and plots?
+
+:::::::::::::::::::::::: solution
+
+## Possible Solutions
+
+Here are examples of what the AI might suggest for each modification:
+
+**Spreading out overlapping points** using `geom_jitter()`:
+
+```r
+ggplot( gapminder, aes( year, gdpPercap, color = continent ) ) +
+    geom_jitter()
+```
+
+![Scatter plot with jittered points colored by continent](
+    fig/02-fig3.png
+){
+    alt="Scatter plot showing year on the x-axis and GDP per capita on the y-axis, with points jittered horizontally to reduce overlap and colored by continent."
+}
+
+**Labeling outlier countries** using `geom_text()`:
+
+```r
+ggplot( gapminder, aes( year, gdpPercap, color = continent ) ) +
+    geom_point() +
+    geom_text( data = subset( gapminder, gdpPercap > 50000 ),
+               aes( label = country ),
+               color = "black" )
+```
+
+![Scatter plot with outlier countries labeled](
+    fig/02-fig4.png
+){
+    alt="Scatter plot showing year on the x-axis and GDP per capita on the y-axis, with points colored by continent and high GDP outlier countries labeled with their names."
+}
+
+**Adding a trend line** using `geom_smooth()`:
+
+```r
+ggplot( gapminder, aes( year, gdpPercap ) ) +
+    geom_point( aes( color = continent ) ) +
+    geom_smooth()
+```
+
+**Using a logarithmic y-axis** with `scale_y_log10()`:
+
+```r
+ggplot( gapminder, aes( year, gdpPercap, color = continent ) ) +
+    geom_point() +
+    scale_y_log10()
+```
+
+The code your AI chatbot generates may differ slightly in style or syntax, but should produce similar results.
+If your code doesn't work, copy the error message back to the AI and ask it to fix the problem.
+
+::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::::::::::
