@@ -8,7 +8,7 @@ exercises: 2 # exercise time in minutes
 
 - **Practice** interacting with an AI chatbot
 - **Use** ggplot2 to plot data
-- **Understand* the need to ask followup questions
+- **Explain** why follow-up questions are essential to learning
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -233,11 +233,11 @@ If you get an error saying `gapminder` is not found, go back to Episode 1 and fo
 ### Install and Load ggplot2
 
 We are going to use the `ggplot2` package to create visualizations of our data.
-The "gg" in ggplot2 stands for "grammar of graphics" which provides a consistent vocabulary for building plots step by step.
+The "gg" in ggplot2 stands for "grammar of graphics", a framework which provides a consistent vocabulary for building plots step by step.
 You can learn more at https://ggplot2.tidyverse.org.
 
 First, we need to install the package.
-Run this command in your console:
+Run this command in your R _Console_ pane:
 
 ```r
 install.packages( "ggplot2" )
@@ -254,14 +254,14 @@ library( "ggplot2" )
 Now we're ready to create our first plot!
 We'll make a scatter plot showing how GDP per capita (`gdpPercap`) has changed over time (`year`).
 
-Type the following code into your script and run it:
+Type the following code into the R _Console_ pane and run it:
 
 ```r
 ggplot( gapminder, aes( year, gdpPercap ) ) +
     geom_point()
 ```
 
-You should see a scatter plot appear in the Plots pane of RStudio, with year on the x-axis and GDP per capita on the y-axis.
+You should see a scatter plot appear in the _Plots_ pane of RStudio, with year on the x-axis and GDP per capita on the y-axis.
 
 ::::::::::::::::::::::::::::::::::::::: challenge
 
@@ -312,7 +312,7 @@ ggplot( gapminder, aes( year, gdpPercap ) ) +
 Read through the explanation carefully.
 The chatbot should describe:
 
-- What `ggplot()` does and what its arguments mean
+- What `ggplot()` does and what its parameters mean
 - What `aes()` stands for and its role in mapping data to visual properties
 - Why we use `+` to connect the parts
 - What `geom_point()` does
@@ -326,7 +326,8 @@ Choose one or more of these follow-up questions to ask your chatbot.
 Or, if something else from the explanation confused you, ask about that instead!
 
 - How does ggplot know to plot `year` on the x-axis and not the y-axis?
-- Why does ggplot use `+` instead of something like `%>%` or a comma?
+- Help me better understand the difference between a parameter (variable) and an argument (value) for a function?
+- Why does ggplot use `+` instead of something like a comma?
 - What's the difference between putting `aes()` inside `ggplot()` versus inside `geom_point()`?
 
 ::::::::::::::::::::::::::::::::::::::: discussion
@@ -432,7 +433,7 @@ Here is one possible explanation that you might get from a chatbot (in this case
 >
 > You'll also automatically get a legend showing which color corresponds to each continent.
 
-Copy the code from the AI response into your RStudio and run it.
+Copy the code from the AI response into your R _Console_ pane and run it.
 You should see a scatter plot where each continent appears in a different color, with a legend automatically added to the right side.
 
 ![Scatter plot of year versus GDP per capita with points colored by continent](
