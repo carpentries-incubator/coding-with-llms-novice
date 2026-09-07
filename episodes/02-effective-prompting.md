@@ -1,7 +1,7 @@
 ---
 title: "Writing Effective AI Prompts"
-teaching: 20 # teaching time in minutes
-exercises: 2 # exercise time in minutes
+teaching: 25 # teaching time in minutes
+exercises: 30 # exercise time in minutes
 ---
 
 ::::::::::::::::::::::::::::::::::::::: objectives
@@ -14,7 +14,10 @@ exercises: 2 # exercise time in minutes
 
 :::::::::::::::::::::::::::::::::::::::: questions
 
-- FIXME
+- What should I include in a prompt?
+- How does context affect responses?
+- How can AI help me understand code?
+- How can AI help me write code?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -66,14 +69,10 @@ Many LLMs produce comprehensive and helpful answers to this prompt. However the 
 
 ### Some More Precision
 
-LLMs are trained on a large variety of texts, and can produce an endless array of possible responses to prompts. In order to generate the most useful response, we need to submit as clear and expressive a prompt as possible. The previous prompt had promising output, but was too general. Let's try something more specific:
-
-**TODO: Python vs R alternatives** 
-```{prompt}
-I need to write a script in python to load data, generate statistics and produce figures. What skills do I need to learn to achieve this?
-```
-
-**TODO: Consider *very* different response structures from different LLMs.**
+LLMs are trained on a large variety of texts, and can produce an endless array of possible responses to prompts.
+In order to generate the most useful response, we need to submit as clear and expressive a prompt as possible.
+The previous prompt had promising output, but was too general.
+Let's try something more specific.
 
 ## The Value of Context
 
@@ -287,7 +286,7 @@ Looking at the plot, you might notice:
 
 1. There appears to be a general upward trend in GDP per capita over time.
 2. There are several outlier points in the earlier years.
-3. The high GDP values likely represent countries with resources or developed economies.
+3. The high GDP values likely represent countries with significant natural resources or developed economies.
 
 :::::::::::::::::::::::::
 
@@ -398,7 +397,7 @@ changes do.
 By asking for "the simplest way possible," you encourage the AI to make minimal changes.
 This can help make it easier to understand exactly what changed and why.
 
-### Try It Out!: Color Points by Continent
+### Try It Out! Color Points by Continent
 
 Let's use this template to make a specific modification to our gapminder plot.
 Color the points according to which continent each country belongs to.
@@ -461,7 +460,7 @@ After you get a response:
 
 - Read the explanation to understand what changed
 - Run the code in RStudio to verify it works
-- Compare your result with a neighbor to see if you get similar code and plots?
+- Compare your result with a neighbor to see if you get similar code and plots
 
 :::::::::::::::::::::::: solution
 
@@ -506,6 +505,12 @@ ggplot( gapminder, aes( year, gdpPercap ) ) +
     geom_smooth()
 ```
 
+![Scatter plot with trend line](
+    fig/02-fig5.png
+){
+    alt="Scatter plot showing year on the x-axis and GDP per capita on the y-axis, with a trend line showing the overall upward pattern over time."
+}
+
 **Using a logarithmic y-axis** with `scale_y_log10()`:
 
 ```r
@@ -514,9 +519,23 @@ ggplot( gapminder, aes( year, gdpPercap, color = continent ) ) +
     scale_y_log10()
 ```
 
+![Scatter plot with logarithmic y-axis](
+    fig/02-fig6.png
+){
+    alt="Scatter plot showing year on the x-axis and GDP per capita on the y-axis, this time on a logarithmic scale to better show the spread of values."
+}
+
 The code your AI chatbot generates may differ slightly in style or syntax, but should produce similar results.
 If your code doesn't work, copy the error message back to the AI and ask it to fix the problem.
 
 ::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::: keypoints
+
+- Providing context such as programming language, dataset, and goals can lead to better AI responses
+- Follow-up questions help personalize learning and deepen understanding
+- Modify code by starting with code, asking for changes, reviewing the code, and testing the code
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
