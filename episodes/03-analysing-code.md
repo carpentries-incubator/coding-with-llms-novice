@@ -211,7 +211,7 @@ These `print` lines can be commented out and in as needed while you experiment w
 :::::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
 ### Keep Exploring
-Refering to the example code block at the top of this episode, find another part of the code that you would like to understand better.
+Referring to the example code block at the top of this episode, find another part of the code that you would like to understand better.
 
 1. What do you think it is doing?
 2. How could you isolate and modify that part of the code to find out whether your prediction is correct?
