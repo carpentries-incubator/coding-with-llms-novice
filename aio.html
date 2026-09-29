@@ -1436,7 +1436,7 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-03-analysing-code"><p>Content from <a href="03-analysing-code.html">Analysing a Real Program</a></p>
 <hr>
-<p>Last updated on 2026-07-30 |
+<p>Last updated on 2026-09-29 |
 
         <a href="https://github.com/carpentries-incubator/coding-with-llms-novice/edit/main/episodes/03-analysing-code.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1450,7 +1450,10 @@ any links that you are not going to use.
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
-<li>FIXME</li>
+<li>What are some good strategies to learn from code that I did not
+write myself?</li>
+<li>How can I use a chatbot to help build my own understanding of how
+code works?</li>
 </ul>
 </div>
 </div>
@@ -1475,98 +1478,666 @@ behaviour changes.</li>
 <section><h2 class="section-heading" id="understanding-existing-code">Understanding Existing Code<a class="anchor" aria-label="anchor" href="#understanding-existing-code"></a>
 </h2>
 <hr class="half-width">
+<p>The code below generates a set of line plots showing how average life
+expectancy has changed over time in countries in the Americas, which are
+then saved to image files in an output directory.</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">ggplot2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">plot_life_expectancy</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span>, <span class="va">country</span>, <span class="va">outdir</span><span class="op">=</span><span class="st">"results"</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">lifeExp_plot</span> <span class="op">&lt;-</span> <span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">df</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">country</span> <span class="op">==</span> <span class="va">country</span>,<span class="op">]</span>, mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">lifeExp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="fu">ggsave</span><span class="op">(</span>filename <span class="op">=</span> <span class="fu">paste0</span><span class="op">(</span><span class="va">outdir</span>, <span class="st">"/"</span>, <span class="va">country</span>, <span class="st">"_lifeExp.png"</span><span class="op">)</span>, plot <span class="op">=</span> <span class="va">lifeExp_plot</span>, width <span class="op">=</span> <span class="fl">12</span>, height <span class="op">=</span> <span class="fl">10</span>, dpi <span class="op">=</span> <span class="fl">300</span>, units <span class="op">=</span> <span class="st">"cm"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">gapminder</span> <span class="op">&lt;-</span> <span class="fu">read.csv</span><span class="op">(</span><span class="st">'gapminder_data.csv'</span><span class="op">)</span></span>
+<span><span class="va">americas</span> <span class="op">&lt;-</span> <span class="va">gapminder</span><span class="op">[</span><span class="va">gapminder</span><span class="op">$</span><span class="va">continent</span> <span class="op">==</span> <span class="st">"Americas"</span>,<span class="op">]</span></span>
+<span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">country</span> <span class="kw">in</span> <span class="fu">unique</span><span class="op">(</span><span class="va">americas</span><span class="op">$</span><span class="va">country</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu">plot_life_expectancy</span><span class="op">(</span><span class="va">americas</span>, <span class="va">country</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre>
+</div>
+<p>There is a lot to understand in these eleven lines and, if you have
+never written any code before, it can feel overwhelming to be presented
+with a program like this. If we are going to generate our code with AI
+instead of writing it line-by-line, inspecting a lot of code is the
+trade we make in exchange for the increased speed of writing. It may be
+tempting to assume that AI-generated code is correct. But we have a
+responsibility to ensure that the results produced by our code are
+correct. A key skill we need to develop is the ability to trace the
+execution of code, to understand how information flows through the
+program and what might be done to it along the way. By practicing this
+skill, we can develop our ability to review code that has been
+generated.</p>
+<div class="section level3">
+<h3 id="reverse-engineering">Reverse-Engineering<a class="anchor" aria-label="anchor" href="#reverse-engineering"></a>
+</h3>
+<p>Time worn strategies for understanding what a chunk of code is doing
+are to a) run it, and b) mess around with it! It is helpful to spend
+some time doing this even if you plan to generate all of your code with
+AI.</p>
+<p>If the code we want to understand is part of a larger program, we can
+copy out a line or chunk and run it.</p>
+<div id="think-before-you-run-the-code" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="think-before-you-run-the-code" class="callout-inner">
+<h3 class="callout-title">Think before you run the code</h3>
+<div class="callout-content">
+<p>A good habit to get into, to help you learn how to read code, is to
+try to predict what the output of some code will be before you run it.
+Comparing the results against your prediction will help you spot and
+correct any misconceptions you might have picked up.</p>
+</div>
+</div>
+</div>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">unique</span><span class="op">(</span><span class="va">americas</span><span class="op">$</span><span class="va">country</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code> [1] "Argentina"           "Bolivia"             "Brazil"              "Canada"              "Chile"
+ [6] "Colombia"            "Costa Rica"          "Cuba"                "Dominican Republic"  "Ecuador"
+[11] "El Salvador"         "Guatemala"           "Haiti"               "Honduras"            "Jamaica"
+[16] "Mexico"              "Nicaragua"           "Panama"              "Paraguay"            "Peru"
+[21] "Puerto Rico"         "Trinidad and Tobago" "United States"       "Uruguay"             "Venezuela"   </code></pre>
+</div>
+<div id="r-studio-makes-this-easier" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="r-studio-makes-this-easier" class="callout-inner">
+<h3 class="callout-title">R Studio Makes This Easier</h3>
+<div class="callout-content">
+<p>Working in R Studio, you can also select some of the code and press
+the “Run” button to run only that selection. This works for multiple
+lines, a single line, or even part of a line.</p>
+</div>
+</div>
+</div>
+<p>Making a small adjustment to the code before running it again is
+another good way to build and test your understanding.</p>
+<div class="codewrapper sourceCode" id="cb4">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">unique</span><span class="op">(</span><span class="va">americas</span><span class="op">$</span><span class="va">continent</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>[1] "Americas"</code></pre>
+</div>
+<p>As long as you do this on a copy, you can always recover the original
+version. And you can learn a lot about how a program works through this
+kind of reverse-engineering.</p>
+<p>Let’s do this again to explore what the <code>paste0(...)</code> part
+is doing:</p>
+<div class="codewrapper sourceCode" id="cb6">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">paste0</span><span class="op">(</span><span class="va">outdir</span>, <span class="st">"/"</span>, <span class="va">country</span>, <span class="st">"_lifeExp.png"</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="error" tabindex="0"><code>Error: object 'outdir' not found</code></pre>
+</div>
+<p>This error message tells us that we cannot run that section of the
+code on its own: <code>outdir</code> is a <em>variable</em> that gets
+assigned a value in the code, and that value is then used in the
+<code>paste0</code> <em>function</em> in some way (<code>country</code>
+is another variable). When we run the whole program, these variables are
+being created and assigned a value. But when we try to run the function
+in isolation, they are not. So we need to also define the variables, or
+replace them with values directly.</p>
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># option 1: assign values to the variables</span></span>
+<span><span class="va">outdir</span> <span class="op">&lt;-</span> <span class="st">"output_directory"</span></span>
+<span><span class="va">country</span> <span class="op">&lt;-</span> <span class="st">"germany"</span></span>
+<span><span class="fu">paste0</span><span class="op">(</span><span class="va">outdir</span>, <span class="st">"/"</span>, <span class="va">country</span>, <span class="st">"_lifeExp.png"</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>[1] "output_directory/germany_lifeExp.png"</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb10">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># option 2: replace the variables with literal values</span></span>
+<span></span>
+<span><span class="fu">paste0</span><span class="op">(</span><span class="st">"output_directory"</span>, <span class="st">"/"</span>, <span class="st">"germany"</span>, <span class="st">"_lifeExp.png"</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>[1] "output_directory/germany_lifeExp.png"</code></pre>
+</div>
+<div id="comments" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="comments" class="callout-inner">
+<h3 class="callout-title">Comments</h3>
+<div class="callout-content">
+<p>The lines beginning with <code>#</code> above are <em>comments</em>:
+notes we can add to the code that are ignored when it is executed. As
+well as using them to annotate code as we did above, we can add
+<code>#</code> at the start of any lines we want to temporarily
+deactivate. This is another quick way of isolating particular line(s) of
+the code that we want to run: “comment out” the other lines then run the
+program.</p>
+<p>Most text editors provide a keyboard shortcut to quickly comment
+out/in lines, and getting used to this can be a great time-saver. (Look
+under the <code>Code</code> dropdown menu for the keyboard shortcut in R
+Studio on your system.)</p>
+</div>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="paths">Paths<a class="anchor" aria-label="anchor" href="#paths"></a>
+</h2>
+<hr class="half-width">
+<p>In our program, the output of this <code>paste0</code> function call
+is used as the name of the image file created to store the data
+visualisation. <code>output_directory/germany_lifeExp.png</code> is the
+<em>relative path</em> of the image file that will be created. Paths are
+the way that programs describe locations on the computer’s filesystem,
+and there are two types: <em>relative paths and absolute paths</em>. A
+relative path defines a location on the filesystem <em>relative to your
+current location</em>, whereas an absolute path describes its location
+from the <em>root</em> of the filesystem.</p>
+<p>The filesystem is a tree-like structure branching out from the
+root:</p>
+<figure><img src="fig/filesystem.svg" alt="A file system made up of a root directory that contains sub-directories titled bin, data, users, and tmp, and three subdirectories under users" class="figure mx-auto d-block"><div class="figcaption">Diagram of a filesystem.</div>
+</figure><p>The root folder is referred to as <code>/</code>, with more
+forward-slashes used to indicate levels of the filesystem. For example,
+<code>/Users/nelle</code> describes the absolute path of the user
+<code>nelle</code>’s home directory. From Nelle’s directory, a relative
+path to user <code>imhotep</code>’s home directory would be
+<code>../imhotep</code>, where <code>..</code> means “up one level”.
+Paths can take a bit of getting used to! Software Carpentry’s lesson <a href="https://swcarpentry.github.io/shell-novice/02-filedir.html" class="external-link"><em>The
+Unix Shell</em></a> is a good resource for learning more about them.</p>
+</section><section><h2 class="section-heading" id="peeking-inside-the-machine">Peeking Inside The Machine<a class="anchor" aria-label="anchor" href="#peeking-inside-the-machine"></a>
+</h2>
+<hr class="half-width">
+<p>While doing the kind of reverse-engineering we described above, we
+may want to keep track of the values that particular variables hold and
+how those change while the code is running. While advanced “debugger”
+tools exist to do this more rigorously, a lot of beginners and
+experienced programmers take a less sophisticated but more accessible
+approach: telling the program to report what things look like while it
+runs. This is done with the <code>print</code> function:</p>
+<div class="codewrapper sourceCode" id="cb12">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">country</span> <span class="kw">in</span> <span class="fu">unique</span><span class="op">(</span><span class="va">americas</span><span class="op">$</span><span class="va">country</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu">print</span><span class="op">(</span><span class="va">country</span><span class="op">)</span></span>
+<span>  <span class="fu">plot_life_expectancy</span><span class="op">(</span><span class="va">gapminder</span>, <span class="va">country</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>[1] "Argentina"
+[1] "Bolivia"
+[1] "Brazil"
+[1] "Canada"
+[1] "Chile"
+[1] "Colombia"
+[1] "Costa Rica"
+[1] "Cuba"
+[1] "Dominican Republic"
+[1] "Ecuador"
+[1] "El Salvador"
+[1] "Guatemala"
+[1] "Haiti"
+[1] "Honduras"
+[1] "Jamaica"
+[1] "Mexico"
+[1] "Nicaragua"
+[1] "Panama"
+[1] "Paraguay"
+[1] "Peru"
+[1] "Puerto Rico"
+[1] "Trinidad and Tobago"
+[1] "United States"
+[1] "Uruguay"
+[1] "Venezuela"</code></pre>
+</div>
+<p>These <code>print</code> lines can be commented out and in as needed
+while you experiment with your code, and you can delete them when you
+are done.</p>
+<div id="keep-exploring" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="keep-exploring" class="callout-inner">
+<h3 class="callout-title">Keep Exploring</h3>
+<div class="callout-content">
+<p>Referring to the example code block at the top of this episode, find
+another part of the code that you would like to understand better.</p>
+<ol style="list-style-type: decimal">
+<li>What do you think it is doing?</li>
+<li>How could you isolate and modify that part of the code to find out
+whether your prediction is correct?</li>
+</ol>
+<p>Try making these changes and reflect on whether or not your
+expectations were correct.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> An Educational Example </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<p>You might choose to look at how the name of the output file changes
+as the program runs. To do that, we need to edit the
+<code>plot_life_expectancy</code> function that is run in loop. Unlike
+built-in functions like <code>print</code> and <code>unique</code>,
+which exist in R by default, <code>plot_life_expectancy</code> is
+defined in our program.</p>
+<div class="codewrapper sourceCode" id="cb14">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">plot_life_expectancy</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span>, <span class="va">country</span>, <span class="va">outdir</span><span class="op">=</span><span class="st">"results"</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">lifeExp_plot</span> <span class="op">&lt;-</span> <span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">americas</span><span class="op">[</span><span class="va">americas</span><span class="op">$</span><span class="va">country</span> <span class="op">==</span> <span class="va">country</span>,<span class="op">]</span>, mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">lifeExp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="fu">ggsave</span><span class="op">(</span>filename <span class="op">=</span> <span class="fu">paste0</span><span class="op">(</span><span class="va">outdir</span>, <span class="st">"/"</span>, <span class="va">country</span>, <span class="st">"_lifeExp.png"</span><span class="op">)</span>, plot <span class="op">=</span> <span class="va">lifeExp_plot</span>, width <span class="op">=</span> <span class="fl">12</span>, height <span class="op">=</span> <span class="fl">10</span>, dpi <span class="op">=</span> <span class="fl">300</span>, units <span class="op">=</span> <span class="st">"cm"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre>
+</div>
+<p>It is then run in the <code>for</code> loop, once for each country in
+the Americas, with the <code>country</code> parameter changing each
+time.</p>
+<div class="codewrapper sourceCode" id="cb15">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">country</span> <span class="kw">in</span> <span class="fu">unique</span><span class="op">(</span><span class="va">americas</span><span class="op">$</span><span class="va">country</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu">plot_life_expectancy</span><span class="op">(</span><span class="va">gapminder</span>, <span class="va">country</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre>
+</div>
+<p>To look at how the name of the output file used in that function
+changes each time, we need to tell our function to print out the result
+of <code>paste0</code>:</p>
+<div class="codewrapper sourceCode" id="cb16">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">plot_life_expectancy</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span>, <span class="va">country</span>, <span class="va">outdir</span><span class="op">=</span><span class="st">"results"</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">lifeExp_plot</span> <span class="op">&lt;-</span> <span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">americas</span><span class="op">[</span><span class="va">americas</span><span class="op">$</span><span class="va">country</span> <span class="op">==</span> <span class="va">country</span>,<span class="op">]</span>, mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">lifeExp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="fu">print</span><span class="op">(</span><span class="fu">paste0</span><span class="op">(</span><span class="va">outdir</span>, <span class="st">"/"</span>, <span class="va">country</span>, <span class="st">"_lifeExp.png"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu">ggsave</span><span class="op">(</span>filename <span class="op">=</span> <span class="fu">paste0</span><span class="op">(</span><span class="va">outdir</span>, <span class="st">"/"</span>, <span class="va">country</span>, <span class="st">"_lifeExp.png"</span><span class="op">)</span>, plot <span class="op">=</span> <span class="va">lifeExp_plot</span>, width <span class="op">=</span> <span class="fl">12</span>, height <span class="op">=</span> <span class="fl">10</span>, dpi <span class="op">=</span> <span class="fl">300</span>, units <span class="op">=</span> <span class="st">"cm"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre>
+</div>
+<p>This <code>print</code> will be run every time the
+<code>plot_life_expectancy</code> function is called, so we will see it
+for each country as the loop progresses:</p>
+<div class="codewrapper sourceCode" id="cb17">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">country</span> <span class="kw">in</span> <span class="fu">unique</span><span class="op">(</span><span class="va">americas</span><span class="op">$</span><span class="va">country</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu">plot_life_expectancy</span><span class="op">(</span><span class="va">gapminder</span>, <span class="va">country</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>[1] "results/Argentina_lifeExp.png"
+[1] "results/Bolivia_lifeExp.png"
+[1] "results/Brazil_lifeExp.png"
+[1] "results/Canada_lifeExp.png"
+[1] "results/Chile_lifeExp.png"
+[1] "results/Colombia_lifeExp.png"
+[1] "results/Costa Rica_lifeExp.png"
+[1] "results/Cuba_lifeExp.png"
+[1] "results/Dominican Republic_lifeExp.png"
+[1] "results/Ecuador_lifeExp.png"
+[1] "results/El Salvador_lifeExp.png"
+[1] "results/Guatemala_lifeExp.png"
+[1] "results/Haiti_lifeExp.png"
+[1] "results/Honduras_lifeExp.png"
+[1] "results/Jamaica_lifeExp.png"
+[1] "results/Mexico_lifeExp.png"
+[1] "results/Nicaragua_lifeExp.png"
+[1] "results/Panama_lifeExp.png"
+[1] "results/Paraguay_lifeExp.png"
+[1] "results/Peru_lifeExp.png"
+[1] "results/Puerto Rico_lifeExp.png"
+[1] "results/Trinidad and Tobago_lifeExp.png"
+[1] "results/United States_lifeExp.png"
+[1] "results/Uruguay_lifeExp.png"
+[1] "results/Venezuela_lifeExp.png"</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>All of this experimentation is likely to have helped you develop your
+understanding of how information flows through the program. This ability
+to trace the flow of code, understanding how variables are handled and
+how their values change as the program runs, is a vital skill. Even if
+the code itself is generated with AI – or written by somebody else! –
+building your own mental model of what it does and how will help you
+ensure that the results it produces are correct.</p>
+<div id="go-with-the-flow" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="go-with-the-flow" class="callout-inner">
+<h3 class="callout-title">Go With The Flow</h3>
+<div class="callout-content">
+<p>Using pencil and paper, <a href="https://tldraw.com" class="external-link uri">https://tldraw.com</a>, or another tool, draw a flow chart
+describing the execution of the program in the code block at the top of
+this episode.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div class="accordion-body">
+
+</div>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="getting-unstuck">Getting Unstuck<a class="anchor" aria-label="anchor" href="#getting-unstuck"></a>
+</h2>
+<hr class="half-width">
+<p>Manually reverse-engineering code will not always help you, though,
+and you can expect to get stuck from time to time. For example, what
+happens if we run the <code><a href="https://ggplot2.tidyverse.org" class="external-link">library(ggplot2)</a></code> part of the example
+code in isolation?</p>
+<div class="codewrapper sourceCode" id="cb19">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">ggplot2</span><span class="op">)</span></span></code></pre>
+</div>
+<p>After a short pause (a sign that <em>something</em> is happening),
+the prompt returns but we get no additional output. This is difficult to
+interpret! We might try adding a call to <code>print</code> afterwards,
+but that doesn’t seem to help:</p>
+<div class="codewrapper sourceCode" id="cb20">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">ggplot2</span><span class="op">)</span></span>
+<span><span class="fu">print</span><span class="op">(</span><span class="va">ggplot2</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="error" tabindex="0"><code>Error: object 'ggplot2' not found</code></pre>
+</div>
+<p>We could also adjust the code and re-run it, to see what happens:</p>
+<div class="codewrapper sourceCode" id="cb22">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">fgplot2</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="error" tabindex="0"><code>Error in library(fgplot2) : there is no package called ‘fgplot2’</code></pre>
+</div>
+<p>This gives us some more information, but how helpful it is will
+depend on our prior knowledge of the concepts and technical terminology
+of the R language. If we do not already know what a package is, the
+error message is of limited use.</p>
+<p>R provides a built-in <code>help</code> function. We can use it to
+view the documentation of a given function.</p>
+<div class="codewrapper sourceCode" id="cb24">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">help</span><span class="op">(</span><span class="va">library</span><span class="op">)</span></span></code></pre>
+</div>
+<p>These documentation pages are a rich source of information but are
+usually more accessible to those already knowledgable about the
+language/with more experience of coding. If <code>help</code> does not
+give you what you need, you could try:</p>
+<ol style="list-style-type: decimal">
+<li>Searching the internet for an answer to your question. The chances
+are good that (many) other people have got stuck with the same thing,
+asked for help, and received an answer that will be useful to you as
+well. Q&amp;A forum websites like StackOverflow are particularly good
+sources for this kind of information.</li>
+<li>Ask another person, or your chatbot.</li>
+</ol>
+<div class="section level3">
+<h3 id="asking-for-help">Asking for Help<a class="anchor" aria-label="anchor" href="#asking-for-help"></a>
+</h3>
+<p>Here is some advice to follow when asking for help, whether from a
+person or a chatbot:</p>
+<ol style="list-style-type: decimal">
+<li>If you are encountering an error, copy and paste the error message
+into your message asking for help.</li>
+<li>Also include a copy of the code where you are having trouble and, if
+applicable, an example of the data you are feeding into it.</li>
+<li>Be specific about the task you are working on, the problem you are
+having (the error message may be enough), and/or what it is about the
+code that you do not understand.</li>
+<li>Unless the person or chatbot is already aware of your level of
+programming expertise, it can be useful to summarise that as well.</li>
+</ol>
+<p>Most importantly, as it will help you build your own ability, take
+time to consider the response you receive. Can you understand the
+explanation that is being provided to you? If not, ask follow-up
+question(s) to fill in the gaps. Can you find a way to adjust your code
+to check that your understanding is correct?</p>
+</div>
+</section><section><h2 class="section-heading" id="ai-generated-explanations">AI-generated Explanations<a class="anchor" aria-label="anchor" href="#ai-generated-explanations"></a>
+</h2>
+<hr class="half-width">
+<p>Our chatbot can also produce explanations of what code is doing.</p>
+
+<div id="explain-this-code" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="explain-this-code" class="callout-inner">
+<h3 class="callout-title">Explain This Code</h3>
+<div class="callout-content">
+<p>Submit the prompt below to your chatbot:</p>
+<blockquote>
+<p>I am a novice programmer learning to code with R. Explain what this
+code does:</p>
+<div class="codewrapper sourceCode" id="cb25">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">ggplot2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">plot_life_expectancy</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span>, <span class="va">country</span>, <span class="va">outdir</span><span class="op">=</span><span class="st">"results"</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">lifeExp_plot</span> <span class="op">&lt;-</span> <span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">df</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">country</span> <span class="op">==</span> <span class="va">country</span>,<span class="op">]</span>, mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">lifeExp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="fu">ggsave</span><span class="op">(</span>filename <span class="op">=</span> <span class="fu">paste0</span><span class="op">(</span><span class="va">outdir</span>, <span class="st">"/"</span>, <span class="va">country</span>, <span class="st">"_lifeExp.png"</span><span class="op">)</span>, plot <span class="op">=</span> <span class="va">lifeExp_plot</span>, width <span class="op">=</span> <span class="fl">12</span>, height <span class="op">=</span> <span class="fl">10</span>, dpi <span class="op">=</span> <span class="fl">300</span>, units <span class="op">=</span> <span class="st">"cm"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">gapminder</span> <span class="op">&lt;-</span> <span class="fu">read.csv</span><span class="op">(</span><span class="st">'gapminder_data.csv'</span><span class="op">)</span></span>
+<span><span class="va">americas</span> <span class="op">&lt;-</span> <span class="va">gapminder</span><span class="op">[</span><span class="va">gapminder</span><span class="op">$</span><span class="va">continent</span> <span class="op">==</span> <span class="st">"Americas"</span>,<span class="op">]</span></span>
+<span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">country</span> <span class="kw">in</span> <span class="fu">unique</span><span class="op">(</span><span class="va">americas</span><span class="op">$</span><span class="va">country</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu">plot_life_expectancy</span><span class="op">(</span><span class="va">americas</span>, <span class="va">country</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre>
+</div>
+</blockquote>
+<p>Consider the response you received:</p>
 <ul>
-<li>introduce some messy script
-<ul>
-<li>important to also (briefly) discuss the way scripts are used:
-typically run on the command line by an interpreter program. that means
-learning a bit about file paths.</li>
+<li>Does the explanation provided match your own understanding of the
+code? If there are inconsistencies between your mental model of the code
+and the explanation in the response, can you identify a way of testing
+whether your understanding or the explanation is correct?</li>
+<li>Is the level of detail included in the response helpful? Are there
+any terms or concepts used in the explanation that you do not
+understand?</li>
+<li>Can you adjust the prompt to generate a more helpful response from
+the chatbot? If so, paste your customised prompt into the shared notes
+document for the workshop.</li>
 </ul>
+</div>
+</div>
+</div>
+<p>Generating an explanation from a chatbot is probably faster than
+exploring and reverse-engineering code to develop your understanding
+independently. It may also provide helpful contextual information that
+you would not learn through experimentation alone. But be careful about
+relying on this method to learn.</p>
+<p>Hands-on experience with code will help you develop a stronger mental
+model of how it works. This practical application of new knowledge may
+help it transfer to your long-term memory, which is required for
+learning. Many people have experienced the sensation of understanding a
+written explanation in the moment, only to find that they have forgotten
+it when required to recall the information later.</p>
+<p>Furthermore, explanations generated by a chatbot may include factual
+inaccuracies and/or irrelevant information. But they are likely to
+appear confident! (The same is true of answers you may find on the
+internet.) You are responsible for the code generated on your behalf,
+and a chatbot cannot be held accountable for any damage caused by the
+code it produces. <!-- link from above to the Implications lesson? -->
+Since that code can be powerful – editing the files on your computer,
+interacting with other people’s servers online, analysing masses of
+research data, etc – some scepticism is healthy.</p>
+<div id="uncertainty" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="uncertainty" class="callout-inner">
+<h3 class="callout-title">Uncertainty</h3>
+<div class="callout-content">
+<p>You may find it possible to adjust the way that uncertainty is
+handled by some more recent versions of chatbots. For example, by adding
+something like the below to your prompt:</p>
+<blockquote>
+<p>Mention when you are uncertain about something in your response,
+instead of confidently glossing over it.</p>
+</blockquote>
+<p>This can help you to avoid being led astray by something in a
+generated response. But we still encourage you to verify everything that
+you get back from a chatbot, especially if the consequences of it being
+wrong could be serious! Remember that you will build your own expertise
+by testing things out for yourself.</p>
+</div>
+</div>
+</div>
+<p>By learning the basics of coding and giving yourself a framework with
+which you can continue to develop your own expertise, we hope to equip
+you with what <a href="https://pluralistic.net/2026/07/28/hitl-ers/" class="external-link">Cory Doctorow refers
+to as <em>discernment</em></a>: the ability to distinguish useful AI
+outputs from unhelpful/misleading responses.</p>
+<p>To ensure that you continue to learn as you work through this lesson
+and afterwards, some good habits to get into are:</p>
+<ol style="list-style-type: decimal">
+<li>Before you ask a question or request some code, <em>think</em> about
+what you expect the answer to be or the response to look like.</li>
+<li>Compare the response generated to that expectation. If the result
+you get is unexpected, spend some time thinking about what is different
+and why that could be.</li>
+<li>Try to find ways to adjust the code that will test your
+understanding: <em>“if x, then y should happen if I make z change to
+this part of the code.”</em>
 </li>
-<li>a good (AI-free) strategy is to copy out chunks of code and run
-them, adjust them and run again.</li>
-<li>as long as you do this on a copy, you can always recover the
-original version</li>
-<li>you will often need to include variables from further up the script.
+</ol>
+<p>If you find that you seem to have misunderstood something, prompt the
+chatbot with a description of what you have changed/what you are trying
+to do, what you expected to happen, what actually happened, and ask for
+clarification. Ask “what am I missing?” rather than “fix it for me” to
+develop your own expertise.</p>
+<div id="test-your-understanding" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="test-your-understanding" class="callout-inner">
+<h3 class="callout-title">Test Your Understanding</h3>
+<div class="callout-content">
+<p>Review the response generated from your prompt in the previous
+exercise (<a href="#explain-this-code"><em>Explain This Code</em></a>)
+and identify one part of the explanation that you understand. Devise a
+way to adjust the code so that you can test whether your understanding
+is correct, then make that change to the code and check whether you were
+right.</p>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="how-much-is-too-much">How Much Is Too Much?<a class="anchor" aria-label="anchor" href="#how-much-is-too-much"></a>
+</h2>
+<hr class="half-width">
+<p>While you are beginning to develop your own programming expertise, we
+recommend that you avoid passing large chunks of code and whole programs
+to the chatbot and asking for an explanation. You may expect that this
+will save you time but it will be harder for you to develop your own
+understanding of the code. It is easier to trace execution through a
+handful of lines than through hundreds.</p>
+<p>And it is easier to process and consider the explanation of a handful
+of lines that one of hundreds. If you provide a large volume of code to
+the chatbot, a detailed explanation will be very long while a less
+thorough summary of the code may explain things at a level too high to
+really build your understanding of how the code works.</p>
+<p>Managing your cognitive load by keeping explanations short and taking
+regular opportunities to test your understanding will aid your learning.
+This will seem slow at first but, as you continue to learn, you will be
+able to move more quickly and spend less time studying the code in
+detail.</p>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<span class="callout-header">Key Points</span>
+<div class="callout-inner">
+<div class="callout-content">
 <ul>
-<li>with practice, it becomes faster to comment out lines you do not
-want to run. Most text editors/IDEs provide a keyboard shortcut for this
-(often Ctrl+/).</li>
-<li>it can be very helpful to insert <code>print</code> statements at
-chosen points throughout the code to give a quick indication of the
-state of variable(s) during execution. Comment them out as needed and
-remove them altogether when you are done.</li>
-<li>if you need to, add comments as you go to make note of what’s going
-on.</li>
-<li>(later on in the lesson: when you have a chunk behaving how you want
-it to, it might be good to capture that as a function.)</li>
+<li>“Reverse-engineering” existing code and inserting <code>print</code>
+statements can help you develop your understanding of how code
+works.</li>
+<li>Develop your own expertise by comparing a chatbot’s explanations to
+your own understanding and finding practical ways to test the
+explanations.</li>
 </ul>
-</li>
-<li>this will help you trace the execution of code, an essential skill
-for evaluating whether code is doing what you want/need it to even if
-the code itself is AI-generated (or written by somebody else – or by
-yourself three months ago!)</li>
-</ul>
-<p>EXERCISE here giving learners a chance to practice isolating and
-interrogating a section of code.</p>
-<p>EXERCISE: draw a flow chart describing the code.</p>
-<ul>
-<li>when you get stuck, cannot figure out what a particular block of
-code is doing, ask somebody.</li>
-<li>paste the code into your chatbot, ask it to explain the code.
-Include information about your level of expertise.
-<ul>
-<li>always try to understand it yourself first, or at least make a
-guess: you will learn more if you can compare the chatbot’s response
-with the answer you expected.</li>
-</ul>
-</li>
-<li>if the response includes words you do not understand, ask for a
-definition (Glosario can be a good source of these too). More on this in
-the next episode.</li>
-<li>check your understanding and the veracity of the explanation that
-was generated.</li>
-<li>based on your interpretation of the response, adjust the code,
-predict what will change in the output/behaviour, then run it and check
-whether you were right.</li>
-</ul>
-<p>EXERCISE or activity here for learners to try identifying a small
-change to a chunk of code, based on the explanation provided.</p>
-<ul>
-<li><p>if you get an unexpected result, refer back to the explanation
-you received and the output you observed, and try to identify your
-misconception. if you cannot find it, explain to the chatbot what you
-changed, what you expected to see, what you actually got, and ask for
-clarification. “what am I missing?” rather than “fix it for
-me”.</p></li>
-<li><p>bear in mind: sometimes the chatbot will make mistakes! if you
-don’t seem to be making any progress after trying this for a while, try
-to find a human to ask, or fire up a new chatbot session to get a
-“second opinion”.</p></li>
-<li><p>all of the above is a good strategy if you are getting help from
-a human too!</p></li>
-<li><p>what about providing the entire code base all at once? wouldn’t
-that be quicker than analysing it line-by-line,
-section-by-section?</p></li>
-<li><p>it will be harder for you to build you own understanding of the
-code – it is easier to trace execution through a handful of lines than
-through hundreds</p></li>
-<li><p>the explanation you receive may be too high-level,
-e.g. explaining <em>what</em> the script does but not helping you
-understand <em>how</em></p></li>
-<li><p>or it may be so long that it becomes overwhelming</p></li>
-<li><p>managing cognitive load by keeping explanations short and taking
-regular opportunities to test your understanding will aid your
-learning</p></li>
-<li><p>this will seem slow at first, but you will be able to move more
-quickly as you continue to learn</p></li>
-</ul>
+</div>
+</div>
+</div>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
- --></section></section><section id="aio-04-learning-concepts"><p>Content from <a href="04-learning-concepts.html">Learning About Programming Concepts</a></p>
+ -->
+</section></section><section id="aio-04-learning-concepts"><p>Content from <a href="04-learning-concepts.html">Learning About Programming Concepts</a></p>
 <hr>
-<p>Last updated on 2026-07-30 |
+<p>Last updated on 2026-09-29 |
 
         <a href="https://github.com/carpentries-incubator/coding-with-llms-novice/edit/main/episodes/04-learning-concepts.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1580,7 +2151,9 @@ any links that you are not going to use.
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
-<li>FIXME</li>
+<li>How can I get explanations when I don’t understand or recognise
+something?</li>
+<li>What can I do to reinforce my learning?</li>
 </ul>
 </div>
 </div>
@@ -1601,43 +2174,275 @@ coding.</li>
 </div>
 </div>
 </div>
-<section><h2 class="section-heading" id="what-more-can-we-learn">What More Can We Learn?<a class="anchor" aria-label="anchor" href="#what-more-can-we-learn"></a>
+<p>At the end of the previous episode, we mentioned that the responses
+you receive when you ask questions are likely to refer to unfamiliar
+concepts and terms as you learn to code. These moments are great
+opportunities to keep learning! How can we make best use of the chatbot
+to help us build our knowledge and skills?</p>
+<section><h2 class="section-heading" id="terminology">Terminology<a class="anchor" aria-label="anchor" href="#terminology"></a>
 </h2>
 <hr class="half-width">
+<p>Like any specialism, software development has its fair share of
+technical jargon. Getting oriented with the terminology takes effort but
+can be very helpful. Just like when composing search terms to maximise
+the chances of finding what you are looking for, including the
+appropriate technical terms in your prompts to a chatbot will increase
+the likelihood that the response generated is specific, relevant, and
+helpful.</p>
+<div id="choose-your-words-carefully" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="choose-your-words-carefully" class="callout-inner">
+<h3 class="callout-title">Choose Your Words Carefully</h3>
+<div class="callout-content">
+<p>In a new chat, prompt your chatbot with the following question:</p>
+<blockquote>
+<p>What is a vector?</p>
+</blockquote>
+<p>If the response generated explains vectors as a mathematical concept,
+follow up to specify that you are interested in learning about vectors
+in programming.</p>
+<blockquote>
+<p>What is a vector in programming?</p>
+</blockquote>
+<p>Then, even more specifically:</p>
+<blockquote>
+<p>What is a vector in R?</p>
+</blockquote>
+<p>Can you follow the explanation provided in the response generated
+from this prompt? Make a list of every technical term in the explanation
+and split that list into three categories: those terms/concepts that you
+feel you already understand well; those that you feel you understand a
+little; and those that you have not encountered before/have no
+understand of.</p>
+</div>
+</div>
+</div>
+<div class="section level3">
+<h3 id="avoid-rabbit-holes">Avoid Rabbit Holes<a class="anchor" aria-label="anchor" href="#avoid-rabbit-holes"></a>
+</h3>
+<p>Chatbot responses will often include follow-up questions to narrow
+down queries that are too general. It can be helpful to answer these but
+you should use your own judgement to decide whether or not they will
+take you in the direction you want to go with your learning. It is very
+easy to go too deep on this kind of exploration, especially when you are
+first starting out. This can result in a sense of becoming overwhelmed
+by so much new information, and/or losing sight of what you wanted to
+learn about in the first place.</p>
+<p>As a novice, it can be difficult to tell the difference between
+something that would be helpful to know at this stage of learning
+(vectors can only contain one type of data) and the things that are too
+much information right now (elements in a character vector are pointers
+to R’s global string cache). You may find that you need to keep
+“reminding” your chatbot about your current level of expertise in order
+to keep the responses pitched to the right level. It can also help to
+ask “is understanding [technical term] necessary for me to keep learning
+right now?” or similar – or ask a friend or colleague the same question
+to help guide your learning.</p>
+<div id="ask-for-feedback" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="ask-for-feedback" class="callout-inner">
+<h3 class="callout-title">Ask for Feedback</h3>
+<div class="callout-content">
+<p>After some back-and-forth with a chatbot, you may also find it
+instructive to ask it how you could be using it better. This will cause
+the model to analyse the history of prompts and responses, and produce
+output that aims to capture points of friction/inefficiency and discuss
+how you could adjust your approach to avoid similar situations in the
+future. Depending on the chatbot and how you have it configured, it
+might be able to do this kind of analysis across all of the
+conversations you have had with it.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section level3">
+<h3 id="reinforce-your-learning">Reinforce Your Learning<a class="anchor" aria-label="anchor" href="#reinforce-your-learning"></a>
+</h3>
+<p>You are unlikely to develop your own expertise if you limit yourself
+to only asking for explanations and reading/listening to the responses
+you receive. Relatively passive use of AI can lead to <a href="https://psycnet.apa.org/doiLanding?doi=10.1037%2F0278-7393.31.2.187" class="external-link"><em>“the
+illusion of competence”</em></a>: a false confidence in one’s
+understanding and ability. <a href="https://arxiv.org/html/2601.10691v1" class="external-link">As Barba and Stegner
+explain</a>:</p>
+<blockquote>
+<p>It is a form of metacognitive miscalibration: in the presence of the
+answer, students misjudge their future performance, they have the
+feeling that they are learning, but in fact they are not. The same can
+happen with other forms of passive engagement, like sitting in a
+lecture, or reading and highlighting notes or the textbook. But the
+effect is more severe with AI tools, because they so drastically
+increase a person’s capacity to complete certain tasks with minimal
+engagement.</p>
+</blockquote>
+<p>A better strategy to build your own skills is pursuing <em>guided
+practice</em>: applying your new knowledge and skills immediately and
+adjusting your approach based on targeted, constructive feedback. One
+way to access this guidance is to participate in interactive training
+settings like this workshop. Another is to engage in regular discussions
+with experts among your colleagues and peers. You can also adjust your
+prompts to influence the way that your chatbot provides new information
+to you.</p>
+<div class="section level4">
+<h4 id="practice-practice-practice">Practice, Practice, Practice<a class="anchor" aria-label="anchor" href="#practice-practice-practice"></a>
+</h4>
+<p>We present you frequent exercises throughout this workshop because
+they are an excellent way for you to practice and get feedback as you
+learn. But time is usually in short supply at training events and you
+may be required to move on before you had enough practice to really
+reinforce your learning. Chatbots can generate a practically endless
+supply of exercises to test your understanding and skills around a given
+topic.</p>
+<div id="asking-for-exercises" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="asking-for-exercises" class="callout-inner">
+<h3 class="callout-title">Asking for Exercises</h3>
+<div class="callout-content">
+<p>Choose a new concept you have been introduced to in this lesson,
+which you would like to learn more about. For example, for loops,
+function definitions, or loading packages in R. Ask your chatbot to
+generate three exercises to test your understanding of that concept.
+E.g.</p>
+<blockquote>
+<p>Challenge me with three ‘two truths and a lie’ exercises about
+loading packages into an R session with the library function.</p>
+</blockquote>
+<p>Now, instead of solving the exercises it produces (save them for
+later if you like!), give feedback and additional information to the
+chatbot to help you refine your prompt so that it is most likely to
+produce exercises that:</p>
 <ul>
-<li>when you encounter a term or concept that you are not yet familiar
-with, take the opportunity to learn more.
+<li>Are appropriate to your level of expertise e.g. do not require
+additional concepts or skills that you have not yet encountered.</li>
+<li>Increase in difficulty.</li>
+<li>Vary in format e.g. not all multiple-choice questions.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<p>An example prompt that worked well for the lesson developers:</p>
+<blockquote>
+<p>You are an expert instructor providing training in programming. I am
+an early career researcher and novice programmer, who wants to learn
+enough coding in R to be able to analyse my research data. So far I have
+encountered some basic scripting: loading data, plotting from a
+dataframe with ggplot2, looping through unique values in a column,
+defining and calling a function. Generate three exercises to help me
+expand and reinforce my understanding of function definitions. Do not
+use any concepts that I am not already familiar with, except where you
+want me to learn about it through the exercise itself. Each exercises
+should be slightly more difficult than the last, and the format of the
+exercises should vary i.e. not three multiple-choice questions in a row.
+Wait for me to provide my solution to an exercise and, if I get it
+wrong, give short hints or ask Socratic questions one at a time, to help
+me figure out where I went wrong. Do not give me the answer unless I say
+“I give up”.</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+<p>The important thing is to spend time thinking about and completing
+these exercises. If you get stuck, ask your chatbot to provide hints or
+ask additional questions without ever giving away the solution
+altogether. Similarly, before you give your answer to check whether it
+is correct, make sure that you instruct the chatbot not to provide the
+correct solution if you got it wrong.</p>
+</div>
+</div>
+<div class="section level3">
+<h3 id="metacognition">Metacognition<a class="anchor" aria-label="anchor" href="#metacognition"></a>
+</h3>
+<p><em>Metacognition</em> is a learner’s awareness that they are
+learning. This awareness itself can promote learning, for example by
+providing additional motivation to continue. Finding opportunities to
+reflect on how much you have learned is a great way to reinforce that
+learning and encourage yourself to keep going.</p>
+<p>For example, you might try writing a list of all of the concepts,
+functions, and practices that you have learned about. Or you could draw
+a concept map, e.g.</p>
+<pre class="mermaid"><code>graph LR
+    A["Function Definition&lt;br/&gt;my_func &lt;- function(x, y) {...}"]
+    B["Arguments/Parameters&lt;br/&gt;x, y"]
+    C["Return Value&lt;br/&gt;last expression evaluated"]
+
+    A --&gt;|"takes"| B
+    B --&gt;|"used inside body"| A
+    A --&gt;|"produces"| C
+    B --&gt;|"determines"| C</code></pre>
+<div id="what-is-a-concept-map" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="what-is-a-concept-map" class="callout-inner">
+<h3 class="callout-title">What is a Concept Map?</h3>
+<div class="callout-content">
+<p>In a concept map, concepts are draw as bubbles and connected together
+by lines describing the relationship(s) between those concepts. They are
+one way to represent our mental model of a domain, system or process.
+Just like any map, they do not have to be exhaustive to be useful.</p>
+</div>
+</div>
+</div>
+<p>If you do draw a concept map or create some other summary of your
+understanding, a great next step would be to share that with somebody
+who can give you feedback on what could be corrected or improved in your
+mental model, and suggestion about what to learn next. Many chatbots are
+able to process images, so you could also prompt yours for this kind of
+guidance.</p>
+<div id="map-your-progress" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="map-your-progress" class="callout-inner">
+<h3 class="callout-title">Map Your Progress</h3>
+<div class="callout-content">
+<p>Draw a concept map of (some of) the things you have learned so far in
+this workshop. If you have time, annotate your diagram to highlight the
+points where you want to test/deepen your understanding.</p>
+</div>
+</div>
+</div>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<span class="callout-header">Key Points</span>
+<div class="callout-inner">
+<div class="callout-content">
 <ul>
-<li>knowing the right vocabulary is valuable so take note of these
-technical terms to use in future chatbot prompts, search queries,
-questions to colleagues etc. the language you use in your prompts can
-significantly influence the quality and specificity of the response you
-receive.</li>
+<li>Being specific about what you know already and what exactly you need
+to be explained will increase your chances of getting a helpful
+response.</li>
+<li>Avoid the illusion of competence by putting your knowledge and
+skills into practice instead of passively consuming responses from a
+chatbot.</li>
 </ul>
-</li>
-</ul>
-<p>EXERCISE here for learners to explore how different ways of asking a
-question can influence the output generated in response.</p>
-<ul>
-<li><p>you should be careful not to disappear down a rabbit hole
-altogether.</p></li>
-<li><p>ask the chatbot for advice on prompting more effectively</p></li>
-<li>
-<p>strategies that can reinforce your learning as you go:</p>
-<ul>
-<li>practice, practice, practice: ask the chatbot to generate exercises
-for you to complete to test your understanding</li>
-<li>draw a concept map: bubbles for concepts and lines connecting them,
-labelled to describe the relationship(s) between these concepts</li>
-</ul>
-</li>
-</ul>
-<p>EXERCISE for learners to request exercises to reinforce understanding
-of some coding concept: for loops, maybe? or if/else control flow?</p>
+</div>
+</div>
+</div>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+</div>
 </section></section><section id="aio-05-modifying-code"><p>Content from <a href="05-modifying-code.html">Modifying Code</a></p>
 <hr>
 <p>Last updated on 2026-07-30 |
