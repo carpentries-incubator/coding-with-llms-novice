@@ -8,10 +8,11 @@ exercises: 2 # exercise time in minutes
 
 _After following this episode, learners will be able to..._
 
-- Generate a plan of steps to improve a script.
-- Execute steps in this plan.
-- Evaluate the impact of changes made.
-- Articulate the changes the chatbot should make to extend an existing script.
+- Describe what a simple existing script does
+- Specify how the function of the script should change to meet a need
+- Generate a modified script by interacting with an LLM chat bot
+- Validate that the generated code what is needed
+- Document the changes made
 - Reflect on what they are learning and what the chatbot is and is not helping with.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
