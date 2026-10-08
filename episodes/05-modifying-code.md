@@ -1,7 +1,7 @@
 ---
 title: "Modifying Code"
-teaching: 20 # teaching time in minutes
-exercises: 2 # exercise time in minutes
+teaching: 30 # teaching time in minutes
+exercises: 30 # exercise time in minutes
 ---
 
 ::::::::::::::::::::::::::::::::::::::: objectives
@@ -37,7 +37,7 @@ And your ability to trace the flow of the generated code and test or query the p
 Before we start generating whole programs, let's spend some time modifying some existing code.
 It is fairly common to need to adapt or extend some code written by somebody else, and the experience here will help prepare you for generating new sections of code and whole programs from scratch later.
 
-[`plotting_script.R`](files/plotting_script.R) loads a CSV file of data from Gapminder and creates two figures, showing how life expectancy has changed over time in countries on Africa and the Americas.
+[`plot_gapminder_lifeExp.R`](files/plot_gapminder_lifeExp.R loads a CSV file of data from Gapminder and creates two figures, showing how life expectancy has changed over time in countries on Africa and the Americas.
 
 ```r
 library(ggplot2)
@@ -77,18 +77,18 @@ ggplot(data = africa, mapping = aes(x = year, y = lifeExp, color=continent)) +
 The script can be opened and run in R Studio.
 As long as the associated data file, `gapminder_data.csv`, is present on the Desktop, the code will produce three figures.
 
-:::::::::::::::::::::::::::::::: warning
+:::::::::::::::::::::::::::::::: caution
 
 ### Looking for the data?
 If you do not already have the data downloaded and saved on your system, follow [the lesson setup instructions](../index.md#setup) to obtain it.
 
 ::::::::::::::::::::::::::::::::::::::::
 
-![Life expectancy over time in all countries in the Gapminder data](fig/lifExp_plot_all.png){alt="line plot of life expectancy between 1952 and 2007 in every country described in the Gapminder data, one line per country, with lines coloured by the country's continent."}
+![_Life expectancy over time in all countries in the Gapminder data_](fig/lifExp_plot_all.png){alt="line plot of life expectancy between 1952 and 2007 in every country described in the Gapminder data, one line per country, with lines coloured by the country's continent."}
 
-![Life expectancy over time in countries on Africa](fig/lifeExp_plot_Africa.png){alt="multi-panel figure of line plots, one per country, showing life expectancy between 1952 and 2007 observed in countries on Africa."}
+![_Life expectancy over time in countries on Africa_](fig/lifeExp_plot_Africa.png){alt="multi-panel figure of line plots, one per country, showing life expectancy between 1952 and 2007 observed in countries on Africa."}
 
-![Life expectancy over time in countries on the Americas](fig/lifeExp_plot_Americas.png){alt="multi-panel figure of line plots, one per country, showing life expectancy between 1952 and 2007 observed in countries on the Americas."}
+![_Life expectancy over time in countries on the Americas_](fig/lifeExp_plot_Americas.png){alt="multi-panel figure of line plots, one per country, showing life expectancy between 1952 and 2007 observed in countries on the Americas."}
 
 This code works -- it runs without errors and produces plots -- but definitely has room for improvement.
 
@@ -330,7 +330,7 @@ Do you feel like you understand programming better than you did before?
 The script we have been working with in this lesson is short.
 We have been able to provide the entire program to the chatbot alongside our prompts and when we ask the chatbot to make changes, we get a complete new version back as part of the response.
 This approach, and the way we have been exploring the changes in detail every time, works well for relatively small modifications to relatively small programs.
-One helpful aspect, especially for novices learning for the first time about how code works, is that we can keep a mental model of the entire program in our heads at all times.
+One helpful aspect, especially for novices learning for the first time about how code works, is that we can keep a mental model of the entire program in our heads while we work with it.
 This is a sensible way to keep working while you develop your familiarity with the central concepts of programming and your ability to understand what the code that you read does.
 
 But this approach won't scale well, to much larger programs and larger changes.
