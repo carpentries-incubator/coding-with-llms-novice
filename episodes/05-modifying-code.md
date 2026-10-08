@@ -84,9 +84,11 @@ If you do not already have the data downloaded and saved on your system, follow 
 
 ::::::::::::::::::::::::::::::::::::::::
 
-![Life expectancy over time in countries on Africa](fig/lifeExp_plot_Africa.png){alt="multi-panel figure of line plots, one per country, showing a trend of broadly increasing life expectancy between FIXME and FIXME observed in countries on Africa."}
+![Life expectancy over time in all countries in the Gapminder data](fig/lifExp_plot_all.png){alt="line plot of life expectancy between 1952 and 2007 in every country described in the Gapminder data, one line per country, with lines coloured by the country's continent."}
 
-![Life expectancy over time in countries on the Americas](fig/lifeExp_plot_Americas.png){alt="multi-panel figure of line plots, one per country, showing a trend of broadly increasing life expectancy between FIXME and FIXME observed in countries on the Americas."}
+![Life expectancy over time in countries on Africa](fig/lifeExp_plot_Africa.png){alt="multi-panel figure of line plots, one per country, showing life expectancy between 1952 and 2007 observed in countries on Africa."}
+
+![Life expectancy over time in countries on the Americas](fig/lifeExp_plot_Americas.png){alt="multi-panel figure of line plots, one per country, showing life expectancy between 1952 and 2007 observed in countries on the Americas."}
 
 This code works -- it runs without errors and produces plots -- but definitely has room for improvement.
 
