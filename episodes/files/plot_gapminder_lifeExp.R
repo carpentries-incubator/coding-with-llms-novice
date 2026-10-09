@@ -1,21 +1,10 @@
 library(ggplot2)
 
-# FIXME HD 2026-08
-# A very brief and simple script based on Data Carpentries
-# It contains inappropriate code duplication, hardcoded paths,
-# and relies on a single data file.
-# I have in mind adapting it to clean it up and deal with data split by
-# continent
-
-
 fpath <- "~/Desktop/gapminder_data.csv"
 
 gapminder <- read.csv(fpath)
 
 summary(gapminder)
-
-ggplot(data = gapminder, mapping = aes(x=year, y=lifeExp, group=country, color=continent)) +
-  geom_line()
 
 americas <- gapminder[gapminder$continent == "Americas",]
 ggplot(data = americas, mapping = aes(x = year, y = lifeExp, color=continent)) +

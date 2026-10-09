@@ -37,7 +37,7 @@ And your ability to trace the flow of the generated code and test or query the p
 Before we start generating whole programs, let's spend some time modifying some existing code.
 It is fairly common to need to adapt or extend some code written by somebody else, and the experience here will help prepare you for generating new sections of code and whole programs from scratch later.
 
-[`plot_gapminder_lifeExp.R`](files/plot_gapminder_lifeExp.R loads a CSV file of data from Gapminder and creates two figures, showing how life expectancy has changed over time in countries on Africa and the Americas.
+[`plot_gapminder_lifeExp.R`](files/plot_gapminder_lifeExp.R) loads a CSV file of data from Gapminder and creates two figures, showing how life expectancy has changed over time in countries on Africa and the Americas.
 
 ```r
 library(ggplot2)
@@ -47,9 +47,6 @@ fpath <- "~/Desktop/gapminder_data.csv"
 gapminder <- read.csv(fpath)
 
 summary(gapminder)
-
-ggplot(data = gapminder, mapping = aes(x=year, y=lifeExp, group=country, color=continent)) +
-  geom_line()
 
 americas <- gapminder[gapminder$continent == "Americas",]
 ggplot(data = americas, mapping = aes(x = year, y = lifeExp, color=continent)) +
@@ -75,7 +72,7 @@ ggplot(data = africa, mapping = aes(x = year, y = lifeExp, color=continent)) +
 ```
 
 The script can be opened and run in R Studio.
-As long as the associated data file, `gapminder_data.csv`, is present on the Desktop, the code will produce three figures.
+As long as the associated data file, `gapminder_data.csv`, is present on the Desktop, the code will produce two figures.
 
 :::::::::::::::::::::::::::::::: caution
 
@@ -83,8 +80,6 @@ As long as the associated data file, `gapminder_data.csv`, is present on the Des
 If you do not already have the data downloaded and saved on your system, follow [the lesson setup instructions](../index.md#setup) to obtain it.
 
 ::::::::::::::::::::::::::::::::::::::::
-
-![_Life expectancy over time in all countries in the Gapminder data_](fig/lifExp_plot_all.png){alt="line plot of life expectancy between 1952 and 2007 in every country described in the Gapminder data, one line per country, with lines coloured by the country's continent."}
 
 ![_Life expectancy over time in countries on Africa_](fig/lifeExp_plot_Africa.png){alt="multi-panel figure of line plots, one per country, showing life expectancy between 1952 and 2007 observed in countries on Africa."}
 
