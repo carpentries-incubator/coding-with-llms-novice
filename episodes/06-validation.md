@@ -38,7 +38,7 @@ Since research computing tasks are often concerned with questions/data at the li
 
 Recall from Episode 3 that outputs from chatbots often have an authoritative tone, regardless of their relevance or factual accuracy. This tone can make us inclined to accept the output without critically evaluating it, but it's very important that we do.
 
-Whether you wrote the code from scratch or generated it with AI, you will held responsible for the results it produces. 
+Whether you wrote the code from scratch or generated it with AI, you will be held responsible for the results it produces. 
 Therefore, it is up to you to determine whether or not the output generated is accurate and/or does what you need it to do.
 
 
@@ -47,7 +47,7 @@ Therefore, it is up to you to determine whether or not the output generated is a
 
 There are a few common types of errors to bear in mind when assessing whether your code is correct:
 
-- **Syntax errors** A syntax error occurs when code breaks the grammatical rules of the programming language such as a missing colon, an unclosed bracket or a misspelled keyword. 
+- **Syntax errors**: A syntax error occurs when code breaks the grammatical rules of the programming language such as a missing colon, an unclosed bracket or a misspelled keyword. 
 AI-generated code is generally quite reliable when it comes to syntax because LLMs are good at reproducing the surface-level structure of a programming language. 
 However, syntax errors can still occur when AI stitches together code from different sources or versions of a package.
 
@@ -219,7 +219,7 @@ This could be informal, formal, or both.
 
 ### Informal testing
 
-Minimally, run it on a small, test dataset. 
+Minimally, run it on a small test dataset. 
 Check results carefully. Think first about what you expect to see, and compare the outcome with that expectation.
     
 :::: challenge
@@ -254,10 +254,11 @@ By hand:
 | B       | 75 - 50 = 25 | 25 / 10 = 2.5   |
  
 Running the function gives a `total_change` of 0 for both countries. 
-With only two rows per country, `n - 1` is 1, so the "last" value is the same as the first value. 
+
 The mismatch tells us something is wrong with how the last value is chosen, even though we haven't yet found the exact line.
  
 Note that it was important to calculate the answer **before** running the code. 
+
 If we had looked at the output first, it would be much easier to convince ourselves that it looked reasonable.
  
 :::::::::::::
@@ -269,7 +270,7 @@ If we had looked at the output first, it would be much easier to convince oursel
  
 ## Print statements
  
-Print out the value of a variable at different stages throughout the code (or at each iteration of the loop). 
+When looking for logical errors, it can be useful to print out the value of a variable at different stages throughout the code or at each iteration of the loop. 
  
 1. Add the following line inside the loop in `calculate_life_expectancy_change()`, immediately after `last_life_exp` is assigned:
 ```r
@@ -285,8 +286,8 @@ Re-create the `calculate_life_expectancy_change()` function with the print state
 
 ::: solution
  
-1&2. The printed `last` value matches the `first` row of the data. `n` appears to refer to the last row of the dataset and therefore `n-1` will refer to the row before the last row.
-3. Change `n-1` to `n` to accurately refer to the last row in the dataset. 
+1 and 2. The printed `last` value matches the `first` row of the data. `n` appears to refer to the last row of the dataset and therefore `n - 1` will refer to the row before the last row.
+3. Change `n - 1` to `n` to accurately refer to the last row in the dataset. 
  
 :::::::::::::
  
@@ -328,16 +329,16 @@ Bear in mind that scientific code may be more difficult to test: a lot of unit t
 But results produced by scientific code may need to be tested for their plausibility, e.g. whether they respect the laws of thermodynamics, whether a number fits within a biologically feasible range, etc. 
 You will need to use your own domain expertise to inform this kind of evaluation, and it is worth noting that LLMs lack the kind of mental model of the world and how it works that you apply in your daily work, making them less likely to provide useful output in these cases.
 
-### Which parts of the code is it most important to test?
+### Which parts of the code are most important to test?
 
 Allocate your rigour: consider how crucial each part of the code is, and treat those parts accordingly. 
-For example, routine plotting functions and other standard "boilerplate" is more likely to be generated correctly and, in the case of the plotting code, errors might be detected quite easily. 
+For example, routine plotting functions and other standard boilerplate are more likely to be generated correctly and, in the case of the plotting code, errors might be detected quite easily. 
 You might choose to spend less effort reviewing that code. 
-But complex and/or crucial processing and calculations that are particular important for the results you will be reporting from your work merit a much closer look.
+But complex and/or crucial processing and calculations that are particularly important for the results you will be reporting from your work merit a much closer look.
 
 :::: challenge
  
-## Which parts of the code is it most important to test?
+## Which parts of the code are most important to test?
  
 Look again at the three functions in our script: `calculate_life_expectancy_change()`, `plot_life_expectancy_change()` and `plot_continent_life_expectancy()`.
  
@@ -362,7 +363,7 @@ For example:
  
 > Please review the following R code. Check that it does what its comments say it does, and point out any bugs or edge cases that could produce incorrect results. 
  
-then paste in the code from this episode.
+Then paste in the code from this episode.
  
 To get a different perspective, you could also try starting a new chat session or even opening up a different chatbot and providing some context for the project.
  
@@ -391,7 +392,7 @@ As well as validating the code itself, check packages are legitimate before impo
 AI tools sometimes hallucinate non-existent coding packages in their outputs. 
 A [study by the security company Vulcan](https://www.securityweek.com/chatgpt-hallucinations-can-be-exploited-to-distribute-malicious-code-packages/) identified a cyberattack technique where criminals would publish a malicious package under the name of the hallucinated package, hoping that AI would suggest the same package to other users, who would then install the cyber criminals’ malicious package based on the AI tool’s recommendation.
 
-This practice has become known as ‘slopsquatting’, a combination of ‘AI Slop’ and ‘typosquatting’ (the practice of registering domain names or software package names that are slightly misspelled versions of popular ones to trick users into visiting them or downloading malicious content).
+This practice has become known as 'slopsquatting', a combination of 'AI Slop' and 'typosquatting' (the practice of registering domain names or software package names that are slightly misspelled versions of popular ones to trick users into visiting them or downloading malicious content).
 
 Check that packages exist 
 
