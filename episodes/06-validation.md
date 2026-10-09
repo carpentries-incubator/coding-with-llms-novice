@@ -16,7 +16,11 @@ _After following this episode, learners will be able to..._
 
 :::::::::::::::::::::::::::::::::::::::: questions
 
-- FIXME
+- Why do we need to check code that a chatbot has generated?
+- What kinds of errors can be hidden in AI-generated code?
+- How can we test whether code is doing what we intended?
+- Which parts of our code deserve the most scrutiny?
+
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -55,12 +59,151 @@ An AI might use the wrong formula, be off by one when indexing a variable, or ma
 This may be due to problems such as trying to divide by zero or access a file that doesn't exist. 
 You may only notice them with specific inputs or edge cases, meaning AI-generated code can pass initial testing and still fail later on unfamiliar data.
 
+## The Code We Will Be Validating
+ 
+For the challenges in this episode we will extend the life expectancy plotting code from the previous episode. 
+In addition to the plotting function we wrote before, we have asked a chatbot for code that calculates how much life expectancy changed in each country of a continent between the first and last years in the data, and plots the result.
+ 
+Copy the code below into a new R script and run it. 
+You will need the `gapminder_data.csv` file from the previous episode in your working directory.
+
+
+```r
+library(ggplot2)
+ 
+gapminder <- read.csv("gapminder_data.csv")
+ 
+summary(gapminder)
+ 
+# Calculate the change in life expectancy for each country in a continent
+calculate_life_expectancy_change <- function(data, continent_name) {
+ 
+  continent_data <- data[data$continent == continent_name, ]
+  countries <- unique(continent_data$country)
+ 
+  results <- data.frame()
+ 
+  for (country_name in countries) {
+ 
+    country_data <- continent_data[continent_data$country == country_name, ]
+    country_data <- country_data[order(country_data$year), ]
+    n <- nrow(country_data)
+ 
+    # Life expectancy in the earliest and most recent years
+    first_life_exp <- country_data$lifeExp[1]
+    last_life_exp <- country_data$lifeExp[n - 1]
+ 
+    total_change <- last_life_exp - first_life_exp
+    years_covered <- max(country_data$year) - min(country_data$year)
+    change_per_year <- total_change / years_covered
+ 
+    results <- rbind(
+      results,
+      data.frame(
+        country = country_name,
+        continent = continent_name,
+        total_change = total_change,
+        change_per_year = change_per_year
+      )
+    )
+  }
+ 
+  return(results)
+}
+ 
+# Plot the total change in life expectancy for each country
+plot_life_expectancy_change <- function(change_data) {
+ 
+  ggplot(
+    data = change_data,
+    mapping = aes(x = reorder(country, total_change), y = total_change)
+  ) +
+    geom_col() +
+    coord_flip() +
+    labs(
+      x = "Country",
+      y = "Change in life expectancy (years)"
+    )
+}
+ 
+# Plot life expectancy over time (from the previous episode)
+plot_continent_life_expectancy <- function(data, continent_name) {
+ 
+  continent_data <- data[data$continent == continent_name, ]
+ 
+  ggplot(
+    data = continent_data,
+    mapping = aes(x = year, y = lifeExp, color = continent)
+  ) +
+    geom_line() +
+    facet_wrap(~ country) +
+    labs(
+      x = "Year",
+      y = "Life expectancy"
+    ) +
+    theme(
+      axis.text.x = element_text(angle = 90, hjust = 1)
+    )
+}
+ 
+americas_change <- calculate_life_expectancy_change(gapminder, "Americas")
+plot_life_expectancy_change(americas_change)
+ 
+plot_continent_life_expectancy(gapminder, "Americas")
+```
+The code runs without any error messages and produces sensible-looking plots. 
+But is it correct?
+ 
+For teaching purposes, a subtle error has been deliberately introduced into this code. 
+
+In real use you would not know whether, or where, an error was hiding, which is exactly why it's important to conduct the checks in this episode.
+ 
+
+:::: challenge
+ 
+## Spot the logical error
+ 
+Read through `calculate_life_expectancy_change()` carefully, without running anything new. 
+ 
+1. What does each comment say the code is doing? 
+2. Does the code beneath each comment actually do that?
+3. Can you spot anything that looks wrong? How confident are you?
+
+::: solution
+ 
+The line
+ 
+```r
+last_life_exp <- country_data$lifeExp[n - 1]
+```
+ 
+has an off-by-one error. 
+The comment says this is the life expectancy in the *most recent* year, but because `n` is the number of rows, `[n - 1]` selects the *second-to-last* row. 
+On the gapminder data that is 2002 rather than 2007. It should be `[n]`.
+ 
+Notice that:
+ 
+- the code runs without complaint,
+- the results are plausible (every country just shows a slightly smaller improvement than it should), and
+- the plots look perfectly reasonable.
+
+Did you spot it by reading? If not, don't worry. This kind of error is easy to miss by eye, which is why the next challenges look at ways of detecting problems by running the code.
+ 
+:::::::::::::
+ 
+::::::::::::::::
+
+
 
 ## How can we detect any errors? 
 
 Some errors, such as syntax errors, will stop the script from running and produce an error message. 
 The debugging skills from previous episodes will be helpful for detecting and fixing these.  
 However, logical or runtime errors are less straightforward to detect. 
+
+'AI-generated code may introduce plausible but incorrect logic' is rated as 'High likelihood', 'High severity' and 'Very high reach' on the Responsible AI Risk Register developed by the Institute for Research Software's Responsible AI in RSE study group https://jshng-glasgow.github.io/Responsible-AI-Risk-Register/
+
+
 To find these errors, looking at the code is often not enough on its own because:
 
 - Once the script/code base gets large, it becomes difficult for one person to keep a complete mental model of how it works, and how any given change will affect the functioning of the whole.
@@ -69,6 +212,7 @@ To find these errors, looking at the code is often not enough on its own because
 Changes generated by a model might all seem sensible by themselves, but be missing something that later turns out to be important.
 
 So how can we detect these more subtle errors and validate that our code is doing what it should be? 
+
 We can test it!
 
 This could be informal, formal, or both.
@@ -79,26 +223,75 @@ Minimally, run it on a small, test dataset.
 Check results carefully. Think first about what you expect to see, and compare the outcome with that expectation.
     
 :::: challenge
+ 
+## Run code on a small dataset 
+ 
+Create a very small dataset where you can work out the answer by hand:
+ 
+```r
+test_data <- data.frame(
+  country   = c("A", "A", "B", "B"),
+  continent = "Testland",
+  year      = c(2000, 2010, 2000, 2010),
+  lifeExp   = c(40, 60, 50, 75)
+)
+```
 
-## Run code on small dataset 
-
-Very small dataset e.g. 4 rows.  Manually calculate the answer then run the function on it.
+In country A, life expectancy was 40 in 2000 and 60 in 2010.
+In country B, life expectancy was 50 in 2000 and 75 in 2010.
+ 
+1. Before running any code, calculate by hand what `total_change` and `change_per_year` should be for countries A and B.
+2. Now run `calculate_life_expectancy_change(test_data, "Testland")`. 
+3. Do the results match your expectations? If not, what might explain the difference?
 
 ::: solution
-:::
-
+ 
+By hand:
+ 
+| Country | Total change | Change per year |
+|---------|--------------|-----------------|
+| A       | 60 - 40 = 20 | 20 / 10 = 2     |
+| B       | 75 - 50 = 25 | 25 / 10 = 2.5   |
+ 
+Running the function gives a `total_change` of 0 for both countries. 
+With only two rows per country, `n - 1` is 1, so the "last" value is the same as the first value. 
+The mismatch tells us something is wrong with how the last value is chosen, even though we haven't yet found the exact line.
+ 
+Note that it was important to calculate the answer **before** running the code. 
+If we had looked at the output first, it would be much easier to convince ourselves that it looked reasonable.
+ 
+:::::::::::::
+ 
 ::::::::::::::::
+
 
 :::: challenge
-
+ 
 ## Print statements
+ 
+Print out the value of a variable at different stages throughout the code (or at each iteration of the loop). 
+ 
+1. Add the following line inside the loop in `calculate_life_expectancy_change()`, immediately after `last_life_exp` is assigned:
+```r
+print(paste(country_name, "| first:", first_life_exp, "| last:", last_life_exp, "| n rows:", n))
+```
 
-Print out the value of a variable at different stages throughout the code (or at each iteration of the loop)
+Re-create the `calculate_life_expectancy_change()` function with the print statement included.
+ 
+2. Run the `calculate_life_expectancy_change()` function on the `Testland` data again.  What is unexpected in the output?
+
+3. Using the information from the output, edit the function so that the variable `last_life_exp` is actually using the last row in the dataframe.
+
 
 ::: solution
-:::
-
+ 
+1&2. The printed `last` value matches the `first` row of the data. `n` appears to refer to the last row of the dataset and therefore `n-1` will refer to the row before the last row.
+3. Change `n-1` to `n` to accurately refer to the last row in the dataset. 
+ 
+:::::::::::::
+ 
 ::::::::::::::::
+
 
 ### Formal testing 
 
@@ -131,29 +324,52 @@ You might choose to spend less effort reviewing that code.
 But complex and/or crucial processing and calculations that are particular important for the results you will be reporting from your work merit a much closer look.
 
 :::: challenge
-
+ 
 ## Which parts of the code is it most important to test?
-
-Use plotting code from previous.
-
+ 
+Look again at the three functions in our script: `calculate_life_expectancy_change()`, `plot_life_expectancy_change()` and `plot_continent_life_expectancy()`.
+ 
+1. Imagine you will report the results of this analysis in a paper. Which function would you scrutinise most closely? Which least? Why?
+2. Look at the plot produced by `plot_life_expectancy_change()` for the Americas. Could you have told from the plot alone that the calculation behind it contained an error?
+3. What kinds of errors in the plotting functions would be easy to notice, and what kinds might slip through?
 ::: solution
-:::
-
+ 
+1. `calculate_life_expectancy_change()` deserves the closest scrutiny because its output is what would be reported as a result, and it contains the logic where subtle errors can hide. The two plotting functions contain mostly boilerplate and deserve less effort.
+2. No. The plot of `total_change` looks perfectly reasonable even with the bug, because every bar is shifted by a similar small amount. A plot can display wrong numbers just as clearly as correct ones, so it can't validate the calculation behind it.
+3. Errors such as missing axis labels, a wrong colour scale, or an empty or garbled plot are easy to see. Errors in *what data is being plotted* (for example, plotting the wrong column or a filtered subset by mistake) are much harder to spot, as the plot will still look polished.
+:::::::::::::
+ 
 ::::::::::::::::
-
-
+ 
 :::: challenge
-
+ 
 ## Ask the chatbot to mark its own homework
-
-Ask the chatbot to review the code and provide constructive feedback on how it could be improved.
-
+ 
+Ask the chatbot to review the code and provide constructive feedback on how it could be improved. 
+For example:
+ 
+> Please review the following R code. Check that it does what its comments say it does, and point out any bugs or edge cases that could produce incorrect results. 
+ 
+then paste in the code from this episode.
+ 
 To get a different perspective, you could also try starting a new chat session or even opening up a different chatbot and providing some context for the project.
+ 
+1. Did the chatbot find the off-by-one error?
+2. Did it suggest any other changes? Were they all genuine improvements?
+3. Did you get the same feedback from the second chat session or chatbot?
 
 ::: solution
-:::
-
+ 
+Results will vary between chatbots and between runs, so there's no single right answer. 
+Many chatbots will spot the `n - 1` error when asked to compare the comments with the code, but not all will, and some will flag "problems" that aren't really problems or suggest unnecessary changes.
+ 
+- A chatbot reviewing code can be a useful additional check, but it is not a substitute for testing.
+- A review that finds nothing wrong is not proof that the code is correct.
+- Any suggested fixes still need to be checked. Re-run your small test dataset after making a change to confirm the problem has gone away and no new problem has been introduced.
+:::::::::::::
+ 
 ::::::::::::::::
+
 
         
 ## Errors outside Code Logic
@@ -178,4 +394,47 @@ Check that packages exist
 
  3. Is the name suspiciously similar to a popular package?
     - flask-auth vs flask_auth vs flask-authentication
+    
+    
+
+:::: challenge
+ 
+## Check that packages exist
+ 
+Suppose you ask the chatbot how to improve the plots in our script. 
+It replies that you could make them interactive, so that learners can hover over a line to see the exact values, by using a different plotting package called `plotly`. 
+It suggests adding the following to your script:
+ 
+```r
+library(plotly)
+
+americas_change_plot <- plot_life_expectancy_change(americas_change)
+ggplotly(americas_change_plot)
+```
+ 
+Before you install this package, run the checks:
+ 
+1. **Does the package exist?** 
+   Search for it on [CRAN](https://cran.r-project.org). 
+   Is there also a GitHub repository for it?
+2. **Is it the official package?** 
+   Who is the author/maintainer? 
+   Are there signs of legitimacy, such as a long release history, a link to a project website, documentation, or many downloads?
+3. **Is the name suspiciously similar to a popular package?** 
+   Could it be a misspelling or variation of a package you already know?
+Based on your findings, would you be happy to install it? 
+What else would you want to know before you do?
+ 
+::: solution
+ 
+1. **It exists.** `plotly` is listed on CRAN, and its CRAN page links to a GitHub repository ([plotly/plotly.R](https://github.com/plotly/plotly.R)).
+2. **It appears to be legitimate.** The CRAN page names a maintainer and the organisation behind it (Plotly Technologies Inc.), links to a project website and documentation ([plotly-r.com](https://plotly-r.com)), lists a bug-report page, and shows a long history of versions. Its dependencies include `ggplot2`, which fits with the chatbot's suggestion of converting an existing ggplot with `ggplotly()`.
+3. **The name isn't a lookalike of something else.** `plotly` is the original, well-known package, not a variation on the name of another one.
+
+On this evidence it is reasonable to install `plotly`. 
+ 
+:::::::::::::
+ 
+::::::::::::::::
+
 
