@@ -292,6 +292,18 @@ Re-create the `calculate_life_expectancy_change()` function with the print state
  
 ::::::::::::::::
 
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## Would an AI really make this mistake?
+
+Not very often. We planted this bug for teaching purposes, and a current chatbot would usually get this line right.
+
+However, there is a plausible reason an off-by-one slip like this could happen. Python counts positions from 0, so the last item in a list of `n` items is at position `n - 1`. R counts from 1, so the last item is at position `n`. A model trained on a lot of Python code can occasionally carry the Python habit over into R.
+
+The same kind of mistake can appear whenever code is translated between languages with different conventions, so it is worth checking even when the code looks sensible.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ### Formal testing 
 
