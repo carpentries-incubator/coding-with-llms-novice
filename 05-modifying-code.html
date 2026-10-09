@@ -123,7 +123,7 @@
     <a id="search-button-nav" class="btn btn-primary" href="aio.html" role="button" aria-label="Search the All In One page">Search the All In One page</a>
   </div><!--/div.container-fluid -->
 </nav><aside class="col-md-12 lesson-progress"><div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" aria-label="Lesson Progress">70%</div>
+    <div class="progress-bar incubator" role="progressbar" style="width: 56%" aria-valuenow="56" aria-valuemin="0" aria-valuemax="100" aria-label="Lesson Progress">56%</div>
   </div>
 </aside><div class="container">
       <div class="row">
@@ -255,6 +255,9 @@
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#using-what-we-have-learned">Using What We Have Learned</a></li>
+<li><a href="#modifying-a-script">Modifying a script</a></li>
+<li><a href="#extending-the-script">Extending the script</a></li>
+<li><a href="#looking-ahead">Looking Ahead</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -351,7 +354,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Modifying Code</h1>
-        <p>Last updated on 2026-07-30 |
+        <p>Last updated on 2026-10-09 |
 
         <a href="https://github.com/carpentries-incubator/coding-with-llms-novice/edit/main/episodes/05-modifying-code.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -370,7 +373,12 @@
 <div class="card-body">
 <div class="inner">
 <h3 class="card-title">Questions</h3>
-<ul><li>FIXME</li>
+<ul><li>How can I tidy up and reorganise existing code?</li>
+<li>How should I describe a change I want to make to a program?</li>
+<li>How can I ensure that I am building my own expertise when working
+with a chatbot?</li>
+<li>What are the challenges of scaling up this approach to larger
+programs?</li>
 </ul></div>
 </div>
 </div>
@@ -379,11 +387,11 @@
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <p><em>After following this episode, learners will be able to…</em></p>
-<ul><li>Generate a plan of steps to improve a script.</li>
-<li>Execute steps in this plan.</li>
-<li>Evaluate the impact of changes made.</li>
-<li>Articulate the changes the chatbot should make to extend an existing
-script.</li>
+<ul><li>Describe what a simple existing script does</li>
+<li>Specify how the function of the script should change to meet a
+need</li>
+<li>Generate a modified script by interacting with an LLM chat bot</li>
+<li>Validate that the generated code does what is needed</li>
 <li>Reflect on what they are learning and what the chatbot is and is not
 helping with.</li>
 </ul></div>
@@ -392,59 +400,445 @@ helping with.</li>
 </div>
 </div>
 <section><h2 class="section-heading" id="using-what-we-have-learned">Using What We Have Learned<a class="anchor" aria-label="anchor" href="#using-what-we-have-learned"></a></h2>
-<hr class="half-width"><ul><li>it is time to move on from analysing code that has already been
-written, and begin generating new code</li>
-<li>the knowledge you have gained so far will help:
-<ul><li>conceptual understanding, “computational thinking”, and familiarity
-with technical terminology will help you write a prompt that is more
-likely to generate the code you want</li>
-<li>you may be more capable now of anticipating what code you will get
-back</li>
-<li>ability to trace the flow of the generated code and test+query parts
-you do not understand will help you evaluate the usefulness of the
-output (more on this in the next episode)</li>
-</ul></li>
-<li>back to our messy script: upload whole script to chatbot and prompt
-for:
-<ul><li>a plan: what can be cleaned up and how?
-<ul><li>discuss each of these suggestions. are they all useful, relevant? if
-the chatbot output includes a long list and makes a distinction between
-recommended and optional steps – do you agree with these
-suggestions?</li>
-</ul></li>
-<li>ask the chatbot to execute one of the proposed steps, e.g. clean up
-variable names</li>
-<li>now re-run the script: is it doing the same thing as it was
-before?</li>
-</ul></li>
-</ul><p>Then an EXERCISE, giving learners the chance to try it out again on
-their own, e.g. refactor code into functions * (opportunity when looking
-at functions to call back to earlier “analysing code” episode, where we
-pulled out chunks and tried them out – often, when you have finished
-tweaking some code and getting it to do what you want, you should
-capture it as a function)</p>
-<ul><li>now that the script is clean, we can think about extending the
-functionality.
-<ul><li>ask the audience how they would modify the script – what would they
-want it to do? e.g. adjust the script to use wildcard to capture all
-*.tsv files in the working directory</li>
-<li>spend some time writing prompt together as a group:
-<ul><li>what info should we include?</li>
-<li>how should we describe the change we want made?</li>
-<li>ask participants what they expect to see in the changes
-produced?</li>
-</ul></li>
-</ul></li>
-</ul><p>EXERCISE to allow participants to experiment some more</p>
-<p>Follow-up discussion EXERCISE to find out what people learned, where
-they got stuck, any weird behaviour observed from the chatbot, etc?</p>
-<p>Toby: I found myself wondering about version control as I worked on
-this outline: as learners get more and more into this, they are
-increasingly going to benefit from viewing diffs of changes being made.
-the commit history also helps the model (then agent) keep track of
-what’s been done and why, which facilitates experimentation and work
-spread across multiple sessions. Where and how can we gracefully
-introduce this stuff?</p>
+<hr class="half-width"><p>It is time to move on from analysing code that has already been
+written, and begin generating new code with the help of a chatbot. The
+knowledge you have gained so far will help with this.</p>
+<p>A conceptual understanding of how code works and how it describes
+what the computer should do, the ability to break down a task into a
+series of actions and decisions (often referred to as computational or
+algorithmic thinking), and some familiarity with technical terminology
+will all help you write a prompt that is more likely to generate the
+code you want. As you continue to practice these skills, you will become
+more capable of anticipating what the code needed to perform a new task
+will look like. And your ability to trace the flow of the generated code
+and test or query the parts you do not understand, will help you
+evaluate the usefulness of the output you receive from your chatbot
+(more on this in the next episode).</p>
+</section><section><h2 class="section-heading" id="modifying-a-script">Modifying a script<a class="anchor" aria-label="anchor" href="#modifying-a-script"></a></h2>
+<hr class="half-width"><p>Before we start generating whole programs, let’s spend some time
+modifying some existing code. It is fairly common to need to adapt or
+extend some code written by somebody else, and the experience here will
+help prepare you for generating new sections of code and whole programs
+from scratch later.</p>
+<p><a href="files/plot_gapminder_lifeExp.R"><code>plot_gapminder_lifeExp.R</code></a>
+loads a CSV file of data from Gapminder and creates two figures, showing
+how life expectancy has changed over time in countries on Africa and the
+Americas.</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">ggplot2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">fpath</span> <span class="op">&lt;-</span> <span class="st">"~/Desktop/gapminder_data.csv"</span></span>
+<span></span>
+<span><span class="va">gapminder</span> <span class="op">&lt;-</span> <span class="fu">read.csv</span><span class="op">(</span><span class="va">fpath</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">summary</span><span class="op">(</span><span class="va">gapminder</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">americas</span> <span class="op">&lt;-</span> <span class="va">gapminder</span><span class="op">[</span><span class="va">gapminder</span><span class="op">$</span><span class="va">continent</span> <span class="op">==</span> <span class="st">"Americas"</span>,<span class="op">]</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">americas</span>, mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">lifeExp</span>, color<span class="op">=</span><span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">facet_wrap</span><span class="op">(</span> <span class="op">~</span> <span class="va">country</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="st">"Year"</span>,              <span class="co"># x axis title</span></span>
+<span>    y <span class="op">=</span> <span class="st">"Life expectancy"</span>,   <span class="co"># y axis title</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Figure 1"</span>,      <span class="co"># main title of figure</span></span>
+<span>    color <span class="op">=</span> <span class="st">"Continent"</span>      <span class="co"># title of legend</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme</span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">africa</span> <span class="op">&lt;-</span> <span class="va">gapminder</span><span class="op">[</span><span class="va">gapminder</span><span class="op">$</span><span class="va">continent</span> <span class="op">==</span> <span class="st">"Africa"</span>,<span class="op">]</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">africa</span>, mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">lifeExp</span>, color<span class="op">=</span><span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">facet_wrap</span><span class="op">(</span> <span class="op">~</span> <span class="va">country</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="st">"Year"</span>,              <span class="co"># x axis title</span></span>
+<span>    y <span class="op">=</span> <span class="st">"Life expectancy"</span>,   <span class="co"># y axis title</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Figure 1"</span>,      <span class="co"># main title of figure</span></span>
+<span>    color <span class="op">=</span> <span class="st">"Continent"</span>      <span class="co"># title of legend</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme</span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+</div>
+<p>The script can be opened and run in R Studio. As long as the
+associated data file, <code>gapminder_data.csv</code>, is present on the
+Desktop, the code will produce two figures.</p>
+<div id="looking-for-the-data" class="callout caution">
+<div class="callout-square">
+<i class="callout-icon" data-feather="alert-triangle"></i>
+</div>
+<span class="callout-header">Caution</span>
+<div id="looking-for-the-data" class="callout-inner">
+<h3 class="callout-title">Looking for the data?</h3>
+<div class="callout-content">
+<p>If you do not already have the data downloaded and saved on your
+system, follow <a href="index.html#setup">the lesson setup
+instructions</a> to obtain it.</p>
+</div>
+</div>
+</div>
+<figure><img src="fig/lifeExp_plot_Africa.png" alt="multi-panel figure of line plots, one per country, showing life expectancy between 1952 and 2007 observed in countries on Africa." class="figure mx-auto d-block"><div class="figcaption"><em>Life expectancy over time in countries on
+Africa</em></div>
+</figure><figure><img src="fig/lifeExp_plot_Americas.png" alt="multi-panel figure of line plots, one per country, showing life expectancy between 1952 and 2007 observed in countries on the Americas." class="figure mx-auto d-block"><div class="figcaption"><em>Life expectancy over time in countries on
+the Americas</em></div>
+</figure><p>This code works – it runs without errors and produces plots – but
+definitely has room for improvement.</p>
+<div id="how-could-the-script-be-improved" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="how-could-the-script-be-improved" class="callout-inner">
+<h3 class="callout-title">How Could The Script Be Improved?</h3>
+<div class="callout-content">
+<p>With a partner or in small groups, and <strong>without consulting
+your chatbot</strong>, discuss how this example script could be
+improved. At this stage, focus on improvements that would make the code
+easier to read, easier to maintain, easier to adapt to another data set,
+or produce better output plots. Do not spend time discussing what
+additional functionality might enhance the script. This will be
+discussed in the next section.</p>
+<p>Expand the hint below to reveal some principles of good software
+engineering that might be applicable here.</p>
+</div>
+</div>
+</div>
+<div id="accordionHint1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
+  <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
+</button>
+<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div class="accordion-body">
+<p>Two relevant principles of software engineering:</p>
+<ol style="list-style-type: decimal"><li>
+<strong>DRY: Don’t Repeat Yourself</strong>. Make code more easily
+maintainable by avoiding multiple copies of identical or very similar
+code. These can usually be removed by capturing the repeated elements as
+functions, which can then be called each time you want to perform those
+actions. This way, the code can be changed in one place (the function
+definition) for that change to be applied everywhere the function is
+used.</li>
+<li>
+<strong>Make code configurable</strong>. Avoid “hard coding” inputs
+that will affect how the code operates or what it operates on, e.g. the
+values of important parameters in an analysis or the locations of input
+files. This will make your code more adaptable e.g. when you want to
+perform the same analysis on a new data file with a different name, or
+on different subsets of the same data.</li>
+</ol><p>You may also find it helpful to review the points under “Software” in
+Box 1 of <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510" class="external-link"><em>Good
+Enough Practices for Scientific Computing</em> (Wilson et al, 2014)</a>,
+and the explanations of these points further down the article.</p>
+<blockquote>
+<ol start="2" style="list-style-type: decimal"><li>Software</li>
+</ol><ol style="list-style-type: lower-alpha"><li>Place a brief explanatory comment at the start of every
+program.</li>
+<li>Decompose programs into functions.</li>
+<li>Be ruthless about eliminating duplication.</li>
+<li>Always search for well-maintained software libraries that do what
+you need.</li>
+<li>Test libraries before relying on them.</li>
+<li>Give functions and variables meaningful names.</li>
+<li>Make dependencies and requirements explicit.</li>
+<li>Do not comment and uncomment sections of code to control a program’s
+behavior.</li>
+<li>Provide a simple example or test data set.</li>
+<li>Submit code to a reputable DOI-issuing repository.</li>
+</ol></blockquote>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<p>The script could be improved by:</p>
+<ul><li>providing the user with a way to specify the location of the input
+data file (<code>gapminder_data.csv</code>)</li>
+<li>capturing the code that produces the multi-panel figures for the
+countries on a continent in a function, then calling that function twice
+to produce the figures.</li>
+<li>providing a way for the user to specify the title of the figures
+being produced, or for those titles to be set based on some relevant
+information e.g. the name of the given continent.</li>
+</ul><p>Did you find any other potential improvements?</p>
+</div>
+</div>
+</div>
+</div>
+
+<p>What suggestions does the chatbot have for how this short program
+could be improved? Provide the script to the chatbot along with the
+prompt quoted below: most chatbots provide a way to upload a file but
+you can copy/paste the whole code block above if not.</p>
+<blockquote>
+<p>I have inherited this R script from a colleague and would like to
+tidy it up and ensure that the code follows good practices that will
+make it easy to maintain and adapt in the future. Review section 2,
+Software, of Good Enough Practices for Scientific Computing, available
+at <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510" class="external-link uri">https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510</a>
+then give me a short list of ways that the script could be improved.
+Describe the potential improvements in terms that will be understandable
+for a novice programmer, and include examples where necessary. Do not
+make any changes to the script I have provided.</p>
+</blockquote>
+<div id="why-good-enough-practices" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="why-good-enough-practices" class="callout-inner">
+<h3 class="callout-title">Why “good enough” practices?</h3>
+<div class="callout-content">
+<p>Some of the authors of the <em>Good Enough Practices…</em> article
+published a related paper, <a href="https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745" class="external-link"><em>Best
+Practices for Scientific Computing</em></a>. So why not ask the chatbot
+to follow those best practices right away? The <em>Good Enough
+Practices</em> paper is aimed at researchers with less experience of
+computational methods, which is a better match to our intended adience
+for this lesson as well. By providing this article as context for the
+chatbot’s responses, we hope to produce more accessible recommendations
+that – as the title suggests – are good enough for now. You will be more
+able to adopt the best practices, and ensure that AI-generated code
+follows them, after you have gained more experience.</p>
+</div>
+</div>
+</div>
+<p>How does the response generated from this prompt compare to the
+points you identified in the previous discussion? One difference you
+might observe is the chatbot producing a longer list than you were able
+to do as a pair or a group. Do not let this bring you down: recognising
+opportunities to improve the structure and organisation of code is a
+skill that develops alongside expertise in other aspects of programming,
+and it should be expected that those new to coding cannot identify many
+opportunities in a short space of time.</p>
+<p>Was the chatbot’s response understandable? If not, ask clarifying
+follow-up questions.</p>
+<div class="section level3">
+<h3 id="making-a-plan">Making a plan<a class="anchor" aria-label="anchor" href="#making-a-plan"></a></h3>
+
+<p>At this point in the episode, the Instructor should lead a discussion
+of the suggestions for improvement that the group has gathered so
+far.</p>
+<ul><li>Did anyone in the learner group identify any potential improvements
+that were not mentioned in the chatbot’s response?</li>
+<li>Are all of the suggestions in the chatbots’ responses good? Should
+all of the proposed improvements be made to the code?</li>
+<li>Did the chatbot’s response distinguish between recommended and
+optional improvements? If so, does that distinction match your
+assessment?</li>
+<li>Are any of the suggestions out of scope, or lower priority changes
+that could be saved for later? Are any of them spurious suggestions that
+can be ignored altogether?</li>
+</ul><p>Based on this discussion, construct a list of 3-5 improvements you
+want to make to the code first.</p>
+</div>
+<div class="section level3">
+<h3 id="executing-the-plan">Executing the plan<a class="anchor" aria-label="anchor" href="#executing-the-plan"></a></h3>
+<p>Ask the chatbot to make one of the improvements in your plan,
+producing a new version of the script. For example, we might ask the
+chatbot to modify the code to use more meaningful variable names:</p>
+<blockquote>
+<p>Modify the code to use more meaningful variable names. Do not apply
+any of the other suggested improvements.</p>
+</blockquote>
+<p>Examine the code generated in response to this prompt.</p>
+<ul><li>What has changed?</li>
+<li>How does this compare to what you expected?</li>
+</ul><p>Run the modified version of the script. Does it still do what it did
+before, or have the modifications changed the outputs or behaviour of
+the program?</p>
+<div id="apply-another-suggestion" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="apply-another-suggestion" class="callout-inner">
+<h3 class="callout-title">Apply another suggestion</h3>
+<div class="callout-content">
+<p>Prompt your chatbot to modify the code, to replace repetitive code
+with functions. Before you submit this prompt, <em>think</em> about what
+you expect it to change. Which lines do you expect to change, and how?
+Now <em>execute</em> the prompt and <em>review</em> the generated
+response. <em>Reflect</em> on how that response – and especially the
+modified code included in it – compares to your expectations.</p>
+<p>Run the modified code again, and check whether the outputs or
+behaviour of the script have changed.</p>
+</div>
+</div>
+</div>
+<p>If everything has gone well so far, execute one or two more of the
+planned improvements to the script.</p>
+</div>
+</section><section><h2 class="section-heading" id="extending-the-script">Extending the script<a class="anchor" aria-label="anchor" href="#extending-the-script"></a></h2>
+<hr class="half-width"><p>Now that the script has been cleaned up, we can move on to the next
+step: extending its functionality.</p>
+<div id="what-additional-functionality-could-we-add" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<span class="callout-header">Discussion</span>
+<div id="what-additional-functionality-could-we-add" class="callout-inner">
+<h3 class="callout-title">What additional functionality could we
+add?</h3>
+<div class="callout-content">
+<p>Considering what the script is currently doing, how could it be
+extended to do something more/new? What ideas do you have for building
+on this program?</p>
+
+</div>
+</div>
+</div>
+<div class="section level3">
+<h3 id="describing-the-change-we-want-to-make">Describing the change we want to make<a class="anchor" aria-label="anchor" href="#describing-the-change-we-want-to-make"></a></h3>
+<p>Let’s ask our chatbot to adjust the script to make one of these
+changes.</p>
+
+<p>While composing your prompt, use these questions to help guide
+you:</p>
+<ul><li>What information should you include to provide context for the
+model?</li>
+<li>How can you precisely describe the way you want the script to
+change? (This should be a description of how you want its behaviour to
+change, rather than the individual changes to individual lines of
+code.)</li>
+<li>How can you explain the goal of this change: why will the change
+make the script more useful?</li>
+</ul><p>As before, take a few moments to think about what you expect the
+script to look like after these changes have been made. Now submit the
+prompt and review the response you receive from the chatbot. Reflect
+once again on how the modified script included in the chatbot’s response
+compares to your expectations.</p>
+<p>Can you follow what the new pieces of code will do when the script is
+executed? If not, use the approaches we have already discussed to build
+your understanding by asking follow-up questions, isolating the new
+pieces of code, and exploring their behaviour. When you are satisfied
+that you understand what the code is doing, run the whole script and
+evaluate whether the changes made by the chatbot have extended the
+script as you intended.</p>
+<div id="extend-the-script-again" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="extend-the-script-again" class="callout-inner">
+<h3 class="callout-title">Extend the script again</h3>
+<div class="callout-content">
+<p>In pairs, spend some time working with the chatbot to make one or two
+more improvements to your script. Follow the same process as before:</p>
+<ul><li>compose the prompt</li>
+<li>think about what you expect to change</li>
+<li>execute the prompt</li>
+<li>review the response</li>
+<li>reflect on how it compares to your expectations</li>
+<li>explore how the code has changed</li>
+<li>run the modified script and verify the new behaviour</li>
+</ul></div>
+</div>
+</div>
+<div id="how-is-it-going" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<span class="callout-header">Discussion</span>
+<div id="how-is-it-going" class="callout-inner">
+<h3 class="callout-title">How is it going?</h3>
+<div class="callout-content">
+<p>Now we have spent some time working on code with a chatbot, exploring
+code, learning about it, improving and enhancing it. What has gone well?
+Where was the chatbot most helpful? Where did you get stuck? Did you
+receive any unhelpful or irrelevant responses from the chatbot, or any
+incorrect code?</p>
+<p>Now take a step back from the task at hand and the practicalities of
+working with the chatbot. How do you feel about working like this? What
+are you finding enjoyable about the experience? What is frustrating you?
+What is one thing you have learned so far? Do you feel like you
+understand programming better than you did before?</p>
+</div>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="looking-ahead">Looking Ahead<a class="anchor" aria-label="anchor" href="#looking-ahead"></a></h2>
+<hr class="half-width"><p>The script we have been working with in this lesson is short. We have
+been able to provide the entire program to the chatbot alongside our
+prompts and when we ask the chatbot to make changes, we get a complete
+new version back as part of the response. This approach, and the way we
+have been exploring the changes in detail every time, works well for
+relatively small modifications to relatively small programs. One helpful
+aspect, especially for novices learning for the first time about how
+code works, is that we can keep a mental model of the entire program in
+our heads while we work with it. This is a sensible way to keep working
+while you develop your familiarity with the central concepts of
+programming and your ability to understand what the code that you read
+does.</p>
+<p>But this approach won’t scale well, to much larger programs and
+larger changes. One reason for this is the increasing complexity: larger
+programs tend to be split into multiple files and folders that refer to
+each other, and even small changes to the functionality of a large
+program can touch a lot of different places in its source code. This
+makes it difficult even for experts to maintain a complete picture of
+the architecture of a large piece of software and how every part of it
+works.</p>
+<p>As well as challenging human comprehension, storing information about
+the structure and function of a larger program will also require more of
+a model’s context. Recall from a previous lesson how the responses
+generated by an LLM are influenced by the information represented in its
+context window, and that the size of this window is constrained. As the
+size of the project we are working on increases, the management of the
+model’s context for the task becomes increasingly important. As the
+amount of information relevant to the task approaches the capacity of
+the model’s context window, and especially after it exceeds that
+capacity, we are likely to observe a drop in the quality of its
+responses.</p>
+<p>Another reason why the current approach won’t scale well relates to
+the inclusion of the whole script in each chatbot response. This
+requires more text to be generated in each response, which means more
+opportunities for errors to be introduced. The whole script should be
+reviewed for changes every time, rather than only the lines where we
+expect changes to appear. We consider the risk of errors in the parts of
+the script that are meant to remain unchanged to be acceptable given its
+short length. But better practice would be to track the changes being
+made to our script using <em>version control</em>, because it helps us
+see exactly what changes in each iteration. A version control system
+like Git keeps track of the specific changes being made each time a
+program is modified, and helps you to document those changes. This makes
+it easier for us to focus our attention, and some AI coding tools can
+use the history of changes to a program to enhance their context for a
+given task. Regardless of whether you continue to work with AI in your
+coding projects, we strongly recommend that you learn how to use version
+control for them. <a href="https://swcarpentry.github.io/git-novice/" class="external-link">Software Carpentry’s
+Version Control with Git</a> is a good resouce to get started with.</p>
+<p>People have been developing different strategies to address the
+challenges of scaling AI-assisted coding to large programs, but we
+remain far from a consensus about risk mitigation and best practices.
+For now, as you keep working with AI tools while coding, we recommend
+that you focus much of your attention on <em>verification and
+validation</em> of the programs being generated on your behalf. The next
+episode will discuss some approaches that you can take to be confident
+that AI-generated code does what you want it to do, and that the results
+produced by that code are valid.</p>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<span class="callout-header">Key Points</span>
+<div class="callout-inner">
+<div class="callout-content">
+<ul><li>Following established principles to organise and document your
+programs makes them easier to maintain.</li>
+<li>When instructing a chatbot to change a program, provide relevant
+context and be precise about what you want to change and why.</li>
+<li>Be reflective about how you use a chatbot and test your
+understanding of the code it generates to keep building your own
+expertise.</li>
+<li>Approaches that work well for novices working with small programs
+may not scale well to larger software and bigger projects.</li>
+</ul></div>
+</div>
+</div>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
@@ -509,8 +903,8 @@ any links that you are not going to use.
   "url": "https://carpentries-incubator.github.io/coding-with-llms-novice/05-modifying-code.html",
   "identifier": "https://carpentries-incubator.github.io/coding-with-llms-novice/05-modifying-code.html",
   "dateCreated": "2026-02-05",
-  "dateModified": "2026-07-30",
-  "datePublished": "2026-10-06"
+  "dateModified": "2026-10-09",
+  "datePublished": "2026-10-09"
 }
 
   </script><script>
