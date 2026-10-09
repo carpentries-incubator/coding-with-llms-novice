@@ -345,6 +345,7 @@ Look again at the three functions in our script: `calculate_life_expectancy_chan
 1. Imagine you will report the results of this analysis in a paper. Which function would you scrutinise most closely? Which least? Why?
 2. Look at the plot produced by `plot_life_expectancy_change()` for the Americas. Could you have told from the plot alone that the calculation behind it contained an error?
 3. What kinds of errors in the plotting functions would be easy to notice, and what kinds might slip through?
+
 ::: solution
  
 1. `calculate_life_expectancy_change()` deserves the closest scrutiny because its output is what would be reported as a result, and it contains the logic where subtle errors can hide. The two plotting functions contain mostly boilerplate and deserve less effort.
