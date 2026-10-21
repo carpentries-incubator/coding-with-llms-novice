@@ -53,8 +53,8 @@ AI-generated code is generally quite reliable when it comes to syntax because LL
 However, syntax errors can still occur when AI stitches together code from different sources or versions of a package.
 
 - **Logical errors**: A logical error is more dangerous because the code runs without crashing, but it doesn't do what you actually intended. 
-This is possibly the greatest risk when working with AI-generated code. 
-An AI might use the wrong formula, be off by one when indexing a variable, or make a subtly incorrect assumption about your data but still produce code that looks plausible and well-structured. 
+This is possibly the greatest risk when working code, regardless of whether the code was written by an AI or a human. 
+Some examples of logical errors include using the wrong formula, being off by one when indexing a variable, or making a subtly incorrect assumption about your data.  Code containing these errors may look plausible and well-structured but will give  give you an incorrect output. 
 
 - **Runtime errors**: A runtime error occurs when code is syntactically valid and starts running, but fails partway through. 
 This may be due to problems such as trying to divide by zero or access a file that doesn't exist. 
