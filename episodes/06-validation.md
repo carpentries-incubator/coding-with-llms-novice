@@ -164,7 +164,7 @@ In real use you would not know whether, or where, an error was hiding, which is 
  
 ## Spot the logical error
  
-Read through `calculate_life_expectancy_change()` carefully, without running anything new. 
+Read through the definition of the `calculate_life_expectancy_change` function carefully, without running anything new. 
  
 1. What does each comment say the code is doing? 
 2. Does the code beneath each comment actually do that?
