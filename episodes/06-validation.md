@@ -220,7 +220,7 @@ Two concepts to bear in mind when deciding whether to use AI assistance for codi
 - **Technical debt:** The cost of maintaining code that was written quickly, without much thought given to its stucture.
 - **Comprehension debt:** The cost of relying on AI-generated code that you don't fully understand, leaving you unable to make changes or fixes without AI assistance.
 
-Avoiding comprehension debt is a requirement of UCL's Advanced Research Computing Centre as outlined in its [AI-assisted software development policy](https://www.ucl.ac.uk/research-innovation/news/2026/oct/launch-new-ai-assisted-software-development-policy), which expects staff to be able to make unassisted changes to the codebases they are responsible for.
+Avoiding comprehension debt is a requirement of UCL's Advanced Research Computing Centre as outlined in its [AI-assisted software development policy](https://rdr.ucl.ac.uk/articles/report/AI-Assisted_Software_Development_Policy_for_UCL_Advanced_Research_Computing/34070631?file=69660984), which expects staff to be able to make unassisted changes to the codebases they are responsible for.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
