@@ -41,7 +41,8 @@ Recall from Episode 3 that outputs from chatbots often have an authoritative ton
 Whether you wrote the code from scratch or generated it with AI, you are responsible for the results it produces. 
 Therefore, it is up to you to determine whether or not the output generated is accurate and/or does what you need it to do.
 
-
+In the context of research, some of this validation might take the form of follow-up experiments to confirm hypotheses produced from a computational analysis.
+But there are many things you can do to detect and correct inaccuracies in the implementation of research software, which might otherwise result in the publication of erroneous claims and resources wasted on further research in the wrong direction.
 
 ## Types of Errors
 
