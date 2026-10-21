@@ -455,4 +455,18 @@ On this evidence it is reasonable to install `plotly`.
  
 ::::::::::::::::
 
+AI-generated code that runs cleanly and looks well-structured can still be wrong, and you are accountable for the results it produces. No validation technique can replace your own understanding of the code, so one of the best things you can do now is keep building your ability to read, run and explore code. The better you understand what your code is doing, the sooner you will notice when something is wrong and the more confidently you can judge whether its outputs are correct. This will give you a deeper understanding of the code your research relies on and help you use an AI tool as an assistant rather than an authority.
+
+:::::::::::::::::::::::::::::::::::::::: keypoints
+
+- Code that runs without errors and produces plausible-looking output can still contain logical errors.
+- It's important to check AI-generated code and in order to sport logical errors.
+- Work out the expected answer by hand on a small dataset before running the code, then compare.
+- Print statements let you inspect intermediate values and see what the code is actually doing.
+- Focus the most scrutiny on the calculations behind the results you will report, and less scrutiny on routine boilerplate such as plotting code.
+- Asking a chatbot to review code can be a useful extra check, but a review that finds nothing wrong is not proof of correctness, and any suggested fixes need to be re-tested.
+- It's not only the code itself that needs validating. Check that suggested packages exist, are the official ones, and are not lookalikes of popular names.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
