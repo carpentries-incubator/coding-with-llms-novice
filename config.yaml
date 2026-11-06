@@ -24,11 +24,11 @@ title: 'Learning to Code with AI Chatbots'
 created: 2026-02-05
 
 # Comma-separated list of keywords for the lesson
-keywords: 'AI Carpentry, generative AI, programming' # FIXME
+keywords: 'AI Carpentry, generative AI, programming'
 
 # Life cycle stage of the lesson
 # possible values: pre-alpha, alpha, beta, stable
-life_cycle: 'pre-alpha'
+life_cycle: 'alpha'
 
 # License of the lesson
 license: 'CC-BY 4.0'
@@ -40,7 +40,7 @@ source: 'https://github.com/carpentries-incubator/coding-with-llms-novice'
 branch: 'main'
 
 # Who to contact if there are any issues
-contact: 'tobyhodges@carpentries.org' # FIXME
+contact: 'tobyhodges@carpentries.org'
 
 # Navigation ------------------------------------------------
 #
