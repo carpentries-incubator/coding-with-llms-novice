@@ -37,7 +37,7 @@ Alternatively, you might find yourself needing to build programs that are larger
 In this case, you will probably benefit from learning more about some of the fundamentals of software engineering:
 building command line interfaces, defining object classes, and the automated testing frameworks mentioned in the previous episode are all good things to explore next.
 
-:::::::::::::::::::::::::::::::::::::::: checklist
+:::::::::::::::::::::::::::::::::::::::: callout
 
 ### Good Next Steps
 Most learners who have found this workshop valuable will benefit from learning more about:
@@ -50,9 +50,15 @@ Most learners who have found this workshop valuable will benefit from learning m
 * [ ] More features of an Integrated Development Environment (IDE):
   these powerful editor tools are designed to facilitate software development, e.g. through debugging tools, combined views of the editor, program output, environment information, and warning/error logs.
   Many include features that integrate AI coding assistance.
-  [Positron](https://positron.posit.co/) and R Studio are popular choices for R; [Visual Studio Code](https://code.visualstudio.com/) (or the open source equivalent, [VS Codium](https://vscodium.com/)) is a popular general choice.
+  [Positron](https://positron.posit.co/) and RStudio are popular choices for R; [Visual Studio Code](https://code.visualstudio.com/) (or the open source equivalent, [VSCodium](https://vscodium.com/)) is a popular general choice.
+::::::::::::::::::::::::::::::::::::::::: callout
+
+### Advanced AI Coding Tools
+
   More "AI-forward" IDEs exist, but we strongly recommend that you spend a bit more time developing your own understanding of programming and AI coding assistants before making extensive use of coding agents.
   Agents have access to your filesystem and the ability to run programs on your computer, which presents a serious security risk without skilled supervision.
+  
+  :::::::::::::::::::::::::::::::::::::::::::::::
 * [ ] Version control:
   tools that keep track of changes to the files in your project, and facilitate the comparison and merging of different versions of a file.
   Version control is particularly powerful when you are collaborating with other people on a project, but still very helpful when working alone.
@@ -62,7 +68,9 @@ Most learners who have found this workshop valuable will benefit from learning m
   [Software Carpentry's _Version Control with Git_](https://swcarpentry.github.io/git-novice/) is a good place to start.
 * [ ] Additional key concepts in programming: 
   environment management; Markdown and documentation; logical operators (`>=`, `==`, `!=`, `&&`, `||`, etc) and control flow (`if`, `else`, `while`, etc); fundamental data structures in your chosen programming language.
-
+* Testing code: as mentioned in the previous episode, frameworks for automated testing exist for almost every programming language.  
+  Validation of results and intermediate calculations is essential and formal tests make this much easier.
+  Software Carpentry's [_Building Better Research Software_](https://carpentries-incubator.github.io/better-research-software/06-code-correctness.html) lesson provides a good introduction.
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Regardless of where you decide to take things next, it will be essential to reinforce the knowledge and skills that you already have by applying them regularly.
@@ -75,14 +83,16 @@ If you want to keep working with a chatbot as you practice and expand your progr
 Follow the steps we took throughout this lesson: 
 
 * _Think_ about what you want to do.
-* _Articulate_ that with aprecise and detailed prompt, making sure to include all relevant context.
+* _Articulate_ that with a precise and detailed prompt, making sure to include all relevant context.
 * _Think_ about what you expect to happen when you submit the prompt.
 * Critically _Review_ the output you receive, and take the time to check and validate parts that are crucial or that you suspect to be incorrect.
 * _Explore_ further, when there are parts of the output that you do not understand/could not explain.
 
 Remember that, as well as asking a chatbot to do things for us, we can ask it to take on the role of a tutor or examiner:
 
-* When you encounter something that you do not understand, direct the chatbot to ask Socratic questions that require you to figure out the answers yourself, rather than jumping straight to the explanation/solution.
+* When you encounter something that you do not understand, direct the chatbot to ask questions and provide guiding hints to help you get unstuck, rather than jumping straight to the explanation/solution. 
+  To reinforce your understanding and build your ability to think critically about your solutions, you can also prompt the chatbot to ask [Socratic questions](https://en.wikipedia.org/wiki/Socratic_questioning) (_"Why do you think that is the case?"_, _"Is there another way to do this?"_, _"How would this function behave if one of the input values was negative?"_) as follow-ups to your answers.
+  You should bear in mind that AI output can contain errors when taking this approach; it is worth double-checking anything you are uncertain about with an authoritative source.
 * Shortly after you have learned about a new concept, take some time to request and then work through exercises that will test, expand, and reinforce your understanding and ability.
 * Ask for suggestions about what it would be sensible to learn next.
 
