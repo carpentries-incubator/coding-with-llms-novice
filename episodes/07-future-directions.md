@@ -61,6 +61,8 @@ Most learners who have found this workshop valuable will benefit from learning m
 * Version control:
   tools that keep track of changes to the files in your project, and facilitate the comparison and merging of different versions of a file.
   Version control is particularly powerful when you are collaborating with other people on a project, but still very helpful when working alone.
+  In an earlier episode we mentioned that a weakness in our approach in this workshop was that we needed to review the entire program included in each chatbot response because changes could be inserted anywhere.
+  Version control helps with this problem, by highlighting exactly what has changed between versions of a file.
   Git is by far the most widely-used tool for version control.
   Some familiarity with the key concepts of version control is essential for working effectively with AI coding assistants.
   These key concepts include: commits, commit messages and commit history, diffs, and branches.
