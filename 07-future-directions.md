@@ -1,13 +1,15 @@
 ---
 title: "Crafting A Learning Path"
-teaching:  # teaching time in minutes
-exercises:  # exercise time in minutes
+teaching: 15
+exercises: 5
 ---
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
-- FIXME
--
+_After following this episode, learners will be able to..._
+
+- Reflect on what they have learned so far.
+- Identify what it would be valuable to learn next.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -22,20 +24,101 @@ exercises:  # exercise time in minutes
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-#### Ways To Keep The Learning Going
+::::::::::::::::::::::::::::::::::::::::: challenge
 
-There are a few ways to keep ourselves learning with LLMs, such as
+### What Have You Learned?
+Take five minutes to think about what you have learned in this workshop, and make a list of 1-3 most important takeaways.
+This list is for you, and you do not need to share it with the Instructors or the other participants.
 
-- Writing clear, detailed prompts
-- Asking for tuition in a specific way
-- Analysing existing code
-- Asking for explanations
-- Using chat to identify gaps in our knowledge
+::::::::::::::::::::::::::::::::::::::::::::::::
+## What's next?
 
-what to learn next: maybe as suggested prompts rather than (or as well as) links to specific recommended reading
+We have reached the end of this workshop but this is only the beginning of the programming skills you can learn.
+Hopefully, the knowledge and ability you have gained here will be immediately useful.
+What you learn next depends on how you expect to apply these skills in your future work.
 
-* reproducibility: version control, environment management, reports with Quarto
-* more software development skills and principles
-* logic? i.e. selection criteria > == != etc and &, |
-* agents and AI-forward IDEs, mention security
+For example, if you expect to need mostly scripts that you can apply to repeat the same analysis on multiple data sets, a good next step might be to learn more about good practices for _cleaning and organising data_, and how to describe the steps of your analysis as a _workflow_. 
+You might also benefit from exploring how to create reproducible reports from your analyses, combining methodlogy, results, and discussion into a single document with a tool like Quarto.
 
+Alternatively, you might find yourself needing to build programs that are larger and more complex than the scripts we have been working with here.
+In this case, you will probably benefit from learning more about some of the fundamentals of software engineering:
+building command line interfaces, defining object classes, and the automated testing frameworks mentioned in the previous episode are all good things to explore next.
+
+:::::::::::::::::::::::::::::::::::::::: callout
+
+### Good Next Steps
+Most learners who have found this workshop valuable will benefit from learning more about:
+
+* Working in the shell:
+  scripts can be run easily in a command line interface, and learning more about how to navigate your filesystem and run programs in that environment will empower you to quickly repeat and automate processes and analyses.
+  We recommend learning to work with the Bash shell first.
+  Key concepts include relative and absolute file paths, file and folder access and permissions, and pipes and redirection.
+  [Software Carpentry's _The UNIX Shell_](https://swcarpentry.github.io/shell-novice/) is a good place to start.
+* More features of an Integrated Development Environment (IDE):
+  these powerful editor tools are designed to facilitate software development, e.g. through debugging tools, combined views of the editor, program output, environment information, and warning/error logs.
+  Many include features that integrate AI coding assistance.
+  [Positron](https://positron.posit.co/) and RStudio are popular choices for R; [Visual Studio Code](https://code.visualstudio.com/) (or the open source equivalent, [VSCodium](https://vscodium.com/)) is a popular general choice.
+* Version control:
+  tools that keep track of changes to the files in your project, and facilitate the comparison and merging of different versions of a file.
+  Version control is particularly powerful when you are collaborating with other people on a project, but still very helpful when working alone.
+  In an earlier episode we mentioned that a weakness in our approach in this workshop was that we needed to review the entire program included in each chatbot response because changes could be inserted anywhere.
+  Version control helps with this problem, by highlighting exactly what has changed between versions of a file.
+  Git is by far the most widely-used tool for version control.
+  Some familiarity with the key concepts of version control is essential for working effectively with AI coding assistants.
+  These key concepts include: commits, commit messages and commit history, diffs, and branches.
+  [Software Carpentry's _Version Control with Git_](https://swcarpentry.github.io/git-novice/) is a good place to start.
+* Additional key concepts in programming: 
+  environment management; Markdown and documentation; logical operators (`>=`, `==`, `!=`, `&&`, `||`, etc) and control flow (`if`, `else`, `while`, etc); fundamental data structures in your chosen programming language.
+* Testing code: as mentioned in the previous episode, frameworks for automated testing exist for almost every programming language.  
+  Validation of results and intermediate calculations is essential and formal tests make this much easier.
+  Software Carpentry's [_Building Better Research Software_](https://carpentries-incubator.github.io/better-research-software/06-code-correctness.html) lesson provides a good introduction.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::: callout
+
+### Advanced AI Coding Tools
+
+  More "AI-forward" IDEs exist, but we strongly recommend that you spend a bit more time developing your own understanding of programming and AI coding assistants before making extensive use of coding agents.
+  Agents have access to your filesystem and the ability to run programs on your computer, which presents a serious security risk without skilled supervision.
+  
+:::::::::::::::::::::::::::::::::::::::::::::::
+
+Regardless of where you decide to take things next, it will be essential to reinforce the knowledge and skills that you already have by applying them regularly.
+If you do not have a project waiting that will allow you to do this already, look for opportunities like [the Advent of Code puzzles](https://adventofcode.com/2026/events) or ask your chatbot to generate exercises for you.
+
+## Keep Learning
+We hope that this workshop has inspired you to continue developing your own coding ability.
+If you want to keep working with a chatbot as you practice and expand your programming skills, follow this advice to make sure that you build your own expertise and retain your agency and ownership of your work.
+
+Follow the steps we took throughout this lesson: 
+
+* _Think_ about what you want to do.
+* _Articulate_ that with a precise and detailed prompt, making sure to include all relevant context.
+* _Think_ about what you expect to happen when you submit the prompt.
+* Critically _Review_ the output you receive, and take the time to check and validate parts that are crucial or that you suspect to be incorrect.
+* _Explore_ further, when there are parts of the output that you do not understand/could not explain.
+
+Remember that, as well as asking a chatbot to do things for us, we can ask it to take on the role of a tutor or examiner:
+
+* When you encounter something that you do not understand, direct the chatbot to ask questions and provide guiding hints to help you get unstuck, rather than jumping straight to the explanation/solution. 
+  To reinforce your understanding and build your ability to think critically about your solutions, you can also prompt the chatbot to ask [Socratic questions](https://en.wikipedia.org/wiki/Socratic_questioning) (_"Why do you think that is the case?"_, _"Is there another way to do this?"_, _"How would this function behave if one of the input values was negative?"_) as follow-ups to your answers.
+  You should bear in mind that AI output can contain errors when taking this approach; it is worth double-checking anything you are uncertain about with an authoritative source.
+* Shortly after you have learned about a new concept, take some time to request and then work through exercises that will test, expand, and reinforce your understanding and ability.
+* Ask for suggestions about what it would be sensible to learn next.
+
+It may be helpful to save a set of instructions to share with the chatbot if you find yourself interacting with it in this way often.
+This will save you some typing each time you want to prompt the tool a certain way, and allows you to refine your instructions over time.
+You can take the same approach for any other types of task that you find yourself routinely asking the chatbot to perform.
+
+### Human Connections are Essential
+One risk of extensive chatbot use is that it isolates us from the other people around us.
+To guard against this, remember to also ask questions of your colleagues and others whose expertise and judgement you trust.
+Their advice and insights will be informed by their own individual experience, and they may be aware of less well-known or niche resources specific to your domain that could be particularly helpful.
+
+:::::::::::::::::::::::::::::::::::::::: keypoints
+
+* The skills you have learned in this workshop are only the beginning.
+* Taking the time to develop our own expertise helps us use AI tools more effectively and responsibly, and helps us to avoid becoming reliant on them.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
