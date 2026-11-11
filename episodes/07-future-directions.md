@@ -1,7 +1,7 @@
 ---
 title: "Crafting A Learning Path"
 teaching: 15
-exercises: 0
+exercises: 5
 ---
 
 ::::::::::::::::::::::::::::::::::::::: objectives
@@ -24,6 +24,13 @@ _After following this episode, learners will be able to..._
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+::::::::::::::::::::::::::::::::::::::::: challenge
+
+### What Have You Learned?
+Take five minutes to think about what you have learned in this workshop, and make a list of 1-3 most important takeaways.
+This list is for you, and you do not need to share it with the Instructors or the other participants.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 ## What's next?
 
 We have reached the end of this workshop but this is only the beginning of the programming skills you can learn.
