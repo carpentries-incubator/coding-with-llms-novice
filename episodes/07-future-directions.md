@@ -42,15 +42,30 @@ building command line interfaces, defining object classes, and the automated tes
 ### Good Next Steps
 Most learners who have found this workshop valuable will benefit from learning more about:
 
-* [ ] Working in the shell:
+* Working in the shell:
   scripts can be run easily in a command line interface, and learning more about how to navigate your filesystem and run programs in that environment will empower you to quickly repeat and automate processes and analyses.
   We recommend learning to work with the Bash shell first.
   Key concepts include relative and absolute file paths, file and folder access and permissions, and pipes and redirection.
   [Software Carpentry's _The UNIX Shell_](https://swcarpentry.github.io/shell-novice/) is a good place to start.
-* [ ] More features of an Integrated Development Environment (IDE):
+* More features of an Integrated Development Environment (IDE):
   these powerful editor tools are designed to facilitate software development, e.g. through debugging tools, combined views of the editor, program output, environment information, and warning/error logs.
   Many include features that integrate AI coding assistance.
   [Positron](https://positron.posit.co/) and RStudio are popular choices for R; [Visual Studio Code](https://code.visualstudio.com/) (or the open source equivalent, [VSCodium](https://vscodium.com/)) is a popular general choice.
+* Version control:
+  tools that keep track of changes to the files in your project, and facilitate the comparison and merging of different versions of a file.
+  Version control is particularly powerful when you are collaborating with other people on a project, but still very helpful when working alone.
+  Git is by far the most widely-used tool for version control.
+  Some familiarity with the key concepts of version control is essential for working effectively with AI coding assistants.
+  These key concepts include: commits, commit messages and commit history, diffs, and branches.
+  [Software Carpentry's _Version Control with Git_](https://swcarpentry.github.io/git-novice/) is a good place to start.
+* Additional key concepts in programming: 
+  environment management; Markdown and documentation; logical operators (`>=`, `==`, `!=`, `&&`, `||`, etc) and control flow (`if`, `else`, `while`, etc); fundamental data structures in your chosen programming language.
+* Testing code: as mentioned in the previous episode, frameworks for automated testing exist for almost every programming language.  
+  Validation of results and intermediate calculations is essential and formal tests make this much easier.
+  Software Carpentry's [_Building Better Research Software_](https://carpentries-incubator.github.io/better-research-software/06-code-correctness.html) lesson provides a good introduction.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 ::::::::::::::::::::::::::::::::::::::::: callout
 
 ### Advanced AI Coding Tools
@@ -58,20 +73,7 @@ Most learners who have found this workshop valuable will benefit from learning m
   More "AI-forward" IDEs exist, but we strongly recommend that you spend a bit more time developing your own understanding of programming and AI coding assistants before making extensive use of coding agents.
   Agents have access to your filesystem and the ability to run programs on your computer, which presents a serious security risk without skilled supervision.
   
-  :::::::::::::::::::::::::::::::::::::::::::::::
-* [ ] Version control:
-  tools that keep track of changes to the files in your project, and facilitate the comparison and merging of different versions of a file.
-  Version control is particularly powerful when you are collaborating with other people on a project, but still very helpful when working alone.
-  Git is by far the most widely-used tool for version control.
-  Some familiarity with the key concepts of version control is essential for working effectively with AI coding assistants.
-  These key concepts include: commits, commit messages and commit history, diffs, and branches.
-  [Software Carpentry's _Version Control with Git_](https://swcarpentry.github.io/git-novice/) is a good place to start.
-* [ ] Additional key concepts in programming: 
-  environment management; Markdown and documentation; logical operators (`>=`, `==`, `!=`, `&&`, `||`, etc) and control flow (`if`, `else`, `while`, etc); fundamental data structures in your chosen programming language.
-* Testing code: as mentioned in the previous episode, frameworks for automated testing exist for almost every programming language.  
-  Validation of results and intermediate calculations is essential and formal tests make this much easier.
-  Software Carpentry's [_Building Better Research Software_](https://carpentries-incubator.github.io/better-research-software/06-code-correctness.html) lesson provides a good introduction.
-::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::
 
 Regardless of where you decide to take things next, it will be essential to reinforce the knowledge and skills that you already have by applying them regularly.
 If you do not have a project waiting that will allow you to do this already, look for opportunities like [the Advent of Code puzzles](https://adventofcode.com/2026/events) or ask your chatbot to generate exercises for you.
