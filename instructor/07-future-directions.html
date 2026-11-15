@@ -123,7 +123,7 @@
     <a id="search-button-nav" class="btn btn-primary" href="../instructor/aio.html" role="button" aria-label="Search the All In One page">Search the All In One page</a>
   </div><!--/div.container-fluid -->
 </nav><aside class="col-md-12 lesson-progress"><div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: 94%" aria-valuenow="94" aria-valuemin="0" aria-valuemax="100" aria-label="Lesson Progress">94%</div>
+    <div class="progress-bar incubator" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100" aria-label="Lesson Progress">89%</div>
   </div>
 </aside><div class="container">
       <div class="row">
@@ -262,12 +262,20 @@
 <div class="accordion accordion-flush" id="accordionFlushcurrent">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-headingcurrent">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
         <span class="visually-hidden">Current Chapter</span>
         <span class="current-chapter">
         7. Crafting A Learning Path
         </span>
-      
+      </button>
     </div><!--/div.accordion-header-->
+
+    <div id="flush-collapsecurrent" class="accordion-collapse collapse show" data-bs-parent="#accordionFlushcurrent">
+      <div class="accordion-body">
+        <ul><li><a href="#whats-next">What’s next?</a></li>
+<li><a href="#keep-learning">Keep Learning</a></li>
+        </ul></div><!--/div.accordion-body-->
+    </div><!--/div.accordion-collapse-->
 
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
@@ -344,13 +352,13 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Crafting A Learning Path</h1>
-        <p>Last updated on 2026-07-30 |
+        <p>Last updated on 2026-11-15 |
 
         <a href="https://github.com/carpentries-incubator/coding-with-llms-novice/edit/main/episodes/07-future-directions.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
 
 
-
+        <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 20 minutes</p>
 
         <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
@@ -378,38 +386,196 @@
 <div class="card-body">
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
-<ul><li>FIXME</li>
-<li>
-</li>
+<p><em>After following this episode, learners will be able to…</em></p>
+<ul><li>Reflect on what they have learned so far.</li>
+<li>Identify what it would be valuable to learn next.</li>
 </ul></div>
 </div>
 </div>
 </div>
 </div>
-<div class="section level4">
-<h4 id="ways-to-keep-the-learning-going">Ways To Keep The Learning Going<a class="anchor" aria-label="anchor" href="#ways-to-keep-the-learning-going"></a></h4>
-<p>There are a few ways to keep ourselves learning with LLMs, such
-as</p>
-<ul><li>Writing clear, detailed prompts</li>
-<li>Asking for tuition in a specific way</li>
-<li>Analysing existing code</li>
-<li>Asking for explanations</li>
-<li>Using chat to identify gaps in our knowledge</li>
-</ul><p>what to learn next: maybe as suggested prompts rather than (or as
-well as) links to specific recommended reading</p>
-<ul><li>reproducibility: version control, environment management, reports
-with Quarto</li>
-<li>more software development skills and principles</li>
-<li>logic? i.e. selection criteria &gt; == != etc and &amp;, |</li>
-<li>agents and AI-forward IDEs, mention security</li>
-</ul><!--
+<div id="what-have-you-learned" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="what-have-you-learned" class="callout-inner">
+<h3 class="callout-title">What Have You Learned?</h3>
+<div class="callout-content">
+<p>Take five minutes to think about what you have learned in this
+workshop, and make a list of 1-3 most important takeaways. This list is
+for you, and you do not need to share it with the Instructors or the
+other participants.</p>
+</div>
+</div>
+</div>
+<section><h2 class="section-heading" id="whats-next">What’s next?<a class="anchor" aria-label="anchor" href="#whats-next"></a></h2>
+<hr class="half-width"><p>We have reached the end of this workshop but this is only the
+beginning of the programming skills you can learn. Hopefully, the
+knowledge and ability you have gained here will be immediately useful.
+What you learn next depends on how you expect to apply these skills in
+your future work.</p>
+<p>For example, if you expect to need mostly scripts that you can apply
+to repeat the same analysis on multiple data sets, a good next step
+might be to learn more about good practices for <em>cleaning and
+organising data</em>, and how to describe the steps of your analysis as
+a <em>workflow</em>. You might also benefit from exploring how to create
+reproducible reports from your analyses, combining methodlogy, results,
+and discussion into a single document with a tool like Quarto.</p>
+<p>Alternatively, you might find yourself needing to build programs that
+are larger and more complex than the scripts we have been working with
+here. In this case, you will probably benefit from learning more about
+some of the fundamentals of software engineering: building command line
+interfaces, defining object classes, and the automated testing
+frameworks mentioned in the previous episode are all good things to
+explore next.</p>
+<div id="good-next-steps" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="good-next-steps" class="callout-inner">
+<h3 class="callout-title">Good Next Steps</h3>
+<div class="callout-content">
+<p>Most learners who have found this workshop valuable will benefit from
+learning more about:</p>
+<ul><li>Working in the shell: scripts can be run easily in a command line
+interface, and learning more about how to navigate your filesystem and
+run programs in that environment will empower you to quickly repeat and
+automate processes and analyses. We recommend learning to work with the
+Bash shell first. Key concepts include relative and absolute file paths,
+file and folder access and permissions, and pipes and redirection. <a href="https://swcarpentry.github.io/shell-novice/" class="external-link">Software Carpentry’s
+<em>The UNIX Shell</em></a> is a good place to start.</li>
+<li>More features of an Integrated Development Environment (IDE): these
+powerful editor tools are designed to facilitate software development,
+e.g. through debugging tools, combined views of the editor, program
+output, environment information, and warning/error logs. Many include
+features that integrate AI coding assistance. <a href="https://positron.posit.co/" class="external-link">Positron</a> and RStudio are popular
+choices for R; <a href="https://code.visualstudio.com/" class="external-link">Visual Studio
+Code</a> (or the open source equivalent, <a href="https://vscodium.com/" class="external-link">VSCodium</a>) is a popular general
+choice.</li>
+<li>Version control: tools that keep track of changes to the files in
+your project, and facilitate the comparison and merging of different
+versions of a file. Version control is particularly powerful when you
+are collaborating with other people on a project, but still very helpful
+when working alone. Git is by far the most widely-used tool for version
+control. Some familiarity with the key concepts of version control is
+essential for working effectively with AI coding assistants. These key
+concepts include: commits, commit messages and commit history, diffs,
+and branches. <a href="https://swcarpentry.github.io/git-novice/" class="external-link">Software Carpentry’s
+<em>Version Control with Git</em></a> is a good place to start.</li>
+<li>Additional key concepts in programming: environment management;
+Markdown and documentation; logical operators (<code>&gt;=</code>,
+<code>==</code>, <code>!=</code>, <code>&amp;&amp;</code>,
+<code>||</code>, etc) and control flow (<code>if</code>,
+<code>else</code>, <code>while</code>, etc); fundamental data structures
+in your chosen programming language.</li>
+<li>Testing code: as mentioned in the previous episode, frameworks for
+automated testing exist for almost every programming language.<br>
+Validation of results and intermediate calculations is essential and
+formal tests make this much easier. Software Carpentry’s <a href="https://carpentries-incubator.github.io/better-research-software/06-code-correctness.html" class="external-link"><em>Building
+Better Research Software</em></a> lesson provides a good
+introduction.</li>
+</ul></div>
+</div>
+</div>
+<div id="advanced-ai-coding-tools" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="advanced-ai-coding-tools" class="callout-inner">
+<h3 class="callout-title">Advanced AI Coding Tools</h3>
+<div class="callout-content">
+<p>More “AI-forward” IDEs exist, but we strongly recommend that you
+spend a bit more time developing your own understanding of programming
+and AI coding assistants before making extensive use of coding agents.
+Agents have access to your filesystem and the ability to run programs on
+your computer, which presents a serious security risk without skilled
+supervision.</p>
+</div>
+</div>
+</div>
+<p>Regardless of where you decide to take things next, it will be
+essential to reinforce the knowledge and skills that you already have by
+applying them regularly. If you do not have a project waiting that will
+allow you to do this already, look for opportunities like <a href="https://adventofcode.com/2026/events" class="external-link">the Advent of Code
+puzzles</a> or ask your chatbot to generate exercises for you.</p>
+</section><section><h2 class="section-heading" id="keep-learning">Keep Learning<a class="anchor" aria-label="anchor" href="#keep-learning"></a></h2>
+<hr class="half-width"><p>We hope that this workshop has inspired you to continue developing
+your own coding ability. If you want to keep working with a chatbot as
+you practice and expand your programming skills, follow this advice to
+make sure that you build your own expertise and retain your agency and
+ownership of your work.</p>
+<p>Follow the steps we took throughout this lesson:</p>
+<ul><li>
+<em>Think</em> about what you want to do.</li>
+<li>
+<em>Articulate</em> that with a precise and detailed prompt, making
+sure to include all relevant context.</li>
+<li>
+<em>Think</em> about what you expect to happen when you submit the
+prompt.</li>
+<li>Critically <em>Review</em> the output you receive, and take the time
+to check and validate parts that are crucial or that you suspect to be
+incorrect.</li>
+<li>
+<em>Explore</em> further, when there are parts of the output that
+you do not understand/could not explain.</li>
+</ul><p>Remember that, as well as asking a chatbot to do things for us, we
+can ask it to take on the role of a tutor or examiner:</p>
+<ul><li>When you encounter something that you do not understand, direct the
+chatbot to ask questions and provide guiding hints to help you get
+unstuck, rather than jumping straight to the explanation/solution. To
+reinforce your understanding and build your ability to think critically
+about your solutions, you can also prompt the chatbot to ask <a href="https://en.wikipedia.org/wiki/Socratic_questioning" class="external-link">Socratic
+questions</a> (<em>“Why do you think that is the case?”</em>, <em>“Is
+there another way to do this?”</em>, <em>“How would this function behave
+if one of the input values was negative?”</em>) as follow-ups to your
+answers. You should bear in mind that AI output can contain errors when
+taking this approach; it is worth double-checking anything you are
+uncertain about with an authoritative source.</li>
+<li>Shortly after you have learned about a new concept, take some time
+to request and then work through exercises that will test, expand, and
+reinforce your understanding and ability.</li>
+<li>Ask for suggestions about what it would be sensible to learn
+next.</li>
+</ul><p>It may be helpful to save a set of instructions to share with the
+chatbot if you find yourself interacting with it in this way often. This
+will save you some typing each time you want to prompt the tool a
+certain way, and allows you to refine your instructions over time. You
+can take the same approach for any other types of task that you find
+yourself routinely asking the chatbot to perform.</p>
+<div class="section level3">
+<h3 id="human-connections-are-essential">Human Connections are Essential<a class="anchor" aria-label="anchor" href="#human-connections-are-essential"></a></h3>
+<p>One risk of extensive chatbot use is that it isolates us from the
+other people around us. To guard against this, remember to also ask
+questions of your colleagues and others whose expertise and judgement
+you trust. Their advice and insights will be informed by their own
+individual experience, and they may be aware of less well-known or niche
+resources specific to your domain that could be particularly
+helpful.</p>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<span class="callout-header">Key Points</span>
+<div class="callout-inner">
+<div class="callout-content">
+<ul><li>The skills you have learned in this workshop are only the
+beginning.</li>
+<li>Taking the time to develop our own expertise helps us use AI tools
+more effectively and responsibly, and helps us to avoid becoming reliant
+on them.</li>
+</ul></div>
+</div>
+</div>
+<!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
- --></div>
-
-
-
-      </div> <!-- / div.lesson-content -->
+ -->
+</div>
+</section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter Bottom"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="../instructor/06-validation.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
         <a class="chapter-link float-end" href="../instructor/index.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
@@ -469,8 +635,8 @@ any links that you are not going to use.
   "url": "https://carpentries-incubator.github.io/coding-with-llms-novice/instructor/07-future-directions.html",
   "identifier": "https://carpentries-incubator.github.io/coding-with-llms-novice/instructor/07-future-directions.html",
   "dateCreated": "2026-02-05",
-  "dateModified": "2026-07-30",
-  "datePublished": "2026-11-10"
+  "dateModified": "2026-11-15",
+  "datePublished": "2026-11-15"
 }
 
   </script><script>
